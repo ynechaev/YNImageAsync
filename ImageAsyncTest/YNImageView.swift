@@ -8,16 +8,30 @@
 
 import UIKit
 
-class YNImageView: UIImageView {
-    
-    
+protocol ImageProgressDelegate: NSObjectProtocol {
+    func didChangeProgress (progress: Float) -> Void
+}
 
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
+class YNImageView: UIImageView, NSURLSessionTaskDelegate, ImageProgressDelegate {
+    var circleIndicator: YNCircleIndicator!
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.prepareCircleIndicator(frame: frame)
     }
-    */
 
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func prepareCircleIndicator (#frame: CGRect) -> Void {
+        self.circleIndicator = YNCircleIndicator(frame: frame)
+        self.circleIndicator.opaque = false
+        self.addSubview(self.circleIndicator)
+        self.bringSubviewToFront(self.circleIndicator)
+    }
+    
+    func didChangeProgress(progress: Float) {
+        
+    }
 }

@@ -69,14 +69,20 @@ extension UIImageView {
         }
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
             var session: NSURLSession = NSURLSession.sharedSession()
-            var task : NSURLSessionDataTask = session.dataTaskWithURL(NSURL(string: imageUrl)!, completionHandler:{ (data:NSData!, response:NSURLResponse!, error:NSError!) -> Void in
-                if (data != nil) {
+            var task : NSURLSessionDownloadTask = session.downloadTaskWithURL(NSURL(string: imageUrl)!, completionHandler: { (url:NSURL!, response:NSURLResponse!, error:NSError!) -> Void in
+                if (error == nil) {
+                    let downloadedImage: UIImage = UIImage(data: NSData(contentsOfURL: url)!)!
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        self.image = UIImage(data: data)
-                        if (pattern) { self.backgroundColor = UIColor.clearColor() }
+                        self.image = downloadedImage
+                        if (pattern) { self.backgroundColor = UIColor.clearColor()
+                        }
                     })
                 }
+                
             })
+            if (self.isKindOfClass(YNImageView.self)) {
+                
+            }
             task.resume()
         }
     }

@@ -15,6 +15,8 @@
 		062AC01F1A0827E000744325 /* ImageAsyncTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062AC01E1A0827E000744325 /* ImageAsyncTestTests.swift */; };
 		062AC0291A08F57500744325 /* YNCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062AC0281A08F57500744325 /* YNCollectionViewCell.swift */; };
 		062AC02B1A08F68700744325 /* YNImageAsyncExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062AC02A1A08F68700744325 /* YNImageAsyncExtensions.swift */; };
+		06EE758F1A0ABB65007BE5B0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06EE758E1A0ABB65007BE5B0 /* CoreGraphics.framework */; };
+		06EE75911A0AC26D007BE5B0 /* YNCircleIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EE75901A0AC26D007BE5B0 /* YNCircleIndicator.swift */; };
 		717360AB1A0A750D0007454A /* YNImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717360AA1A0A750D0007454A /* YNImageView.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +43,8 @@
 		062AC01E1A0827E000744325 /* ImageAsyncTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAsyncTestTests.swift; sourceTree = "<group>"; };
 		062AC0281A08F57500744325 /* YNCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCollectionViewCell.swift; sourceTree = "<group>"; };
 		062AC02A1A08F68700744325 /* YNImageAsyncExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNImageAsyncExtensions.swift; sourceTree = "<group>"; };
+		06EE758E1A0ABB65007BE5B0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		06EE75901A0AC26D007BE5B0 /* YNCircleIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCircleIndicator.swift; sourceTree = "<group>"; };
 		717360AA1A0A750D0007454A /* YNImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -49,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06EE758F1A0ABB65007BE5B0 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 		062ABFFA1A0827E000744325 = {
 			isa = PBXGroup;
 			children = (
+				06EE758E1A0ABB65007BE5B0 /* CoreGraphics.framework */,
 				062AC0051A0827E000744325 /* ImageAsyncTest */,
 				062AC01B1A0827E000744325 /* ImageAsyncTestTests */,
 				062AC0041A0827E000744325 /* Products */,
@@ -85,6 +91,7 @@
 			children = (
 				062AC0081A0827E000744325 /* AppDelegate.swift */,
 				717360AA1A0A750D0007454A /* YNImageView.swift */,
+				06EE75901A0AC26D007BE5B0 /* YNCircleIndicator.swift */,
 				062AC02A1A08F68700744325 /* YNImageAsyncExtensions.swift */,
 				062AC00A1A0827E000744325 /* ViewController.swift */,
 				062AC0281A08F57500744325 /* YNCollectionViewCell.swift */,
@@ -221,6 +228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06EE75911A0AC26D007BE5B0 /* YNCircleIndicator.swift in Sources */,
 				062AC00B1A0827E000744325 /* ViewController.swift in Sources */,
 				717360AB1A0A750D0007454A /* YNImageView.swift in Sources */,
 				062AC0091A0827E000744325 /* AppDelegate.swift in Sources */,

@@ -9,14 +9,14 @@
 import UIKit
 
 class YNCollectionViewCell: UICollectionViewCell {
-    var imageView: UIImageView!
+    var imageView: YNImageView!
     
     required init(coder aDecoder: NSCoder) { super.init(coder: aDecoder) }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height))
+        self.imageView = YNImageView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height))
         self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
         contentView.addSubview(self.imageView)
     }
