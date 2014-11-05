@@ -15,6 +15,7 @@
 		062AC01F1A0827E000744325 /* ImageAsyncTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062AC01E1A0827E000744325 /* ImageAsyncTestTests.swift */; };
 		062AC0291A08F57500744325 /* YNCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062AC0281A08F57500744325 /* YNCollectionViewCell.swift */; };
 		062AC02B1A08F68700744325 /* YNImageAsyncExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062AC02A1A08F68700744325 /* YNImageAsyncExtensions.swift */; };
+		717360AB1A0A750D0007454A /* YNImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717360AA1A0A750D0007454A /* YNImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		062AC01E1A0827E000744325 /* ImageAsyncTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAsyncTestTests.swift; sourceTree = "<group>"; };
 		062AC0281A08F57500744325 /* YNCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCollectionViewCell.swift; sourceTree = "<group>"; };
 		062AC02A1A08F68700744325 /* YNImageAsyncExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNImageAsyncExtensions.swift; sourceTree = "<group>"; };
+		717360AA1A0A750D0007454A /* YNImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				062AC0081A0827E000744325 /* AppDelegate.swift */,
+				717360AA1A0A750D0007454A /* YNImageView.swift */,
 				062AC02A1A08F68700744325 /* YNImageAsyncExtensions.swift */,
 				062AC00A1A0827E000744325 /* ViewController.swift */,
 				062AC0281A08F57500744325 /* YNCollectionViewCell.swift */,
@@ -219,6 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				062AC00B1A0827E000744325 /* ViewController.swift in Sources */,
+				717360AB1A0A750D0007454A /* YNImageView.swift in Sources */,
 				062AC0091A0827E000744325 /* AppDelegate.swift in Sources */,
 				062AC0291A08F57500744325 /* YNCollectionViewCell.swift in Sources */,
 				062AC02B1A08F68700744325 /* YNImageAsyncExtensions.swift in Sources */,

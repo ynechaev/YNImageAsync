@@ -14,7 +14,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     @IBOutlet weak var imageCollectionView: UICollectionView!
     let reuseIdentifier = "imageCell"
-    var url = NSURL(string:"https://itunes.apple.com/search?term=blog&media=software")
+    var url = NSURL(string:"https://itunes.apple.com/search?term=game&media=software")
     var itunesTask: NSURLSessionDataTask!
     var imageCollection: NSArray!
     
@@ -67,9 +67,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as YNCollectionViewCell
-        var object: AnyObject = imageCollection.objectAtIndex(indexPath.row)
-        var imageUrl = object["artworkUrl512"] as? String
-        cell.imageView.yn_setImageWithUrl(imageUrl!)
+        let object: AnyObject = imageCollection.objectAtIndex(indexPath.row)
+        let imageUrl = object["artworkUrl512"] as? String
+//        cell.imageView.yn_setImageWithUrl(imageUrl!)
+        cell.imageView.yn_setImageWithUrl(imageUrl!, pattern: true)
         cell.backgroundColor = UIColor.whiteColor()
         return cell
     }
