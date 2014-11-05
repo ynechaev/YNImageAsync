@@ -16,7 +16,7 @@ class YNCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height*2/3))
+        self.imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height))
         self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
         contentView.addSubview(self.imageView)
     }
