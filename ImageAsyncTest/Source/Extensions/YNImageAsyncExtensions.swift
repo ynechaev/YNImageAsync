@@ -17,20 +17,18 @@ extension UIImageView {
     
     public func yn_setImageWithUrl(_ imageUrl: String, completion: ImageCompletionClosure? = nil) {
         
-        DispatchQueue.global(qos: .default).async {
-            let session: URLSession = URLSession.shared
-            let task = session.dataTask(with: URL(string: imageUrl)!, completionHandler: { (data:Data?, response:URLResponse?, error:Error?) in
-                if let imageData = data {
-                    DispatchQueue.main.async(execute: { () -> Void in
-                        self.image = UIImage(data: imageData)
-                    })
-                    completion?(UIImage(data: imageData), error)
-                } else {
-                    completion?(nil, error)
-                }
-            })
-            task.resume()
-        }
+        let session: URLSession = URLSession.shared
+        let task = session.dataTask(with: URL(string: imageUrl)!, completionHandler: { (data:Data?, response:URLResponse?, error:Error?) in
+            if let imageData = data {
+                DispatchQueue.main.async(execute: { () -> Void in
+                    self.image = UIImage(data: imageData)
+                })
+                completion?(UIImage(data: imageData), error)
+            } else {
+                completion?(nil, error)
+            }
+        })
+        task.resume()
         
     }
     

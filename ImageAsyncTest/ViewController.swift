@@ -15,7 +15,6 @@ class ViewController: UITableViewController, URLSessionTaskDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.register(YNTableViewCell.self, forCellReuseIdentifier: YNTableViewCell.reuseIdentifier())
         setupDataProvider()
     }
     
