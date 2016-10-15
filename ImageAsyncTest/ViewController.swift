@@ -14,7 +14,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     @IBOutlet weak var imageCollectionView: UICollectionView!
     let reuseIdentifier = "imageCell"
-    var url = NSURL(string:"https://itunes.apple.com/search?term=game&media=software")
+    var url = NSURL(string:"https://s3.amazonaws.com/work-project-image-loading/images.json")
     var itunesTask: NSURLSessionDataTask!
     var imageCollection: NSArray!
     
@@ -59,7 +59,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func processRequestResult(objects: AnyObject) {
         print("JSONDictionary! \(objects)")
-        let results: NSArray = objects["results"] as! NSArray
+        let results: NSArray = objects["images"] as! NSArray
         imageCollection = results
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             self.imageCollectionView.reloadData()
@@ -74,7 +74,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! YNCollectionViewCell
         let object: AnyObject = imageCollection.objectAtIndex(indexPath.row)
-        let imageUrl = object["artworkUrl512"] as? String
+        let imageUrl = object["url"] as? String
 //        cell.imageView.yn_setImageWithUrl(imageUrl!)
         cell.imageView.yn_setImageWithUrl(imageUrl!, pattern: true)
         cell.backgroundColor = UIColor.whiteColor()
