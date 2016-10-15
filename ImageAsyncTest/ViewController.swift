@@ -8,14 +8,14 @@
 
 import UIKit
 
-class ViewController: UITableViewController, NSURLSessionTaskDelegate {
+class ViewController: UITableViewController, URLSessionTaskDelegate {
     
     var dataProvider: YNDataProvider?
     var imageCollection: Array <ListObject> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.registerClass(YNTableViewCell.self, forCellReuseIdentifier: YNTableViewCell.reuseIdentifier())
+        self.tableView.register(YNTableViewCell.self, forCellReuseIdentifier: YNTableViewCell.reuseIdentifier())
         setupDataProvider()
     }
     
@@ -30,20 +30,20 @@ class ViewController: UITableViewController, NSURLSessionTaskDelegate {
         })
     }
     
-    func handleError(error: NSError?) {
+    func handleError(_ error: NSError?) {
         if let responseError = error {
             print("Error occured: \(responseError)")
         }
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return imageCollection.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath
-        indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier(YNTableViewCell.reuseIdentifier(), forIndexPath: indexPath) as! YNTableViewCell
-        cell.setDataObject(imageCollection[indexPath.row])
+    override func tableView(_ tableView: UITableView, cellForRowAt
+        indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: YNTableViewCell.reuseIdentifier(), for: indexPath) as! YNTableViewCell
+        cell.setDataObject(imageCollection[(indexPath as NSIndexPath).row])
         return cell
     }
     

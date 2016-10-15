@@ -24,10 +24,10 @@ class YNTableViewCell: UITableViewCell, YNCellDataProtocol {
     }
     
     static func reuseIdentifier() -> String {
-        return String(YNTableViewCell)
+        return String(describing: YNTableViewCell.self)
     }
     
-    func setDataObject<T: Any where T: YNCellObjectProtocol>(dataObject: T) {
+    func setDataObject<T: Any>(_ dataObject: T) where T: YNCellObjectProtocol {
         self.cellImage.yn_setImageWithUrl(dataObject.imageUrl, pattern: true)
         self.cellTitle.text = dataObject.imageTitle
     }

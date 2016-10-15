@@ -11,42 +11,44 @@ import UIKit
 
 let defaultPattern = "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAO0lEQVQYV2NkIBIwwtSdOXPmv4mJCZyPrp94hSCTQLpBpiGzyTeRZDcS8jxOX4I0IocEToUwRTCaaBMBIqwoC66FcWAAAAAASUVORK5CYII="
 
-public typealias ImageCompletionClosure = ((image: UIImage?, error: NSError?) -> (Void))
+public typealias ImageCompletionClosure = ((_ image: UIImage?, _ error: Error?) -> (Void))
 
 extension UIImageView {
     
-    public func yn_setImageWithUrl(imageUrl: String, completion: ImageCompletionClosure? = nil) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
-            let session: NSURLSession = NSURLSession.sharedSession()
-            let task : NSURLSessionDataTask = session.dataTaskWithURL(NSURL(string: imageUrl)!, completionHandler:{ (data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
+    public func yn_setImageWithUrl(_ imageUrl: String, completion: ImageCompletionClosure? = nil) {
+        
+        DispatchQueue.global(qos: .default).async {
+            let session: URLSession = URLSession.shared
+            let task = session.dataTask(with: URL(string: imageUrl)!, completionHandler: { (data:Data?, response:URLResponse?, error:Error?) in
                 if let imageData = data {
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    DispatchQueue.main.async(execute: { () -> Void in
                         self.image = UIImage(data: imageData)
                     })
-                    completion?(image: UIImage(data: imageData), error: error)
+                    completion?(UIImage(data: imageData), error)
                 } else {
-                    completion?(image: nil, error: error)
+                    completion?(nil, error)
                 }
             })
             task.resume()
         }
+        
     }
     
-    public func yn_setImageWithUrl(imageUrl: String, placeholderImage: UIImage, completion: ImageCompletionClosure?) -> Void {
+    public func yn_setImageWithUrl(_ imageUrl: String, placeholderImage: UIImage, completion: ImageCompletionClosure?) -> Void {
         self.image = placeholderImage
         yn_setImageWithUrl(imageUrl)
     }
     
-    public func yn_setImageWithUrl(imageUrl: String, pattern: Bool) -> Void {
+    public func yn_setImageWithUrl(_ imageUrl: String, pattern: Bool) -> Void {
         if (pattern) {
-            if let decodedData = NSData(base64EncodedString: defaultPattern, options: NSDataBase64DecodingOptions()) {
+            if let decodedData = Data(base64Encoded: defaultPattern, options: NSData.Base64DecodingOptions()) {
                 let decodedimage = UIImage(data: decodedData)
                 self.backgroundColor = UIColor(patternImage: decodedimage!)
             }
         }
         yn_setImageWithUrl(imageUrl) { (image, error) -> (Void) in
             if pattern && image != nil {
-                self.backgroundColor = UIColor.clearColor()
+                self.backgroundColor = UIColor.clear
             }
         }
     }

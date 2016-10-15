@@ -8,25 +8,25 @@
 
 import UIKit
 
-public class YNImageCacheProvider {
+open class YNImageCacheProvider {
     
     init() {
         
     }
     
-    public func imageDiskCacheForKey(key: String) -> UIImage? {
+    open func imageDiskCacheForKey(_ key: String) -> UIImage? {
         return nil
     }
     
-    public func imageMemoryCacheForKey(key: String) -> UIImage? {
+    open func imageMemoryCacheForKey(_ key: String) -> UIImage? {
         return nil
     }
     
-    public func storeImageToMemory(image: UIImage) {
+    open func storeImageToMemory(_ image: UIImage) {
         
     }
     
-    public func storeImageToDisk(image: UIImage) {
+    open func storeImageToDisk(_ image: UIImage) {
         
     }
     

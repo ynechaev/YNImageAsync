@@ -9,10 +9,10 @@
 import UIKit
 
 protocol ImageProgressDelegate: NSObjectProtocol {
-    func didChangeProgress (progress: Float) -> Void
+    func didChangeProgress (_ progress: Float) -> Void
 }
 
-class YNImageView: UIImageView, NSURLSessionTaskDelegate, ImageProgressDelegate {
+class YNImageView: UIImageView, URLSessionTaskDelegate, ImageProgressDelegate {
     var circleIndicator: YNCircleIndicator!
     
     override init(frame: CGRect) {
@@ -24,14 +24,14 @@ class YNImageView: UIImageView, NSURLSessionTaskDelegate, ImageProgressDelegate 
         fatalError("init(coder:) has not been implemented")
     }
     
-    func prepareCircleIndicator(frame: CGRect) -> Void {
+    func prepareCircleIndicator(_ frame: CGRect) -> Void {
         self.circleIndicator = YNCircleIndicator(frame: frame)
-        self.circleIndicator.opaque = false
+        self.circleIndicator.isOpaque = false
         self.addSubview(self.circleIndicator)
-        self.bringSubviewToFront(self.circleIndicator)
+        self.bringSubview(toFront: self.circleIndicator)
     }
     
-    func didChangeProgress(progress: Float) {
+    func didChangeProgress(_ progress: Float) {
         self.circleIndicator.currentProgress = progress
     }
 }

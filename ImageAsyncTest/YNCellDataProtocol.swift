@@ -10,7 +10,7 @@ import Foundation
 
 public protocol YNCellDataProtocol {
     
-    func setDataObject<T: AnyObject where T: YNCellObjectProtocol>(dataObject: T)
+    func setDataObject<T: AnyObject>(_ dataObject: T) where T: YNCellObjectProtocol
     static func reuseIdentifier() -> String
 
 }
