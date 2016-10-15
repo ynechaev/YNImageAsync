@@ -19,7 +19,7 @@ class YNTableViewCell: UITableViewCell, YNCellDataProtocol {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-//        self.cellImage.image = nil
+        self.cellImage.image = nil
 //        self.cellTitle.text = nil
     }
     

@@ -8,27 +8,35 @@
 
 import Foundation
 import UIKit
+import ObjectiveC
 
 let defaultPattern = "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAO0lEQVQYV2NkIBIwwtSdOXPmv4mJCZyPrp94hSCTQLpBpiGzyTeRZDcS8jxOX4I0IocEToUwRTCaaBMBIqwoC66FcWAAAAAASUVORK5CYII="
 
-public typealias ImageCompletionClosure = ((_ image: UIImage?, _ error: Error?) -> (Void))
+
+private var taskAssociationKey: UInt8 = 0
 
 extension UIImageView {
     
     public func yn_setImageWithUrl(_ imageUrl: String, completion: ImageCompletionClosure? = nil) {
         
-        let session: URLSession = URLSession.shared
-        let task = session.dataTask(with: URL(string: imageUrl)!, completionHandler: { (data:Data?, response:URLResponse?, error:Error?) in
-            if let imageData = data {
-                DispatchQueue.main.async(execute: { () -> Void in
-                    self.image = UIImage(data: imageData)
-                })
-                completion?(UIImage(data: imageData), error)
-            } else {
-                completion?(nil, error)
-            }
+        if let currentTask = self.task {
+            currentTask.cancel()
+        }
+        
+        self.task = YNImageLoader.sharedInstance.loadImageWithUrl(imageUrl, completion: { (image: UIImage?, error: Error?) -> (Void) in
+            DispatchQueue.main.async(execute: { () -> Void in
+                if let responseImage = image {
+                    self.image = responseImage
+                    if let completionBlock = completion {
+                        completionBlock(responseImage, nil)
+                    }
+                } else {
+                    if let completionBlock = completion {
+                        completionBlock(nil, error)
+                    }
+                }
+            })
         })
-        task.resume()
         
     }
     
@@ -48,6 +56,17 @@ extension UIImageView {
             if pattern && image != nil {
                 self.backgroundColor = UIColor.clear
             }
+        }
+    }
+    
+    // MARK: Associated task object
+    
+    var task: URLSessionTask? {
+        get {
+            return objc_getAssociatedObject(self, &taskAssociationKey) as? URLSessionTask
+        }
+        set(newValue) {
+            objc_setAssociatedObject(self, &taskAssociationKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
         }
     }
     

@@ -23,6 +23,8 @@
 		062AC0131A0827E000744325 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 062AC0111A0827E000744325 /* LaunchScreen.xib */; };
 		062AC01F1A0827E000744325 /* ImageAsyncTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062AC01E1A0827E000744325 /* ImageAsyncTestTests.swift */; };
 		062AC0291A08F57500744325 /* YNTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062AC0281A08F57500744325 /* YNTableViewCell.swift */; };
+		063365F21DB2A99900B78098 /* YNImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063365F11DB2A99900B78098 /* YNImageLoader.swift */; };
+		063365F31DB2A99900B78098 /* YNImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063365F11DB2A99900B78098 /* YNImageLoader.swift */; };
 		06CA03B91DB25F8C00AC65E5 /* YNDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CA03B81DB25F8C00AC65E5 /* YNDataProvider.swift */; };
 		06EE758F1A0ABB65007BE5B0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06EE758E1A0ABB65007BE5B0 /* CoreGraphics.framework */; };
 		06EE759B1A0ACD37007BE5B0 /* YNCircleIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EE75971A0ACD37007BE5B0 /* YNCircleIndicator.swift */; };
@@ -96,6 +98,7 @@
 		062AC01D1A0827E000744325 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		062AC01E1A0827E000744325 /* ImageAsyncTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAsyncTestTests.swift; sourceTree = "<group>"; };
 		062AC0281A08F57500744325 /* YNTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNTableViewCell.swift; sourceTree = "<group>"; };
+		063365F11DB2A99900B78098 /* YNImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNImageLoader.swift; sourceTree = "<group>"; };
 		06CA03B81DB25F8C00AC65E5 /* YNDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNDataProvider.swift; sourceTree = "<group>"; };
 		06EE758E1A0ABB65007BE5B0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		06EE75971A0ACD37007BE5B0 /* YNCircleIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCircleIndicator.swift; sourceTree = "<group>"; };
@@ -222,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				062AC00A1A0827E000744325 /* ViewController.swift */,
+				063365F11DB2A99900B78098 /* YNImageLoader.swift */,
 				062AC0281A08F57500744325 /* YNTableViewCell.swift */,
 				0626EA801DB25035000DC212 /* YNCellDataProtocol.swift */,
 				0626EA821DB252AE000DC212 /* YNCellObjectProtocol.swift */,
@@ -438,6 +442,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0626EA7F1DB2324A000DC212 /* YNImageCacheProvider.swift in Sources */,
+				063365F31DB2A99900B78098 /* YNImageLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,6 +458,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				063365F21DB2A99900B78098 /* YNImageLoader.swift in Sources */,
 				06EE759B1A0ACD37007BE5B0 /* YNCircleIndicator.swift in Sources */,
 				06CA03B91DB25F8C00AC65E5 /* YNDataProvider.swift in Sources */,
 				06EE759C1A0ACD37007BE5B0 /* YNImageView.swift in Sources */,
