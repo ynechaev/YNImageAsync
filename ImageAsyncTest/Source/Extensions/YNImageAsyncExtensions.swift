@@ -17,45 +17,43 @@ private var taskAssociationKey: UInt8 = 0
 
 extension UIImageView {
     
-    public func yn_setImageWithUrl(_ imageUrl: String, completion: ImageCompletionClosure? = nil) {
-        
+    public func yn_cancelPreviousLoading() {
         if let currentTask = self.task {
             currentTask.cancel()
         }
-        
-        self.task = YNImageLoader.sharedInstance.loadImageWithUrl(imageUrl, completion: { (image: UIImage?, error: Error?) -> (Void) in
-            DispatchQueue.main.async(execute: { () -> Void in
-                if let responseImage = image {
-                    self.image = responseImage
-                    if let completionBlock = completion {
-                        completionBlock(responseImage, nil)
-                    }
-                } else {
-                    if let completionBlock = completion {
-                        completionBlock(nil, error)
-                    }
+    }
+    
+    public func yn_setImageWithUrl(_ imageUrl: String, progress: ImageProgressClosure? = nil, completion: ImageCompletionClosure? = nil) {
+        yn_cancelPreviousLoading()
+        self.task = YNImageLoader.sharedInstance.loadImageWithUrl(imageUrl, progress: { (progress) in
+            
+            }, completion: { (image, error) -> (Void) in
+                if let newImage = image {
+                    self.image = newImage
                 }
-            })
+                if let completionClosure = completion {
+                    completionClosure(image, error)
+                }
         })
-        
     }
     
-    public func yn_setImageWithUrl(_ imageUrl: String, placeholderImage: UIImage, completion: ImageCompletionClosure?) -> Void {
+    public func yn_setImageWithUrl(_ imageUrl: String, placeholderImage: UIImage, progress: @escaping ImageProgressClosure, completion: @escaping ImageCompletionClosure) -> Void {
         self.image = placeholderImage
-        yn_setImageWithUrl(imageUrl)
+        yn_setImageWithUrl(imageUrl, progress: progress, completion: completion)
     }
     
-    public func yn_setImageWithUrl(_ imageUrl: String, pattern: Bool) -> Void {
+    public func yn_setImageWithUrl(_ imageUrl: String, pattern: Bool, progress: @escaping ImageProgressClosure, completion: @escaping ImageCompletionClosure) -> Void {
         if (pattern) {
             if let decodedData = Data(base64Encoded: defaultPattern, options: NSData.Base64DecodingOptions()) {
                 let decodedimage = UIImage(data: decodedData)
                 self.backgroundColor = UIColor(patternImage: decodedimage!)
             }
         }
-        yn_setImageWithUrl(imageUrl) { (image, error) -> (Void) in
+        yn_setImageWithUrl(imageUrl, progress: progress) { (image, error) -> (Void) in
             if pattern && image != nil {
                 self.backgroundColor = UIColor.clear
             }
+            completion(image, error)
         }
     }
     

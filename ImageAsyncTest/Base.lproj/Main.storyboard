@@ -33,18 +33,26 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dzL-Md-ZcT" customClass="YNCircleIndicator" customModule="ImageAsyncTest" customModuleProvider="target">
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="bOx-9g-yL6" firstAttribute="leading" secondItem="Fye-LS-RvE" secondAttribute="trailing" constant="14" id="2zK-I0-9Tx"/>
                                         <constraint firstItem="Fye-LS-RvE" firstAttribute="leading" secondItem="geL-b3-Nmk" secondAttribute="leading" constant="8" id="3zr-Ou-VWm"/>
+                                        <constraint firstItem="dzL-Md-ZcT" firstAttribute="height" secondItem="Fye-LS-RvE" secondAttribute="height" id="7lF-R2-dYz"/>
+                                        <constraint firstItem="dzL-Md-ZcT" firstAttribute="centerY" secondItem="Fye-LS-RvE" secondAttribute="centerY" id="D6Z-71-Gkb"/>
                                         <constraint firstAttribute="bottom" secondItem="bOx-9g-yL6" secondAttribute="bottom" constant="13" id="Ln9-49-dqe"/>
                                         <constraint firstAttribute="trailing" secondItem="bOx-9g-yL6" secondAttribute="trailing" constant="8" id="UAz-Dk-IjM"/>
                                         <constraint firstItem="Fye-LS-RvE" firstAttribute="centerY" secondItem="geL-b3-Nmk" secondAttribute="centerY" id="VJc-Fd-u7L"/>
+                                        <constraint firstItem="dzL-Md-ZcT" firstAttribute="width" secondItem="Fye-LS-RvE" secondAttribute="width" id="gwJ-qp-3NF"/>
                                         <constraint firstItem="bOx-9g-yL6" firstAttribute="top" secondItem="geL-b3-Nmk" secondAttribute="top" constant="13" id="pxQ-08-H9V"/>
+                                        <constraint firstItem="dzL-Md-ZcT" firstAttribute="centerX" secondItem="Fye-LS-RvE" secondAttribute="centerX" id="yI2-Il-Mps"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="cellImage" destination="Fye-LS-RvE" id="qkY-zt-juX"/>
+                                    <outlet property="cellProgressView" destination="dzL-Md-ZcT" id="gaH-xo-Sta"/>
                                     <outlet property="cellTitle" destination="bOx-9g-yL6" id="IRu-xi-a7k"/>
                                 </connections>
                             </tableViewCell>
@@ -57,7 +65,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QV0-1Z-0eY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="270" y="-400"/>
+            <point key="canvasLocation" x="269.60000000000002" y="-400.74962518740631"/>
         </scene>
     </scenes>
 </document>

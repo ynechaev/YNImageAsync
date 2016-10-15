@@ -8,6 +8,9 @@
 
 import UIKit
 
+let memoryCacheSize = 2 * 1024 * 1024 // 2Mb
+let diskCacheSize = 40 * 1024 * 1024 // 40Mb
+
 open class YNImageCacheProvider {
     
     init() {

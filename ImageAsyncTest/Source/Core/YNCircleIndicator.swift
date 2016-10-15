@@ -26,7 +26,7 @@ class YNCircleIndicator: UIView {
         //// Oval Drawing
         let ovalRect = CGRect(x: frame.minX + floor((frame.width - 40) * 0.50000 + 0.5), y: frame.minY + floor((frame.height - 40) * 0.50000 + 0.5), width: 40, height: 40)
         let ovalPath = UIBezierPath()
-        ovalPath.addArc(withCenter: CGPoint(x: ovalRect.midX, y: ovalRect.midY), radius: ovalRect.width / 2, startAngle: -90 * CGFloat(M_PI)/180, endAngle: 0 * CGFloat(M_PI)/180, clockwise: true)
+        ovalPath.addArc(withCenter: CGPoint(x: ovalRect.midX, y: ovalRect.midY), radius: ovalRect.width / 2, startAngle: 0, endAngle: CGFloat(currentProgress) * CGFloat(M_PI)/180, clockwise: true)
         ovalPath.addLine(to: CGPoint(x: ovalRect.midX, y: ovalRect.midY))
         ovalPath.close()
         

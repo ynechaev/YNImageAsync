@@ -12,6 +12,7 @@ class YNTableViewCell: UITableViewCell, YNCellDataProtocol {
     
     @IBOutlet weak var cellImage: UIImageView!
     @IBOutlet weak var cellTitle: UILabel!
+    @IBOutlet weak var cellProgressView: YNCircleIndicator!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,7 +21,7 @@ class YNTableViewCell: UITableViewCell, YNCellDataProtocol {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.cellImage.image = nil
-//        self.cellTitle.text = nil
+        self.cellImage.yn_cancelPreviousLoading()
     }
     
     static func reuseIdentifier() -> String {
@@ -28,7 +29,9 @@ class YNTableViewCell: UITableViewCell, YNCellDataProtocol {
     }
     
     func setDataObject<T: Any>(_ dataObject: T) where T: YNCellObjectProtocol {
-        self.cellImage.yn_setImageWithUrl(dataObject.imageUrl, pattern: true)
+        self.cellImage.yn_setImageWithUrl(dataObject.imageUrl, progress: { (progress) in
+            self.cellProgressView.currentProgress = progress
+            })
         self.cellTitle.text = dataObject.imageTitle
     }
     
