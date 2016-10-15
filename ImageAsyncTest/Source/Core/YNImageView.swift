@@ -17,14 +17,14 @@ class YNImageView: UIImageView, NSURLSessionTaskDelegate, ImageProgressDelegate 
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.prepareCircleIndicator(frame: frame)
+        self.prepareCircleIndicator(frame)
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func prepareCircleIndicator (#frame: CGRect) -> Void {
+    func prepareCircleIndicator(frame: CGRect) -> Void {
         self.circleIndicator = YNCircleIndicator(frame: frame)
         self.circleIndicator.opaque = false
         self.addSubview(self.circleIndicator)

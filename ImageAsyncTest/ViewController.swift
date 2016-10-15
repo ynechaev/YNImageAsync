@@ -30,34 +30,40 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         // Do any additional setup after loading the view, typically from a nib.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-    func loadItunesInfo (itunesUrl: NSURL) -> Void {
-        var session = NSURLSession.sharedSession()
-        self.itunesTask = session.dataTaskWithURL(itunesUrl, completionHandler:self.apiHandler)
+    func loadItunesInfo(itunesUrl: NSURL) -> Void {
+        let session = NSURLSession.sharedSession()
+        self.itunesTask = session.dataTaskWithURL(itunesUrl, completionHandler: self.apiHandler)
         self.itunesTask.resume()
     }
     
-    func apiHandler(data:NSData!, response:NSURLResponse!, error:NSError!) -> Void {
-        if (error != nil) {
-            println("API error: \(error), \(error.userInfo)")
+    func apiHandler(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void {
+        if let apiError = error {
+            print("API error: \(apiError), \(apiError.userInfo)")
         }
-        var jsonError:NSError?
-        var json:NSDictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &jsonError) as NSDictionary
-        if (jsonError != nil) {
-            println("Error parsing json: \(jsonError)")
+        
+        guard let apiData = data else { return }
+        
+        do {
+            let json = try NSJSONSerialization.JSONObjectWithData(apiData, options:NSJSONReadingOptions(rawValue: 0))
+            guard let dict: NSDictionary = json as? NSDictionary else {
+                print("Not a Dictionary")
+                return
+            }
+            processRequestResult(dict)
         }
-        else {
-            var results: NSArray = json["results"] as NSArray
-            imageCollection = results
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.imageCollectionView.reloadData()
-            })
+        catch let JSONError as NSError {
+            print("\(JSONError)")
         }
+    }
+    
+    func processRequestResult(objects: AnyObject) {
+        print("JSONDictionary! \(objects)")
+        let results: NSArray = objects["results"] as! NSArray
+        imageCollection = results
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self.imageCollectionView.reloadData()
+        })
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -66,7 +72,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as YNCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! YNCollectionViewCell
         let object: AnyObject = imageCollection.objectAtIndex(indexPath.row)
         let imageUrl = object["artworkUrl512"] as? String
 //        cell.imageView.yn_setImageWithUrl(imageUrl!)

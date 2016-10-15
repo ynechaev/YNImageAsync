@@ -18,14 +18,14 @@ class YNCircleIndicator: UIView {
     }
     
     override func drawRect(rect: CGRect) {
-        self.drawCanvas1(frame: rect)
+        self.drawCanvas1(rect)
     }
     
-    func drawCanvas1(#frame: CGRect) {
+    func drawCanvas1(frame: CGRect) {
         
         //// Oval Drawing
-        var ovalRect = CGRectMake(frame.minX + floor((frame.width - 40) * 0.50000 + 0.5), frame.minY + floor((frame.height - 40) * 0.50000 + 0.5), 40, 40)
-        var ovalPath = UIBezierPath()
+        let ovalRect = CGRectMake(frame.minX + floor((frame.width - 40) * 0.50000 + 0.5), frame.minY + floor((frame.height - 40) * 0.50000 + 0.5), 40, 40)
+        let ovalPath = UIBezierPath()
         ovalPath.addArcWithCenter(CGPointMake(ovalRect.midX, ovalRect.midY), radius: ovalRect.width / 2, startAngle: -90 * CGFloat(M_PI)/180, endAngle: 0 * CGFloat(M_PI)/180, clockwise: true)
         ovalPath.addLineToPoint(CGPointMake(ovalRect.midX, ovalRect.midY))
         ovalPath.closePath()
