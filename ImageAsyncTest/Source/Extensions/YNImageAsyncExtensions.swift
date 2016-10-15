@@ -11,11 +11,11 @@ import UIKit
 
 let defaultPattern = "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAO0lEQVQYV2NkIBIwwtSdOXPmv4mJCZyPrp94hSCTQLpBpiGzyTeRZDcS8jxOX4I0IocEToUwRTCaaBMBIqwoC66FcWAAAAAASUVORK5CYII="
 
-public typealias CompletionClosure = ((image: UIImage?, error: NSError?) -> (Void))
+public typealias ImageCompletionClosure = ((image: UIImage?, error: NSError?) -> (Void))
 
 extension UIImageView {
     
-    public func yn_setImageWithUrl(imageUrl: String, completion: CompletionClosure? = nil) {
+    public func yn_setImageWithUrl(imageUrl: String, completion: ImageCompletionClosure? = nil) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
             let session: NSURLSession = NSURLSession.sharedSession()
             let task : NSURLSessionDataTask = session.dataTaskWithURL(NSURL(string: imageUrl)!, completionHandler:{ (data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
@@ -32,7 +32,7 @@ extension UIImageView {
         }
     }
     
-    public func yn_setImageWithUrl(imageUrl: String, placeholderImage: UIImage, completion: CompletionClosure?) -> Void {
+    public func yn_setImageWithUrl(imageUrl: String, placeholderImage: UIImage, completion: ImageCompletionClosure?) -> Void {
         self.image = placeholderImage
         yn_setImageWithUrl(imageUrl)
     }

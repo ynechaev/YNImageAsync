@@ -8,77 +8,44 @@
 
 import UIKit
 
-
-
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, NSURLSessionTaskDelegate {
+class ViewController: UITableViewController, NSURLSessionTaskDelegate {
     
-    @IBOutlet weak var imageCollectionView: UICollectionView!
-    let reuseIdentifier = "imageCell"
-    var url = NSURL(string:"https://s3.amazonaws.com/work-project-image-loading/images.json")
-    var itunesTask: NSURLSessionDataTask!
-    var imageCollection: NSArray!
+    var dataProvider: YNDataProvider?
+    var imageCollection: Array <ListObject> = []
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
-        imageCollection = NSArray()
-        
-        imageCollectionView.registerClass(YNCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        
-        loadItunesInfo(url!)
-        
-        // Do any additional setup after loading the view, typically from a nib.
+        self.tableView.registerClass(YNTableViewCell.self, forCellReuseIdentifier: YNTableViewCell.reuseIdentifier())
+        setupDataProvider()
     }
     
-    func loadItunesInfo(itunesUrl: NSURL) -> Void {
-        let session = NSURLSession.sharedSession()
-        self.itunesTask = session.dataTaskWithURL(itunesUrl, completionHandler: self.apiHandler)
-        self.itunesTask.resume()
-    }
-    
-    func apiHandler(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void {
-        if let apiError = error {
-            print("API error: \(apiError), \(apiError.userInfo)")
-        }
-        
-        guard let apiData = data else { return }
-        
-        do {
-            let json = try NSJSONSerialization.JSONObjectWithData(apiData, options:NSJSONReadingOptions(rawValue: 0))
-            guard let dict: NSDictionary = json as? NSDictionary else {
-                print("Not a Dictionary")
-                return
+    func setupDataProvider() {
+        dataProvider = YNDataProvider(completionClosure: { (result, error) in
+            if let completionResult = result {
+                self.imageCollection = completionResult
+                self.tableView.reloadData()
+            } else {
+                self.handleError(error)
             }
-            processRequestResult(dict)
-        }
-        catch let JSONError as NSError {
-            print("\(JSONError)")
-        }
-    }
-    
-    func processRequestResult(objects: AnyObject) {
-        print("JSONDictionary! \(objects)")
-        let results: NSArray = objects["images"] as! NSArray
-        imageCollection = results
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.imageCollectionView.reloadData()
         })
     }
-
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    
+    func handleError(error: NSError?) {
+        if let responseError = error {
+            print("Error occured: \(responseError)")
+        }
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return imageCollection.count
     }
     
-    // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! YNCollectionViewCell
-        let object: AnyObject = imageCollection.objectAtIndex(indexPath.row)
-        let imageUrl = object["url"] as? String
-//        cell.imageView.yn_setImageWithUrl(imageUrl!)
-        cell.imageView.yn_setImageWithUrl(imageUrl!, pattern: true)
-        cell.backgroundColor = UIColor.whiteColor()
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath
+        indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCellWithIdentifier(YNTableViewCell.reuseIdentifier(), forIndexPath: indexPath) as! YNTableViewCell
+        cell.setDataObject(imageCollection[indexPath.row])
         return cell
     }
+    
 }
 

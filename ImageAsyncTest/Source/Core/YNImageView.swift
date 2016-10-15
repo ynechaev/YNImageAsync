@@ -32,6 +32,6 @@ class YNImageView: UIImageView, NSURLSessionTaskDelegate, ImageProgressDelegate 
     }
     
     func didChangeProgress(progress: Float) {
-        
+        self.circleIndicator.currentProgress = progress
     }
 }

@@ -11,8 +11,6 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    let imgur_clientId: String = "2e83c35790b9724"
-
     var window: UIWindow?
     
 

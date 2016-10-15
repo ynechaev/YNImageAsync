@@ -7,13 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0626EA611DB2316C000DC212 /* YNImageAsync.h in Headers */ = {isa = PBXBuildFile; fileRef = 0626EA601DB2316C000DC212 /* YNImageAsync.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0626EA681DB2316C000DC212 /* YNImageAsync.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0626EA5E1DB2316C000DC212 /* YNImageAsync.framework */; };
+		0626EA6F1DB2316C000DC212 /* YNImageAsyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0626EA6E1DB2316C000DC212 /* YNImageAsyncTests.swift */; };
+		0626EA731DB2316C000DC212 /* YNImageAsync.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0626EA5E1DB2316C000DC212 /* YNImageAsync.framework */; };
+		0626EA741DB2316C000DC212 /* YNImageAsync.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0626EA5E1DB2316C000DC212 /* YNImageAsync.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0626EA7E1DB2324A000DC212 /* YNImageCacheProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0626EA7D1DB2324A000DC212 /* YNImageCacheProvider.swift */; };
+		0626EA7F1DB2324A000DC212 /* YNImageCacheProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0626EA7D1DB2324A000DC212 /* YNImageCacheProvider.swift */; };
+		0626EA811DB25035000DC212 /* YNCellDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0626EA801DB25035000DC212 /* YNCellDataProtocol.swift */; };
+		0626EA831DB252AE000DC212 /* YNCellObjectProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0626EA821DB252AE000DC212 /* YNCellObjectProtocol.swift */; };
 		062AC0091A0827E000744325 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062AC0081A0827E000744325 /* AppDelegate.swift */; };
 		062AC00B1A0827E000744325 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062AC00A1A0827E000744325 /* ViewController.swift */; };
 		062AC00E1A0827E000744325 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 062AC00C1A0827E000744325 /* Main.storyboard */; };
 		062AC0101A0827E000744325 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 062AC00F1A0827E000744325 /* Images.xcassets */; };
 		062AC0131A0827E000744325 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 062AC0111A0827E000744325 /* LaunchScreen.xib */; };
 		062AC01F1A0827E000744325 /* ImageAsyncTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062AC01E1A0827E000744325 /* ImageAsyncTestTests.swift */; };
-		062AC0291A08F57500744325 /* YNCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062AC0281A08F57500744325 /* YNCollectionViewCell.swift */; };
+		062AC0291A08F57500744325 /* YNTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062AC0281A08F57500744325 /* YNTableViewCell.swift */; };
+		06CA03B91DB25F8C00AC65E5 /* YNDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CA03B81DB25F8C00AC65E5 /* YNDataProvider.swift */; };
 		06EE758F1A0ABB65007BE5B0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06EE758E1A0ABB65007BE5B0 /* CoreGraphics.framework */; };
 		06EE759B1A0ACD37007BE5B0 /* YNCircleIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EE75971A0ACD37007BE5B0 /* YNCircleIndicator.swift */; };
 		06EE759C1A0ACD37007BE5B0 /* YNImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EE75981A0ACD37007BE5B0 /* YNImageView.swift */; };
@@ -21,6 +31,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0626EA691DB2316C000DC212 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 062ABFFB1A0827E000744325 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0626EA5D1DB2316C000DC212;
+			remoteInfo = YNImageAsync;
+		};
+		0626EA6B1DB2316C000DC212 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 062ABFFB1A0827E000744325 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 062AC0021A0827E000744325;
+			remoteInfo = ImageAsyncTest;
+		};
+		0626EA711DB2316C000DC212 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 062ABFFB1A0827E000744325 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0626EA5D1DB2316C000DC212;
+			remoteInfo = YNImageAsync;
+		};
 		062AC0191A0827E000744325 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 062ABFFB1A0827E000744325 /* Project object */;
@@ -30,7 +61,30 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		0626EA7A1DB2316C000DC212 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0626EA741DB2316C000DC212 /* YNImageAsync.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		0626EA5E1DB2316C000DC212 /* YNImageAsync.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YNImageAsync.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0626EA601DB2316C000DC212 /* YNImageAsync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YNImageAsync.h; sourceTree = "<group>"; };
+		0626EA621DB2316C000DC212 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0626EA671DB2316C000DC212 /* YNImageAsyncTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YNImageAsyncTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0626EA6E1DB2316C000DC212 /* YNImageAsyncTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YNImageAsyncTests.swift; sourceTree = "<group>"; };
+		0626EA701DB2316C000DC212 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0626EA7D1DB2324A000DC212 /* YNImageCacheProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNImageCacheProvider.swift; sourceTree = "<group>"; };
+		0626EA801DB25035000DC212 /* YNCellDataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCellDataProtocol.swift; sourceTree = "<group>"; };
+		0626EA821DB252AE000DC212 /* YNCellObjectProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCellObjectProtocol.swift; sourceTree = "<group>"; };
 		062AC0031A0827E000744325 /* ImageAsyncTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageAsyncTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		062AC0071A0827E000744325 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		062AC0081A0827E000744325 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -41,7 +95,8 @@
 		062AC0181A0827E000744325 /* ImageAsyncTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageAsyncTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		062AC01D1A0827E000744325 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		062AC01E1A0827E000744325 /* ImageAsyncTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAsyncTestTests.swift; sourceTree = "<group>"; };
-		062AC0281A08F57500744325 /* YNCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCollectionViewCell.swift; sourceTree = "<group>"; };
+		062AC0281A08F57500744325 /* YNTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNTableViewCell.swift; sourceTree = "<group>"; };
+		06CA03B81DB25F8C00AC65E5 /* YNDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNDataProvider.swift; sourceTree = "<group>"; };
 		06EE758E1A0ABB65007BE5B0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		06EE75971A0ACD37007BE5B0 /* YNCircleIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCircleIndicator.swift; sourceTree = "<group>"; };
 		06EE75981A0ACD37007BE5B0 /* YNImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNImageView.swift; sourceTree = "<group>"; };
@@ -49,10 +104,26 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0626EA5A1DB2316C000DC212 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0626EA641DB2316C000DC212 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0626EA681DB2316C000DC212 /* YNImageAsync.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		062AC0001A0827E000744325 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0626EA731DB2316C000DC212 /* YNImageAsync.framework in Frameworks */,
 				06EE758F1A0ABB65007BE5B0 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -67,12 +138,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0626EA5F1DB2316C000DC212 /* YNImageAsync */ = {
+			isa = PBXGroup;
+			children = (
+				0626EA601DB2316C000DC212 /* YNImageAsync.h */,
+				0626EA621DB2316C000DC212 /* Info.plist */,
+			);
+			path = YNImageAsync;
+			sourceTree = "<group>";
+		};
+		0626EA6D1DB2316C000DC212 /* YNImageAsyncTests */ = {
+			isa = PBXGroup;
+			children = (
+				0626EA6E1DB2316C000DC212 /* YNImageAsyncTests.swift */,
+				0626EA701DB2316C000DC212 /* Info.plist */,
+			);
+			path = YNImageAsyncTests;
+			sourceTree = "<group>";
+		};
 		062ABFFA1A0827E000744325 = {
 			isa = PBXGroup;
 			children = (
 				06EE758E1A0ABB65007BE5B0 /* CoreGraphics.framework */,
 				062AC0051A0827E000744325 /* ImageAsyncTest */,
 				062AC01B1A0827E000744325 /* ImageAsyncTestTests */,
+				0626EA5F1DB2316C000DC212 /* YNImageAsync */,
+				0626EA6D1DB2316C000DC212 /* YNImageAsyncTests */,
 				062AC0041A0827E000744325 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -82,6 +173,8 @@
 			children = (
 				062AC0031A0827E000744325 /* ImageAsyncTest.app */,
 				062AC0181A0827E000744325 /* ImageAsyncTestTests.xctest */,
+				0626EA5E1DB2316C000DC212 /* YNImageAsync.framework */,
+				0626EA671DB2316C000DC212 /* YNImageAsyncTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -129,7 +222,10 @@
 			isa = PBXGroup;
 			children = (
 				062AC00A1A0827E000744325 /* ViewController.swift */,
-				062AC0281A08F57500744325 /* YNCollectionViewCell.swift */,
+				062AC0281A08F57500744325 /* YNTableViewCell.swift */,
+				0626EA801DB25035000DC212 /* YNCellDataProtocol.swift */,
+				0626EA821DB252AE000DC212 /* YNCellObjectProtocol.swift */,
+				06CA03B81DB25F8C00AC65E5 /* YNDataProvider.swift */,
 			);
 			name = "Example files";
 			sourceTree = "<group>";
@@ -148,6 +244,7 @@
 			children = (
 				06EE75971A0ACD37007BE5B0 /* YNCircleIndicator.swift */,
 				06EE75981A0ACD37007BE5B0 /* YNImageView.swift */,
+				0626EA7D1DB2324A000DC212 /* YNImageCacheProvider.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -162,7 +259,55 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		0626EA5B1DB2316C000DC212 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0626EA611DB2316C000DC212 /* YNImageAsync.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		0626EA5D1DB2316C000DC212 /* YNImageAsync */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0626EA791DB2316C000DC212 /* Build configuration list for PBXNativeTarget "YNImageAsync" */;
+			buildPhases = (
+				0626EA591DB2316C000DC212 /* Sources */,
+				0626EA5A1DB2316C000DC212 /* Frameworks */,
+				0626EA5B1DB2316C000DC212 /* Headers */,
+				0626EA5C1DB2316C000DC212 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YNImageAsync;
+			productName = YNImageAsync;
+			productReference = 0626EA5E1DB2316C000DC212 /* YNImageAsync.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		0626EA661DB2316C000DC212 /* YNImageAsyncTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0626EA7B1DB2316C000DC212 /* Build configuration list for PBXNativeTarget "YNImageAsyncTests" */;
+			buildPhases = (
+				0626EA631DB2316C000DC212 /* Sources */,
+				0626EA641DB2316C000DC212 /* Frameworks */,
+				0626EA651DB2316C000DC212 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0626EA6A1DB2316C000DC212 /* PBXTargetDependency */,
+				0626EA6C1DB2316C000DC212 /* PBXTargetDependency */,
+			);
+			name = YNImageAsyncTests;
+			productName = YNImageAsyncTests;
+			productReference = 0626EA671DB2316C000DC212 /* YNImageAsyncTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		062AC0021A0827E000744325 /* ImageAsyncTest */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 062AC0221A0827E000744325 /* Build configuration list for PBXNativeTarget "ImageAsyncTest" */;
@@ -170,10 +315,12 @@
 				062ABFFF1A0827E000744325 /* Sources */,
 				062AC0001A0827E000744325 /* Frameworks */,
 				062AC0011A0827E000744325 /* Resources */,
+				0626EA7A1DB2316C000DC212 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0626EA721DB2316C000DC212 /* PBXTargetDependency */,
 			);
 			name = ImageAsyncTest;
 			productName = ImageAsyncTest;
@@ -209,6 +356,13 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Yury Nechaev";
 				TargetAttributes = {
+					0626EA5D1DB2316C000DC212 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					0626EA661DB2316C000DC212 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 062AC0021A0827E000744325;
+					};
 					062AC0021A0827E000744325 = {
 						CreatedOnToolsVersion = 6.1;
 					};
@@ -232,12 +386,28 @@
 			projectRoot = "";
 			targets = (
 				062AC0021A0827E000744325 /* ImageAsyncTest */,
+				0626EA5D1DB2316C000DC212 /* YNImageAsync */,
 				062AC0171A0827E000744325 /* ImageAsyncTestTests */,
+				0626EA661DB2316C000DC212 /* YNImageAsyncTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0626EA5C1DB2316C000DC212 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0626EA651DB2316C000DC212 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		062AC0011A0827E000744325 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -258,16 +428,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0626EA591DB2316C000DC212 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0626EA7F1DB2324A000DC212 /* YNImageCacheProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0626EA631DB2316C000DC212 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0626EA6F1DB2316C000DC212 /* YNImageAsyncTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		062ABFFF1A0827E000744325 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				06EE759B1A0ACD37007BE5B0 /* YNCircleIndicator.swift in Sources */,
+				06CA03B91DB25F8C00AC65E5 /* YNDataProvider.swift in Sources */,
 				06EE759C1A0ACD37007BE5B0 /* YNImageView.swift in Sources */,
+				0626EA831DB252AE000DC212 /* YNCellObjectProtocol.swift in Sources */,
 				062AC00B1A0827E000744325 /* ViewController.swift in Sources */,
 				06EE759D1A0ACD37007BE5B0 /* YNImageAsyncExtensions.swift in Sources */,
+				0626EA7E1DB2324A000DC212 /* YNImageCacheProvider.swift in Sources */,
 				062AC0091A0827E000744325 /* AppDelegate.swift in Sources */,
-				062AC0291A08F57500744325 /* YNCollectionViewCell.swift in Sources */,
+				0626EA811DB25035000DC212 /* YNCellDataProtocol.swift in Sources */,
+				062AC0291A08F57500744325 /* YNTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +472,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0626EA6A1DB2316C000DC212 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0626EA5D1DB2316C000DC212 /* YNImageAsync */;
+			targetProxy = 0626EA691DB2316C000DC212 /* PBXContainerItemProxy */;
+		};
+		0626EA6C1DB2316C000DC212 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 062AC0021A0827E000744325 /* ImageAsyncTest */;
+			targetProxy = 0626EA6B1DB2316C000DC212 /* PBXContainerItemProxy */;
+		};
+		0626EA721DB2316C000DC212 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0626EA5D1DB2316C000DC212 /* YNImageAsync */;
+			targetProxy = 0626EA711DB2316C000DC212 /* PBXContainerItemProxy */;
+		};
 		062AC01A1A0827E000744325 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 062AC0021A0827E000744325 /* ImageAsyncTest */;
@@ -309,6 +514,87 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0626EA751DB2316C000DC212 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = YNImageAsync/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = yn.YNImageAsync;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		0626EA761DB2316C000DC212 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = YNImageAsync/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = yn.YNImageAsync;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		0626EA771DB2316C000DC212 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = YNImageAsyncTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = yn.YNImageAsyncTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ImageAsyncTest.app/ImageAsyncTest";
+			};
+			name = Debug;
+		};
+		0626EA781DB2316C000DC212 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = YNImageAsyncTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = yn.YNImageAsyncTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ImageAsyncTest.app/ImageAsyncTest";
+			};
+			name = Release;
+		};
 		062AC0201A0827E000744325 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -393,6 +679,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = ImageAsyncTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "YN.$(PRODUCT_NAME:rfc1034identifier)";
@@ -404,6 +691,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = ImageAsyncTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "YN.$(PRODUCT_NAME:rfc1034identifier)";
@@ -450,6 +738,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0626EA791DB2316C000DC212 /* Build configuration list for PBXNativeTarget "YNImageAsync" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0626EA751DB2316C000DC212 /* Debug */,
+				0626EA761DB2316C000DC212 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0626EA7B1DB2316C000DC212 /* Build configuration list for PBXNativeTarget "YNImageAsyncTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0626EA771DB2316C000DC212 /* Debug */,
+				0626EA781DB2316C000DC212 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		062ABFFE1A0827E000744325 /* Build configuration list for PBXProject "ImageAsyncTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
