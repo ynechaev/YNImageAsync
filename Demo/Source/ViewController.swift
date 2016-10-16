@@ -15,7 +15,6 @@ class ViewController: UITableViewController, URLSessionTaskDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        YNImageAsync.setLoggingLevel(level: .info)
         setupDataProvider()
     }
     
@@ -45,6 +44,10 @@ class ViewController: UITableViewController, URLSessionTaskDelegate {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: YNTableViewCell.reuseIdentifier(), for: indexPath) as! YNTableViewCell
         cell.setDataObject(imageCollection[(indexPath as NSIndexPath).row])
         return cell
+    }
+    
+    @IBAction func didTapClearCache(sender: AnyObject) {
+        YNImageCacheProvider.sharedInstance.clearMemoryCache()
     }
     
 }

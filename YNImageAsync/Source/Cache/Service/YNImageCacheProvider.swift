@@ -9,7 +9,6 @@
 import UIKit
 
 let maxMemoryCacheSize = 3 * 1024 * 1024 // 3Mb
-let maxDiskCacheSize = 40 * 1024 * 1024 // 40Mb
 
 open class YNImageCacheProvider {
 
@@ -46,15 +45,19 @@ open class YNImageCacheProvider {
         return nil
     }
     
-    open func storeDataToMemory(_ key: String, data: Data) {
+    open func cacheData(key: String, data: Data) {
+        cacheDataToMemory(key, data: data)
+        cacheDataToDisk(key, data: data)
+    }
+    
+    open func cacheDataToMemory(_ key: String, data: Data) {
         let entry = YNImageCacheEntry(data: data, cacheType: .memory, date: Date())
         yn_logInfo("Cache store: \(key)")
         memoryCache[key] = entry
         cleanMemoryCache()
-        storeDataToDisk(key, data: data)
     }
     
-    open func storeDataToDisk(_ key: String, data: Data) {
+    open func cacheDataToDisk(_ key: String, data: Data) {
         saveCache(cacheData: data, path: fileInDocumentsDirectory(filename: key))
     }
     
@@ -107,6 +110,15 @@ open class YNImageCacheProvider {
         memoryCache.removeAll()
     }
     
+    open func clearDiskCache() {
+        
+    }
+    
+    open func clearCache() {
+        clearMemoryCache()
+        clearDiskCache()
+    }
+    
     func documentsDirectory() -> String {
         let documentsFolderPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
         return documentsFolderPath
@@ -137,8 +149,8 @@ open class YNImageCacheProvider {
             let data = try Data(contentsOf: fileUrl)
             yn_logInfo("Disk cache read success: \(fileUrl)")
             return data
-        } catch let saveError {
-            yn_logError("\(saveError)")
+        } catch let readError {
+            yn_logInfo("Disk cache read error: \(readError)")
             return nil
         }
     }
@@ -149,7 +161,7 @@ open class YNImageCacheProvider {
             try cacheData.write(to: fileUrl , options: Data.WritingOptions(rawValue: 0))
             yn_logInfo("Disk cache write success: \(fileUrl)")
         } catch let saveError {
-            yn_logError("\(saveError)")
+            yn_logError("Disk cache write error: \(saveError)")
         }
     }
     

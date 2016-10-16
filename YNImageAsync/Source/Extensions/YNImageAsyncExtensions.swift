@@ -23,26 +23,26 @@ extension UIImageView {
         }
     }
     
-    public func yn_setImageWithUrl(_ imageUrl: String, progress: ImageProgressClosure? = nil, completion: ImageCompletionClosure? = nil) {
+    public func yn_setImageWithUrl(_ imageUrl: String, progress: LoaderProgressClosure? = nil, completion: LoaderCompletionClosure? = nil) {
         yn_cancelPreviousLoading()
         self.task = YNImageLoader.sharedInstance.loadImageWithUrl(imageUrl, progress: { (progress) in
             
-            }, completion: { (image, error) -> (Void) in
-                if let newImage = image {
-                    self.image = newImage
+            }, completion: { (data, error) -> (Void) in
+                if let newImageData = data {
+                    self.image = UIImage(data: newImageData)
                 }
                 if let completionClosure = completion {
-                    completionClosure(image, error)
+                    completionClosure(data, error)
                 }
         })
     }
     
-    public func yn_setImageWithUrl(_ imageUrl: String, placeholderImage: UIImage, progress: @escaping ImageProgressClosure, completion: @escaping ImageCompletionClosure) -> Void {
+    public func yn_setImageWithUrl(_ imageUrl: String, placeholderImage: UIImage, progress: @escaping LoaderProgressClosure, completion: @escaping LoaderCompletionClosure) -> Void {
         self.image = placeholderImage
         yn_setImageWithUrl(imageUrl, progress: progress, completion: completion)
     }
     
-    public func yn_setImageWithUrl(_ imageUrl: String, pattern: Bool, progress: @escaping ImageProgressClosure, completion: @escaping ImageCompletionClosure) -> Void {
+    public func yn_setImageWithUrl(_ imageUrl: String, pattern: Bool, progress: @escaping LoaderProgressClosure, completion: @escaping LoaderCompletionClosure) -> Void {
         if (pattern) {
             if let decodedData = Data(base64Encoded: defaultPattern, options: NSData.Base64DecodingOptions()) {
                 let decodedimage = UIImage(data: decodedData)
