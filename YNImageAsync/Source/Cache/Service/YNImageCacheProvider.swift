@@ -93,4 +93,38 @@ open class YNImageCacheProvider {
         memoryCache.removeAll()
     }
     
+    func documentsDirectory() -> String {
+        let documentsFolderPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
+        return documentsFolderPath
+    }
+    
+    func fileInDocumentsDirectory(filename: String) -> String {
+        
+        let writePath = (documentsDirectory() as NSString).appendingPathComponent("YNImageAsync")
+        
+        if (!FileManager.default.fileExists(atPath: writePath)) {
+            do {
+                try FileManager.default.createDirectory(atPath: writePath, withIntermediateDirectories: false, attributes: nil) }
+            catch let error {
+                yn_logError("Failed to create directory: \(writePath) - \(error)")
+            }
+        }
+        return (writePath as NSString).appendingPathComponent(filename)
+    }
+    
+    func saveCache (cacheData: Data, path: String ) -> Bool{
+        guard let fileUrl = URL(string: path) else {
+            yn_logError("Failed to create file url from path: \(path)")
+            return false
+        }
+        do {
+            try cacheData.write(to: fileUrl , options: Data.WritingOptions(rawValue: 0))
+            yn_logInfo("Disk cache write success: \(fileUrl)")
+            return true
+        } catch let saveError {
+            yn_logError("\(saveError)")
+            return false
+        }
+    }
+    
 }
