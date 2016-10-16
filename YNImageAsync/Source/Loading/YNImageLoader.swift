@@ -99,16 +99,18 @@ public class YNImageLoader : NSObject, URLSessionDataDelegate, URLSessionDelegat
     
     public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         if let completionClosure = completionQueue[task.taskIdentifier] {
-            if let existingData = responsesQueue[task.taskIdentifier] {
-                DispatchQueue.main.async {
-                    completionClosure(existingData, error)
-                }
-                if let key = task.originalRequest?.url?.absoluteString {
-                    YNImageCacheProvider.sharedInstance.cacheData(key: key, data: existingData)
-                }
-            } else {
+            if error != nil {
                 DispatchQueue.main.async {
                     completionClosure(nil, error)
+                }
+            } else {
+                if let existingData = responsesQueue[task.taskIdentifier] {
+                    DispatchQueue.main.async {
+                        completionClosure(existingData, error)
+                    }
+                    if let key = task.originalRequest?.url?.absoluteString {
+                        YNImageCacheProvider.sharedInstance.cacheData(key: key, data: existingData)
+                    }
                 }
             }
         }
