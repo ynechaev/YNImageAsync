@@ -15,6 +15,7 @@ class ViewController: UITableViewController, URLSessionTaskDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        YNImageAsync.setLoggingLevel(level: .info)
         setupDataProvider()
     }
     
@@ -31,7 +32,7 @@ class ViewController: UITableViewController, URLSessionTaskDelegate {
     
     func handleError(_ error: NSError?) {
         if let responseError = error {
-            print("Error occured: \(responseError)")
+            yn_logError("Error occured: \(responseError)")
         }
     }
     

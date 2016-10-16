@@ -21,13 +21,21 @@
 		062AC00E1A0827E000744325 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 062AC00C1A0827E000744325 /* Main.storyboard */; };
 		062AC0101A0827E000744325 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 062AC00F1A0827E000744325 /* Images.xcassets */; };
 		062AC0131A0827E000744325 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 062AC0111A0827E000744325 /* LaunchScreen.xib */; };
-		062AC01F1A0827E000744325 /* ImageAsyncTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062AC01E1A0827E000744325 /* ImageAsyncTestTests.swift */; };
 		062AC0291A08F57500744325 /* YNTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062AC0281A08F57500744325 /* YNTableViewCell.swift */; };
 		063365F21DB2A99900B78098 /* YNImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063365F11DB2A99900B78098 /* YNImageLoader.swift */; };
 		063365F31DB2A99900B78098 /* YNImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063365F11DB2A99900B78098 /* YNImageLoader.swift */; };
 		063365F51DB2BD9100B78098 /* YNCommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063365F41DB2BD9100B78098 /* YNCommonFunctions.swift */; };
 		063365F61DB2BD9100B78098 /* YNCommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063365F41DB2BD9100B78098 /* YNCommonFunctions.swift */; };
+		069055901DB2DB6A00C3E48F /* YNImageCacheEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0690558F1DB2DB6A00C3E48F /* YNImageCacheEntry.swift */; };
+		069055911DB2DB6A00C3E48F /* YNImageCacheEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0690558F1DB2DB6A00C3E48F /* YNImageCacheEntry.swift */; };
+		069055931DB2DBB500C3E48F /* YNImageCacheType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069055921DB2DBB500C3E48F /* YNImageCacheType.swift */; };
+		069055941DB2DBB500C3E48F /* YNImageCacheType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069055921DB2DBB500C3E48F /* YNImageCacheType.swift */; };
+		069055951DB3600800C3E48F /* YNImageAsyncExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EE759A1A0ACD37007BE5B0 /* YNImageAsyncExtensions.swift */; };
+		069055961DB3600C00C3E48F /* YNImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EE75981A0ACD37007BE5B0 /* YNImageView.swift */; };
+		069055971DB3601000C3E48F /* YNCircleIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EE75971A0ACD37007BE5B0 /* YNCircleIndicator.swift */; };
 		06CA03B91DB25F8C00AC65E5 /* YNDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CA03B81DB25F8C00AC65E5 /* YNDataProvider.swift */; };
+		06E80CBF1DB37FA40068BF85 /* YNImageAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E80CBE1DB37FA40068BF85 /* YNImageAsync.swift */; };
+		06E80CC01DB37FA40068BF85 /* YNImageAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E80CBE1DB37FA40068BF85 /* YNImageAsync.swift */; };
 		06EE758F1A0ABB65007BE5B0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06EE758E1A0ABB65007BE5B0 /* CoreGraphics.framework */; };
 		06EE759B1A0ACD37007BE5B0 /* YNCircleIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EE75971A0ACD37007BE5B0 /* YNCircleIndicator.swift */; };
 		06EE759C1A0ACD37007BE5B0 /* YNImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EE75981A0ACD37007BE5B0 /* YNImageView.swift */; };
@@ -56,13 +64,6 @@
 			remoteGlobalIDString = 0626EA5D1DB2316C000DC212;
 			remoteInfo = YNImageAsync;
 		};
-		062AC0191A0827E000744325 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 062ABFFB1A0827E000744325 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 062AC0021A0827E000744325;
-			remoteInfo = ImageAsyncTest;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -87,26 +88,26 @@
 		0626EA6E1DB2316C000DC212 /* YNImageAsyncTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YNImageAsyncTests.swift; sourceTree = "<group>"; };
 		0626EA701DB2316C000DC212 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0626EA7D1DB2324A000DC212 /* YNImageCacheProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNImageCacheProvider.swift; sourceTree = "<group>"; };
-		0626EA801DB25035000DC212 /* YNCellDataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCellDataProtocol.swift; sourceTree = "<group>"; };
-		0626EA821DB252AE000DC212 /* YNCellObjectProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCellObjectProtocol.swift; sourceTree = "<group>"; };
-		062AC0031A0827E000744325 /* ImageAsyncTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageAsyncTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0626EA801DB25035000DC212 /* YNCellDataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YNCellDataProtocol.swift; path = ../YNCellDataProtocol.swift; sourceTree = "<group>"; };
+		0626EA821DB252AE000DC212 /* YNCellObjectProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YNCellObjectProtocol.swift; path = ../YNCellObjectProtocol.swift; sourceTree = "<group>"; };
+		062AC0031A0827E000744325 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		062AC0071A0827E000744325 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		062AC0081A0827E000744325 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		062AC00A1A0827E000744325 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		062AC00A1A0827E000744325 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../ViewController.swift; sourceTree = "<group>"; };
 		062AC00D1A0827E000744325 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		062AC00F1A0827E000744325 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		062AC0121A0827E000744325 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		062AC0181A0827E000744325 /* ImageAsyncTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageAsyncTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		062AC01D1A0827E000744325 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		062AC01E1A0827E000744325 /* ImageAsyncTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAsyncTestTests.swift; sourceTree = "<group>"; };
-		062AC0281A08F57500744325 /* YNTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNTableViewCell.swift; sourceTree = "<group>"; };
-		063365F11DB2A99900B78098 /* YNImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNImageLoader.swift; sourceTree = "<group>"; };
-		063365F41DB2BD9100B78098 /* YNCommonFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCommonFunctions.swift; sourceTree = "<group>"; };
-		06CA03B81DB25F8C00AC65E5 /* YNDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNDataProvider.swift; sourceTree = "<group>"; };
+		062AC0281A08F57500744325 /* YNTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YNTableViewCell.swift; path = ../YNTableViewCell.swift; sourceTree = "<group>"; };
+		063365F11DB2A99900B78098 /* YNImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YNImageLoader.swift; path = ../../YNImageLoader.swift; sourceTree = "<group>"; };
+		063365F41DB2BD9100B78098 /* YNCommonFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YNCommonFunctions.swift; path = ../../YNCommonFunctions.swift; sourceTree = "<group>"; };
+		0690558F1DB2DB6A00C3E48F /* YNImageCacheEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNImageCacheEntry.swift; sourceTree = "<group>"; };
+		069055921DB2DBB500C3E48F /* YNImageCacheType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNImageCacheType.swift; sourceTree = "<group>"; };
+		06CA03B81DB25F8C00AC65E5 /* YNDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YNDataProvider.swift; path = ../YNDataProvider.swift; sourceTree = "<group>"; };
+		06E80CBE1DB37FA40068BF85 /* YNImageAsync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNImageAsync.swift; sourceTree = "<group>"; };
 		06EE758E1A0ABB65007BE5B0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		06EE75971A0ACD37007BE5B0 /* YNCircleIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCircleIndicator.swift; sourceTree = "<group>"; };
 		06EE75981A0ACD37007BE5B0 /* YNImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNImageView.swift; sourceTree = "<group>"; };
-		06EE759A1A0ACD37007BE5B0 /* YNImageAsyncExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNImageAsyncExtensions.swift; sourceTree = "<group>"; };
+		06EE759A1A0ACD37007BE5B0 /* YNImageAsyncExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YNImageAsyncExtensions.swift; path = ../Extensions/YNImageAsyncExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,19 +135,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		062AC0151A0827E000744325 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		0626EA5F1DB2316C000DC212 /* YNImageAsync */ = {
 			isa = PBXGroup;
 			children = (
+				06EE75961A0ACD37007BE5B0 /* Source */,
 				0626EA601DB2316C000DC212 /* YNImageAsync.h */,
 				0626EA621DB2316C000DC212 /* Info.plist */,
 			);
@@ -166,8 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				06EE758E1A0ABB65007BE5B0 /* CoreGraphics.framework */,
-				062AC0051A0827E000744325 /* ImageAsyncTest */,
-				062AC01B1A0827E000744325 /* ImageAsyncTestTests */,
+				062AC0051A0827E000744325 /* Demo */,
 				0626EA5F1DB2316C000DC212 /* YNImageAsync */,
 				0626EA6D1DB2316C000DC212 /* YNImageAsyncTests */,
 				062AC0041A0827E000744325 /* Products */,
@@ -177,25 +171,24 @@
 		062AC0041A0827E000744325 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				062AC0031A0827E000744325 /* ImageAsyncTest.app */,
-				062AC0181A0827E000744325 /* ImageAsyncTestTests.xctest */,
+				062AC0031A0827E000744325 /* Demo.app */,
 				0626EA5E1DB2316C000DC212 /* YNImageAsync.framework */,
 				0626EA671DB2316C000DC212 /* YNImageAsyncTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		062AC0051A0827E000744325 /* ImageAsyncTest */ = {
+		062AC0051A0827E000744325 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
 				06EE75951A0ACD37007BE5B0 /* Source */,
-				06EE75941A0ACC5E007BE5B0 /* Example files */,
 				062AC0081A0827E000744325 /* AppDelegate.swift */,
 				062AC00C1A0827E000744325 /* Main.storyboard */,
 				062AC00F1A0827E000744325 /* Images.xcassets */,
 				062AC0111A0827E000744325 /* LaunchScreen.xib */,
 				062AC0061A0827E000744325 /* Supporting Files */,
 			);
+			name = Demo;
 			path = ImageAsyncTest;
 			sourceTree = "<group>";
 		};
@@ -207,62 +200,81 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		062AC01B1A0827E000744325 /* ImageAsyncTestTests */ = {
+		0690558E1DB2DB5800C3E48F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				062AC01E1A0827E000744325 /* ImageAsyncTestTests.swift */,
-				062AC01C1A0827E000744325 /* Supporting Files */,
+				0690558F1DB2DB6A00C3E48F /* YNImageCacheEntry.swift */,
+				069055921DB2DBB500C3E48F /* YNImageCacheType.swift */,
 			);
-			path = ImageAsyncTestTests;
+			name = Model;
 			sourceTree = "<group>";
 		};
-		062AC01C1A0827E000744325 /* Supporting Files */ = {
+		06E80CB91DB37D3F0068BF85 /* Cache */ = {
 			isa = PBXGroup;
 			children = (
-				062AC01D1A0827E000744325 /* Info.plist */,
+				06E80CBA1DB37D4D0068BF85 /* Service */,
+				0690558E1DB2DB5800C3E48F /* Model */,
 			);
-			name = "Supporting Files";
+			name = Cache;
 			sourceTree = "<group>";
 		};
-		06EE75941A0ACC5E007BE5B0 /* Example files */ = {
+		06E80CBA1DB37D4D0068BF85 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				062AC00A1A0827E000744325 /* ViewController.swift */,
+				0626EA7D1DB2324A000DC212 /* YNImageCacheProvider.swift */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
+		06E80CBB1DB37F4A0068BF85 /* Loading */ = {
+			isa = PBXGroup;
+			children = (
 				063365F11DB2A99900B78098 /* YNImageLoader.swift */,
-				062AC0281A08F57500744325 /* YNTableViewCell.swift */,
-				0626EA801DB25035000DC212 /* YNCellDataProtocol.swift */,
-				0626EA821DB252AE000DC212 /* YNCellObjectProtocol.swift */,
-				06CA03B81DB25F8C00AC65E5 /* YNDataProvider.swift */,
-				063365F41DB2BD9100B78098 /* YNCommonFunctions.swift */,
 			);
-			name = "Example files";
+			name = Loading;
+			sourceTree = "<group>";
+		};
+		06E80CBC1DB37F6C0068BF85 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				06EE75981A0ACD37007BE5B0 /* YNImageView.swift */,
+				06EE75971A0ACD37007BE5B0 /* YNCircleIndicator.swift */,
+				06EE759A1A0ACD37007BE5B0 /* YNImageAsyncExtensions.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		06E80CBD1DB37F8A0068BF85 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				063365F41DB2BD9100B78098 /* YNCommonFunctions.swift */,
+				06E80CBE1DB37FA40068BF85 /* YNImageAsync.swift */,
+			);
+			name = Core;
 			sourceTree = "<group>";
 		};
 		06EE75951A0ACD37007BE5B0 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				06EE75961A0ACD37007BE5B0 /* Core */,
-				06EE75991A0ACD37007BE5B0 /* Extensions */,
+				062AC00A1A0827E000744325 /* ViewController.swift */,
+				062AC0281A08F57500744325 /* YNTableViewCell.swift */,
+				0626EA801DB25035000DC212 /* YNCellDataProtocol.swift */,
+				0626EA821DB252AE000DC212 /* YNCellObjectProtocol.swift */,
+				06CA03B81DB25F8C00AC65E5 /* YNDataProvider.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
 		};
-		06EE75961A0ACD37007BE5B0 /* Core */ = {
+		06EE75961A0ACD37007BE5B0 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				06EE75971A0ACD37007BE5B0 /* YNCircleIndicator.swift */,
-				06EE75981A0ACD37007BE5B0 /* YNImageView.swift */,
-				0626EA7D1DB2324A000DC212 /* YNImageCacheProvider.swift */,
+				06E80CBD1DB37F8A0068BF85 /* Core */,
+				06E80CBC1DB37F6C0068BF85 /* Extensions */,
+				06E80CBB1DB37F4A0068BF85 /* Loading */,
+				06E80CB91DB37D3F0068BF85 /* Cache */,
 			);
-			path = Core;
-			sourceTree = "<group>";
-		};
-		06EE75991A0ACD37007BE5B0 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				06EE759A1A0ACD37007BE5B0 /* YNImageAsyncExtensions.swift */,
-			);
-			path = Extensions;
+			name = Source;
+			path = ../ImageAsyncTest/Source/Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,9 +328,9 @@
 			productReference = 0626EA671DB2316C000DC212 /* YNImageAsyncTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		062AC0021A0827E000744325 /* ImageAsyncTest */ = {
+		062AC0021A0827E000744325 /* Demo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 062AC0221A0827E000744325 /* Build configuration list for PBXNativeTarget "ImageAsyncTest" */;
+			buildConfigurationList = 062AC0221A0827E000744325 /* Build configuration list for PBXNativeTarget "Demo" */;
 			buildPhases = (
 				062ABFFF1A0827E000744325 /* Sources */,
 				062AC0001A0827E000744325 /* Frameworks */,
@@ -330,28 +342,10 @@
 			dependencies = (
 				0626EA721DB2316C000DC212 /* PBXTargetDependency */,
 			);
-			name = ImageAsyncTest;
+			name = Demo;
 			productName = ImageAsyncTest;
-			productReference = 062AC0031A0827E000744325 /* ImageAsyncTest.app */;
+			productReference = 062AC0031A0827E000744325 /* Demo.app */;
 			productType = "com.apple.product-type.application";
-		};
-		062AC0171A0827E000744325 /* ImageAsyncTestTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 062AC0251A0827E000744325 /* Build configuration list for PBXNativeTarget "ImageAsyncTestTests" */;
-			buildPhases = (
-				062AC0141A0827E000744325 /* Sources */,
-				062AC0151A0827E000744325 /* Frameworks */,
-				062AC0161A0827E000744325 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				062AC01A1A0827E000744325 /* PBXTargetDependency */,
-			);
-			name = ImageAsyncTestTests;
-			productName = ImageAsyncTestTests;
-			productReference = 062AC0181A0827E000744325 /* ImageAsyncTestTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -379,11 +373,6 @@
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
-					062AC0171A0827E000744325 = {
-						CreatedOnToolsVersion = 6.1;
-						LastSwiftMigration = 0800;
-						TestTargetID = 062AC0021A0827E000744325;
-					};
 				};
 			};
 			buildConfigurationList = 062ABFFE1A0827E000744325 /* Build configuration list for PBXProject "ImageAsyncTest" */;
@@ -399,9 +388,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				062AC0021A0827E000744325 /* ImageAsyncTest */,
+				062AC0021A0827E000744325 /* Demo */,
 				0626EA5D1DB2316C000DC212 /* YNImageAsync */,
-				062AC0171A0827E000744325 /* ImageAsyncTestTests */,
 				0626EA661DB2316C000DC212 /* YNImageAsyncTests */,
 			);
 		};
@@ -432,13 +420,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		062AC0161A0827E000744325 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -446,8 +427,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				069055971DB3601000C3E48F /* YNCircleIndicator.swift in Sources */,
+				06E80CC01DB37FA40068BF85 /* YNImageAsync.swift in Sources */,
+				069055961DB3600C00C3E48F /* YNImageView.swift in Sources */,
 				0626EA7F1DB2324A000DC212 /* YNImageCacheProvider.swift in Sources */,
 				063365F61DB2BD9100B78098 /* YNCommonFunctions.swift in Sources */,
+				069055911DB2DB6A00C3E48F /* YNImageCacheEntry.swift in Sources */,
+				069055951DB3600800C3E48F /* YNImageAsyncExtensions.swift in Sources */,
+				069055941DB2DBB500C3E48F /* YNImageCacheType.swift in Sources */,
 				063365F31DB2A99900B78098 /* YNImageLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -473,17 +460,12 @@
 				06EE759D1A0ACD37007BE5B0 /* YNImageAsyncExtensions.swift in Sources */,
 				063365F51DB2BD9100B78098 /* YNCommonFunctions.swift in Sources */,
 				0626EA7E1DB2324A000DC212 /* YNImageCacheProvider.swift in Sources */,
+				069055901DB2DB6A00C3E48F /* YNImageCacheEntry.swift in Sources */,
 				062AC0091A0827E000744325 /* AppDelegate.swift in Sources */,
 				0626EA811DB25035000DC212 /* YNCellDataProtocol.swift in Sources */,
 				062AC0291A08F57500744325 /* YNTableViewCell.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		062AC0141A0827E000744325 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				062AC01F1A0827E000744325 /* ImageAsyncTestTests.swift in Sources */,
+				06E80CBF1DB37FA40068BF85 /* YNImageAsync.swift in Sources */,
+				069055931DB2DBB500C3E48F /* YNImageCacheType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,18 +479,13 @@
 		};
 		0626EA6C1DB2316C000DC212 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 062AC0021A0827E000744325 /* ImageAsyncTest */;
+			target = 062AC0021A0827E000744325 /* Demo */;
 			targetProxy = 0626EA6B1DB2316C000DC212 /* PBXContainerItemProxy */;
 		};
 		0626EA721DB2316C000DC212 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0626EA5D1DB2316C000DC212 /* YNImageAsync */;
 			targetProxy = 0626EA711DB2316C000DC212 /* PBXContainerItemProxy */;
-		};
-		062AC01A1A0827E000744325 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 062AC0021A0827E000744325 /* ImageAsyncTest */;
-			targetProxy = 062AC0191A0827E000744325 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -736,44 +713,6 @@
 			};
 			name = Release;
 		};
-		062AC0261A0827E000744325 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = ImageAsyncTestTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "YN.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ImageAsyncTest.app/ImageAsyncTest";
-			};
-			name = Debug;
-		};
-		062AC0271A0827E000744325 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = ImageAsyncTestTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "YN.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ImageAsyncTest.app/ImageAsyncTest";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -804,20 +743,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		062AC0221A0827E000744325 /* Build configuration list for PBXNativeTarget "ImageAsyncTest" */ = {
+		062AC0221A0827E000744325 /* Build configuration list for PBXNativeTarget "Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				062AC0231A0827E000744325 /* Debug */,
 				062AC0241A0827E000744325 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		062AC0251A0827E000744325 /* Build configuration list for PBXNativeTarget "ImageAsyncTestTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				062AC0261A0827E000744325 /* Debug */,
-				062AC0271A0827E000744325 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

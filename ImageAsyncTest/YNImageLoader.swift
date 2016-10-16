@@ -35,11 +35,15 @@ public class YNImageLoader : NSObject, URLSessionDataDelegate, URLSessionDelegat
         self.init(configuration: configuration)
     }
     
-    public func loadImageWithUrl(_ imageUrl: String, progress: @escaping ImageProgressClosure, completion: @escaping ImageCompletionClosure) -> URLSessionTask {
-        let task = self.session.dataTask(with: URL(string: imageUrl)!)
-        launchTask(task: task, progress: progress, completion: completion)
-        return task
-        
+    public func loadImageWithUrl(_ imageUrl: String, progress: @escaping ImageProgressClosure, completion: @escaping ImageCompletionClosure) -> URLSessionTask? {
+        if let cachedImageData = YNImageCacheProvider.sharedInstance.memoryCacheForKey(imageUrl) {
+            completion(UIImage(data: cachedImageData), nil)
+            return nil
+        } else {
+            let task = self.session.dataTask(with: URL(string: imageUrl)!)
+            launchTask(task: task, progress: progress, completion: completion)
+            return task
+        }
     }
     
     func launchTask(task: URLSessionTask, progress: @escaping ImageProgressClosure, completion: @escaping ImageCompletionClosure) {
@@ -82,6 +86,9 @@ public class YNImageLoader : NSObject, URLSessionDataDelegate, URLSessionDelegat
         if let completionClosure = completionQueue[task.taskIdentifier] {
             if let existingData = responsesQueue[task.taskIdentifier] {
                 completionClosure(UIImage(data: existingData), error)
+                if let key = task.originalRequest?.url?.absoluteString {
+                    YNImageCacheProvider.sharedInstance.storeDataToMemory(key, data: existingData)
+                }
             } else {
                 completionClosure(nil, error)
             }

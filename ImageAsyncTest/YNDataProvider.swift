@@ -38,7 +38,7 @@ open class YNDataProvider {
     
     func apiHandler(data: Data?, response: URLResponse?, error: Error?) -> Void {
         if let apiError = error {
-            print("API error: \(apiError)")
+            yn_logError("API error: \(apiError)")
         }
         
         guard let apiData = data else { return }
@@ -46,13 +46,13 @@ open class YNDataProvider {
         do {
             let json = try JSONSerialization.jsonObject(with: apiData, options:JSONSerialization.ReadingOptions(rawValue: 0))
             guard let dict: NSDictionary = json as? NSDictionary else {
-                print("Not a Dictionary")
+                yn_logError("Parsed json object is not a Dictionary type")
                 return
             }
             processRequestResult(dict)
         }
         catch let JSONError as NSError {
-            print("\(JSONError)")
+            yn_logError("\(JSONError)")
         }
     }
     
