@@ -21,7 +21,7 @@ func yn_logInfo(_ items: Any...) {
 }
 
 func yn_log(_ items: Any..., level: YNLogLevel) {
-    if YNImageAsync.sharedInstance.logLevel .contains(level) {
+    if YNImageAsync.sharedInstance.logLevel.contains(level) {
         print(items)
     }
 }

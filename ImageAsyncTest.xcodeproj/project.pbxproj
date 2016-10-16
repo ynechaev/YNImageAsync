@@ -27,7 +27,7 @@
 		069055941DB2DBB500C3E48F /* YNImageCacheType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069055921DB2DBB500C3E48F /* YNImageCacheType.swift */; };
 		069055951DB3600800C3E48F /* YNImageAsyncExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EE759A1A0ACD37007BE5B0 /* YNImageAsyncExtensions.swift */; };
 		06B95AD01DB3BF6F00884125 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B95ACF1DB3BF6F00884125 /* SettingsController.swift */; };
-		06B95AD21DB3E32500884125 /* YNImageCachePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B95AD11DB3E32500884125 /* YNImageCachePolicy.swift */; };
+		06B95AD21DB3E32500884125 /* YNCacheOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B95AD11DB3E32500884125 /* YNCacheOptions.swift */; };
 		06CA03B91DB25F8C00AC65E5 /* ListDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CA03B81DB25F8C00AC65E5 /* ListDataProvider.swift */; };
 		06E80CC01DB37FA40068BF85 /* YNImageAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E80CBE1DB37FA40068BF85 /* YNImageAsync.swift */; };
 		06EE758F1A0ABB65007BE5B0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06EE758E1A0ABB65007BE5B0 /* CoreGraphics.framework */; };
@@ -94,7 +94,7 @@
 		0690558F1DB2DB6A00C3E48F /* YNImageCacheEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNImageCacheEntry.swift; sourceTree = "<group>"; };
 		069055921DB2DBB500C3E48F /* YNImageCacheType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNImageCacheType.swift; sourceTree = "<group>"; };
 		06B95ACF1DB3BF6F00884125 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
-		06B95AD11DB3E32500884125 /* YNImageCachePolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNImageCachePolicy.swift; sourceTree = "<group>"; };
+		06B95AD11DB3E32500884125 /* YNCacheOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCacheOptions.swift; sourceTree = "<group>"; };
 		06CA03B81DB25F8C00AC65E5 /* ListDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDataProvider.swift; sourceTree = "<group>"; };
 		06E80CBE1DB37FA40068BF85 /* YNImageAsync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YNImageAsync.swift; path = Source/Core/YNImageAsync.swift; sourceTree = "<group>"; };
 		06EE758E1A0ABB65007BE5B0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -196,7 +196,7 @@
 			children = (
 				0690558F1DB2DB6A00C3E48F /* YNImageCacheEntry.swift */,
 				069055921DB2DBB500C3E48F /* YNImageCacheType.swift */,
-				06B95AD11DB3E32500884125 /* YNImageCachePolicy.swift */,
+				06B95AD11DB3E32500884125 /* YNCacheOptions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -409,7 +409,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				06E80CC01DB37FA40068BF85 /* YNImageAsync.swift in Sources */,
-				06B95AD21DB3E32500884125 /* YNImageCachePolicy.swift in Sources */,
+				06B95AD21DB3E32500884125 /* YNCacheOptions.swift in Sources */,
 				0626EA7F1DB2324A000DC212 /* YNImageCacheProvider.swift in Sources */,
 				063365F61DB2BD9100B78098 /* YNCommonFunctions.swift in Sources */,
 				069055911DB2DB6A00C3E48F /* YNImageCacheEntry.swift in Sources */,

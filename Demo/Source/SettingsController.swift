@@ -11,8 +11,18 @@ import YNImageAsync
 
 class SettingsController: UIViewController {
     
+    @IBOutlet weak var memorySwitch: UISwitch!
+    @IBOutlet weak var diskSwitch: UISwitch!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
+    }
+    
+    func setupUI() {
+        let options = YNImageCacheProvider.sharedInstance.cacheOptions
+        memorySwitch.isOn = options.contains(.memory)
+        diskSwitch.isOn = options.contains(.disk)
     }
     
     @IBAction func didTapDoneButton(sender: AnyObject) {
@@ -27,5 +37,17 @@ class SettingsController: UIViewController {
     @IBAction func didTapGithubButton(sender: AnyObject) {
         let url = URL(string: "https://github.com/RebornSoul/YNImageAsync")!
         UIApplication.shared.openURL(url)
+    }
+    
+    @IBAction func didSwitchMemoryCache(sender: UISwitch) {
+        var options = YNImageCacheProvider.sharedInstance.cacheOptions.rawValue
+        options = options ^ YNCacheOptions.memory.rawValue
+        YNImageCacheProvider.sharedInstance.cacheOptions = YNCacheOptions(rawValue: options)
+    }
+    
+    @IBAction func didSwitchDiskCache(sender: UISwitch) {
+        var options = YNImageCacheProvider.sharedInstance.cacheOptions.rawValue
+        options = options ^ YNCacheOptions.disk.rawValue
+        YNImageCacheProvider.sharedInstance.cacheOptions = YNCacheOptions(rawValue: options)
     }
 }

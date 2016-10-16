@@ -8,16 +8,21 @@
 
 import UIKit
 
-let maxMemoryCacheSize = 3 * 1024 * 1024 // 3Mb
+let maxMemoryCacheSize = 10 * 1024 * 1024 // 10Mb
 
 public class YNImageCacheProvider {
 
     var memoryCache: [String: YNImageCacheEntry] = [:]
+    public var cacheOptions: YNCacheOptions
     
     public static let sharedInstance : YNImageCacheProvider = {
-        let instance = YNImageCacheProvider()
+        let instance = YNImageCacheProvider(cacheOptions: [.memory, .disk])
         return instance
     }()
+    
+    init(cacheOptions: YNCacheOptions) {
+        self.cacheOptions = cacheOptions
+    }
     
     public func cacheForKey(_ key: String) -> Data? {
         if let memCache = memoryCacheForKey(key) {
@@ -28,20 +33,24 @@ public class YNImageCacheProvider {
     }
     
     public func memoryCacheForKey(_ key: String) -> Data? {
-        if let cacheHit = memoryCache[key] {
-            yn_logInfo("Mem cache hit: \(key)")
-            return cacheHit.data
+        if cacheOptions.contains(.memory) {
+            if let cacheHit = memoryCache[key] {
+                yn_logInfo("Mem cache hit: \(key)")
+                return cacheHit.data
+            }
+            yn_logInfo("Mem cache miss: \(key)")
         }
-        yn_logInfo("Mem cache miss: \(key)")
         return nil
     }
     
     public func diskCacheForKey(_ key: String) -> Data? {
-        if let cacheHit = readCache(path: fileInCacheDirectory(filename: key)) {
-            yn_logInfo("Disk cache hit: \(key)")
-            return cacheHit
+        if cacheOptions.contains(.disk) {
+            if let cacheHit = readCache(path: fileInCacheDirectory(filename: key)) {
+                yn_logInfo("Disk cache hit: \(key)")
+                return cacheHit
+            }
+            yn_logInfo("Mem cache miss: \(key)")
         }
-        yn_logInfo("Mem cache miss: \(key)")
         return nil
     }
     
@@ -51,14 +60,18 @@ public class YNImageCacheProvider {
     }
     
     public func cacheDataToMemory(_ key: String, data: Data) {
-        let entry = YNImageCacheEntry(data: data, cacheType: .memory, date: Date())
-        yn_logInfo("Cache store: \(key)")
-        memoryCache[key] = entry
-        cleanMemoryCache()
+        if cacheOptions.contains(.memory) {
+            let entry = YNImageCacheEntry(data: data, cacheType: .memory, date: Date())
+            yn_logInfo("Cache store: \(key)")
+            memoryCache[key] = entry
+            cleanMemoryCache()
+        }
     }
     
     public func cacheDataToDisk(_ key: String, data: Data) {
-        saveCache(cacheData: data, path: fileInCacheDirectory(filename: key))
+        if cacheOptions.contains(.disk) {
+            saveCache(cacheData: data, path: fileInCacheDirectory(filename: key))
+        }
     }
     
     public func cleanMemoryCache() {
@@ -85,6 +98,27 @@ public class YNImageCacheProvider {
         }
     }
     
+    public func clearMemoryCache() {
+        memoryCache.removeAll()
+    }
+    
+    public func clearDiskCache() {
+        do {
+            let files = try FileManager.default.contentsOfDirectory(atPath: cachePath())
+            for file in files {
+                try FileManager.default.removeItem(atPath: file)
+                yn_logInfo("Deleted disk cache: \(file)")
+            }
+        } catch let error {
+            yn_logInfo("Cache folder read error: \(error)")
+        }
+    }
+
+    public func clearCache() {
+        clearMemoryCache()
+        clearDiskCache()
+    }
+    
     func filterCacheWithArray(array: Array <YNImageCacheEntry>) {
         let tempCache = memoryCache
         for (key, entry) in tempCache {
@@ -106,27 +140,18 @@ public class YNImageCacheProvider {
         return size
     }
     
-    public func clearMemoryCache() {
-        memoryCache.removeAll()
-    }
-    
-    public func clearDiskCache() {
-        
-    }
-    
-    public func clearCache() {
-        clearMemoryCache()
-        clearDiskCache()
-    }
-    
     func cacheDirectory() -> String {
         let documentsFolderPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
         return documentsFolderPath
     }
     
+    func cachePath() -> String {
+        return (cacheDirectory() as NSString).appendingPathComponent("YNImageAsync")
+    }
+    
     func fileInCacheDirectory(filename: String) -> String {
         
-        let writePath = (cacheDirectory() as NSString).appendingPathComponent("YNImageAsync")
+        let writePath = cachePath()
         
         if (!FileManager.default.fileExists(atPath: writePath)) {
             do {
