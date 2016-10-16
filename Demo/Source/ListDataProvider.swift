@@ -22,7 +22,7 @@ let url = URL(string:"https://s3.amazonaws.com/work-project-image-loading/images
 
 public typealias DataCompletionClosure = ((_ result: Array<ListObject>?, _ error: NSError?) -> Void)
 
-open class ListDataProvider {
+public class ListDataProvider {
     var completionClosure: DataCompletionClosure
     
     public init(completionClosure com: @escaping DataCompletionClosure) {
@@ -38,7 +38,7 @@ open class ListDataProvider {
     
     func apiHandler(data: Data?, response: URLResponse?, error: Error?) -> Void {
         if let apiError = error {
-            yn_logError("API error: \(apiError)")
+            print("API error: \(apiError)")
         }
         
         guard let apiData = data else { return }
@@ -46,13 +46,14 @@ open class ListDataProvider {
         do {
             let json = try JSONSerialization.jsonObject(with: apiData, options:JSONSerialization.ReadingOptions(rawValue: 0))
             guard let dict: NSDictionary = json as? NSDictionary else {
-                yn_logError("Parsed json object is not a Dictionary type")
+                print("Parsed json object is not a Dictionary type")
                 return
             }
             processRequestResult(dict)
         }
         catch let JSONError as NSError {
-            yn_logError("\(JSONError)")
+            
+            print("\(JSONError)")
         }
     }
     

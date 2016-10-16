@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import YNImageAsync
 
 class ListTableViewCell: UITableViewCell, ListCellDataProtocol {
     

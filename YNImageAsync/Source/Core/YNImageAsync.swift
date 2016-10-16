@@ -21,7 +21,7 @@ public class YNImageAsync {
         self.logLevel = logLevel
     }
     
-    static func setLoggingLevel(level: YNLogLevel) {
+    public static func setLoggingLevel(level: YNLogLevel) {
         YNImageAsync.sharedInstance.logLevel = level
     }
 }

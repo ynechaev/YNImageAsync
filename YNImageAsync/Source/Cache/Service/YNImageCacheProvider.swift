@@ -10,16 +10,16 @@ import UIKit
 
 let maxMemoryCacheSize = 3 * 1024 * 1024 // 3Mb
 
-open class YNImageCacheProvider {
+public class YNImageCacheProvider {
 
     var memoryCache: [String: YNImageCacheEntry] = [:]
     
-    static let sharedInstance : YNImageCacheProvider = {
+    public static let sharedInstance : YNImageCacheProvider = {
         let instance = YNImageCacheProvider()
         return instance
     }()
     
-    open func cacheForKey(_ key: String) -> Data? {
+    public func cacheForKey(_ key: String) -> Data? {
         if let memCache = memoryCacheForKey(key) {
             return memCache
         } else {
@@ -27,7 +27,7 @@ open class YNImageCacheProvider {
         }
     }
     
-    open func memoryCacheForKey(_ key: String) -> Data? {
+    public func memoryCacheForKey(_ key: String) -> Data? {
         if let cacheHit = memoryCache[key] {
             yn_logInfo("Mem cache hit: \(key)")
             return cacheHit.data
@@ -36,8 +36,8 @@ open class YNImageCacheProvider {
         return nil
     }
     
-    open func diskCacheForKey(_ key: String) -> Data? {
-        if let cacheHit = readCache(path: fileInDocumentsDirectory(filename: key)) {
+    public func diskCacheForKey(_ key: String) -> Data? {
+        if let cacheHit = readCache(path: fileInCacheDirectory(filename: key)) {
             yn_logInfo("Disk cache hit: \(key)")
             return cacheHit
         }
@@ -45,23 +45,23 @@ open class YNImageCacheProvider {
         return nil
     }
     
-    open func cacheData(key: String, data: Data) {
+    public func cacheData(key: String, data: Data) {
         cacheDataToMemory(key, data: data)
         cacheDataToDisk(key, data: data)
     }
     
-    open func cacheDataToMemory(_ key: String, data: Data) {
+    public func cacheDataToMemory(_ key: String, data: Data) {
         let entry = YNImageCacheEntry(data: data, cacheType: .memory, date: Date())
         yn_logInfo("Cache store: \(key)")
         memoryCache[key] = entry
         cleanMemoryCache()
     }
     
-    open func cacheDataToDisk(_ key: String, data: Data) {
-        saveCache(cacheData: data, path: fileInDocumentsDirectory(filename: key))
+    public func cacheDataToDisk(_ key: String, data: Data) {
+        saveCache(cacheData: data, path: fileInCacheDirectory(filename: key))
     }
     
-    open func cleanMemoryCache() {
+    public func cleanMemoryCache() {
         let sorted = memoryCache.values.sorted { (entry1, entry2) -> Bool in
             return entry1.date > entry2.date
         }
@@ -106,27 +106,27 @@ open class YNImageCacheProvider {
         return size
     }
     
-    open func clearMemoryCache() {
+    public func clearMemoryCache() {
         memoryCache.removeAll()
     }
     
-    open func clearDiskCache() {
+    public func clearDiskCache() {
         
     }
     
-    open func clearCache() {
+    public func clearCache() {
         clearMemoryCache()
         clearDiskCache()
     }
     
-    func documentsDirectory() -> String {
-        let documentsFolderPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
+    func cacheDirectory() -> String {
+        let documentsFolderPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
         return documentsFolderPath
     }
     
-    func fileInDocumentsDirectory(filename: String) -> String {
+    func fileInCacheDirectory(filename: String) -> String {
         
-        let writePath = (documentsDirectory() as NSString).appendingPathComponent("YNImageAsync")
+        let writePath = (cacheDirectory() as NSString).appendingPathComponent("YNImageAsync")
         
         if (!FileManager.default.fileExists(atPath: writePath)) {
             do {

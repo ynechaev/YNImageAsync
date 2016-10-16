@@ -26,12 +26,17 @@ func yn_log(_ items: Any..., level: YNLogLevel) {
     }
 }
 
-struct YNLogLevel : OptionSet {
-    let rawValue: Int
-    static let none   = YNLogLevel(rawValue: 0)
-    static let errors = YNLogLevel(rawValue: 1 << 0)
-    static let debug  = YNLogLevel(rawValue: (1 << 1) << errors.rawValue)
-    static let info   = YNLogLevel(rawValue: (1 << 2) << debug.rawValue)
+public struct YNLogLevel : OptionSet {
+
+    public let rawValue: Int
+    public static let none   = YNLogLevel(rawValue: 0)
+    public static let errors = YNLogLevel(rawValue: 1 << 0)
+    public static let debug  = YNLogLevel(rawValue: (1 << 1) << errors.rawValue)
+    public static let info   = YNLogLevel(rawValue: (1 << 2) << debug.rawValue)
+    
+    public init(rawValue: Int) {
+        self.rawValue = rawValue
+    }
 }
 
 func synced(lock: AnyObject, closure: () -> ()) {

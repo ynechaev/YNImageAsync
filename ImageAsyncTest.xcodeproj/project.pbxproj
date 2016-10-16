@@ -12,7 +12,6 @@
 		0626EA6F1DB2316C000DC212 /* YNImageAsyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0626EA6E1DB2316C000DC212 /* YNImageAsyncTests.swift */; };
 		0626EA731DB2316C000DC212 /* YNImageAsync.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0626EA5E1DB2316C000DC212 /* YNImageAsync.framework */; };
 		0626EA741DB2316C000DC212 /* YNImageAsync.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0626EA5E1DB2316C000DC212 /* YNImageAsync.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0626EA7E1DB2324A000DC212 /* YNImageCacheProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0626EA7D1DB2324A000DC212 /* YNImageCacheProvider.swift */; };
 		0626EA7F1DB2324A000DC212 /* YNImageCacheProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0626EA7D1DB2324A000DC212 /* YNImageCacheProvider.swift */; };
 		0626EA811DB25035000DC212 /* ListCellDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0626EA801DB25035000DC212 /* ListCellDataProtocol.swift */; };
 		0626EA831DB252AE000DC212 /* ListCellObjectProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0626EA821DB252AE000DC212 /* ListCellObjectProtocol.swift */; };
@@ -22,21 +21,16 @@
 		062AC0101A0827E000744325 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 062AC00F1A0827E000744325 /* Images.xcassets */; };
 		062AC0131A0827E000744325 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 062AC0111A0827E000744325 /* LaunchScreen.xib */; };
 		062AC0291A08F57500744325 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062AC0281A08F57500744325 /* ListTableViewCell.swift */; };
-		063365F21DB2A99900B78098 /* YNImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063365F11DB2A99900B78098 /* YNImageLoader.swift */; };
 		063365F31DB2A99900B78098 /* YNImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063365F11DB2A99900B78098 /* YNImageLoader.swift */; };
-		063365F51DB2BD9100B78098 /* YNCommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063365F41DB2BD9100B78098 /* YNCommonFunctions.swift */; };
 		063365F61DB2BD9100B78098 /* YNCommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063365F41DB2BD9100B78098 /* YNCommonFunctions.swift */; };
-		069055901DB2DB6A00C3E48F /* YNImageCacheEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0690558F1DB2DB6A00C3E48F /* YNImageCacheEntry.swift */; };
 		069055911DB2DB6A00C3E48F /* YNImageCacheEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0690558F1DB2DB6A00C3E48F /* YNImageCacheEntry.swift */; };
-		069055931DB2DBB500C3E48F /* YNImageCacheType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069055921DB2DBB500C3E48F /* YNImageCacheType.swift */; };
 		069055941DB2DBB500C3E48F /* YNImageCacheType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069055921DB2DBB500C3E48F /* YNImageCacheType.swift */; };
 		069055951DB3600800C3E48F /* YNImageAsyncExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EE759A1A0ACD37007BE5B0 /* YNImageAsyncExtensions.swift */; };
 		06B95AD01DB3BF6F00884125 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B95ACF1DB3BF6F00884125 /* SettingsController.swift */; };
+		06B95AD21DB3E32500884125 /* YNImageCachePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B95AD11DB3E32500884125 /* YNImageCachePolicy.swift */; };
 		06CA03B91DB25F8C00AC65E5 /* ListDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CA03B81DB25F8C00AC65E5 /* ListDataProvider.swift */; };
-		06E80CBF1DB37FA40068BF85 /* YNImageAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E80CBE1DB37FA40068BF85 /* YNImageAsync.swift */; };
 		06E80CC01DB37FA40068BF85 /* YNImageAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E80CBE1DB37FA40068BF85 /* YNImageAsync.swift */; };
 		06EE758F1A0ABB65007BE5B0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06EE758E1A0ABB65007BE5B0 /* CoreGraphics.framework */; };
-		06EE759D1A0ACD37007BE5B0 /* YNImageAsyncExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EE759A1A0ACD37007BE5B0 /* YNImageAsyncExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,11 +89,12 @@
 		062AC00F1A0827E000744325 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		062AC0121A0827E000744325 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		062AC0281A08F57500744325 /* ListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
-		063365F11DB2A99900B78098 /* YNImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNImageLoader.swift; sourceTree = "<group>"; };
+		063365F11DB2A99900B78098 /* YNImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YNImageLoader.swift; path = ../Loading/YNImageLoader.swift; sourceTree = "<group>"; };
 		063365F41DB2BD9100B78098 /* YNCommonFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCommonFunctions.swift; sourceTree = "<group>"; };
 		0690558F1DB2DB6A00C3E48F /* YNImageCacheEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNImageCacheEntry.swift; sourceTree = "<group>"; };
 		069055921DB2DBB500C3E48F /* YNImageCacheType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNImageCacheType.swift; sourceTree = "<group>"; };
 		06B95ACF1DB3BF6F00884125 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		06B95AD11DB3E32500884125 /* YNImageCachePolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNImageCachePolicy.swift; sourceTree = "<group>"; };
 		06CA03B81DB25F8C00AC65E5 /* ListDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDataProvider.swift; sourceTree = "<group>"; };
 		06E80CBE1DB37FA40068BF85 /* YNImageAsync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YNImageAsync.swift; path = Source/Core/YNImageAsync.swift; sourceTree = "<group>"; };
 		06EE758E1A0ABB65007BE5B0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -201,6 +196,7 @@
 			children = (
 				0690558F1DB2DB6A00C3E48F /* YNImageCacheEntry.swift */,
 				069055921DB2DBB500C3E48F /* YNImageCacheType.swift */,
+				06B95AD11DB3E32500884125 /* YNImageCachePolicy.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -222,14 +218,6 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
-		06E80CBB1DB37F4A0068BF85 /* Loading */ = {
-			isa = PBXGroup;
-			children = (
-				063365F11DB2A99900B78098 /* YNImageLoader.swift */,
-			);
-			path = Loading;
-			sourceTree = "<group>";
-		};
 		06E80CBC1DB37F6C0068BF85 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,6 +229,7 @@
 		06E80CBD1DB37F8A0068BF85 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				063365F11DB2A99900B78098 /* YNImageLoader.swift */,
 				063365F41DB2BD9100B78098 /* YNCommonFunctions.swift */,
 			);
 			path = Core;
@@ -265,7 +254,6 @@
 				06E80CB91DB37D3F0068BF85 /* Cache */,
 				06E80CBD1DB37F8A0068BF85 /* Core */,
 				06E80CBC1DB37F6C0068BF85 /* Extensions */,
-				06E80CBB1DB37F4A0068BF85 /* Loading */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -421,6 +409,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				06E80CC01DB37FA40068BF85 /* YNImageAsync.swift in Sources */,
+				06B95AD21DB3E32500884125 /* YNImageCachePolicy.swift in Sources */,
 				0626EA7F1DB2324A000DC212 /* YNImageCacheProvider.swift in Sources */,
 				063365F61DB2BD9100B78098 /* YNCommonFunctions.swift in Sources */,
 				069055911DB2DB6A00C3E48F /* YNImageCacheEntry.swift in Sources */,
@@ -442,20 +431,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				063365F21DB2A99900B78098 /* YNImageLoader.swift in Sources */,
 				06CA03B91DB25F8C00AC65E5 /* ListDataProvider.swift in Sources */,
 				0626EA831DB252AE000DC212 /* ListCellObjectProtocol.swift in Sources */,
 				062AC00B1A0827E000744325 /* ListViewController.swift in Sources */,
-				06EE759D1A0ACD37007BE5B0 /* YNImageAsyncExtensions.swift in Sources */,
-				063365F51DB2BD9100B78098 /* YNCommonFunctions.swift in Sources */,
 				06B95AD01DB3BF6F00884125 /* SettingsController.swift in Sources */,
-				0626EA7E1DB2324A000DC212 /* YNImageCacheProvider.swift in Sources */,
-				069055901DB2DB6A00C3E48F /* YNImageCacheEntry.swift in Sources */,
 				062AC0091A0827E000744325 /* AppDelegate.swift in Sources */,
 				0626EA811DB25035000DC212 /* ListCellDataProtocol.swift in Sources */,
 				062AC0291A08F57500744325 /* ListTableViewCell.swift in Sources */,
-				06E80CBF1DB37FA40068BF85 /* YNImageAsync.swift in Sources */,
-				069055931DB2DBB500C3E48F /* YNImageCacheType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,7 +498,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = YNImageAsync/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = yn.YNImageAsync;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -544,7 +526,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = YNImageAsync/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = yn.YNImageAsync;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -683,6 +665,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = SRKJ4V7PLZ;
 				INFOPLIST_FILE = "Demo/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "YN.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -698,6 +681,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = SRKJ4V7PLZ;
 				INFOPLIST_FILE = "Demo/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "YN.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";

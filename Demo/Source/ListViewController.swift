@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import YNImageAsync
 
 class ListViewController: UITableViewController, URLSessionTaskDelegate {
     
@@ -31,7 +32,7 @@ class ListViewController: UITableViewController, URLSessionTaskDelegate {
     
     func handleError(_ error: NSError?) {
         if let responseError = error {
-            yn_logError("Error occured: \(responseError)")
+            print("Error occured: \(responseError)")
         }
     }
     
