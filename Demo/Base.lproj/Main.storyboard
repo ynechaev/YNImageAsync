@@ -197,7 +197,9 @@
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="diskLabel" destination="MKG-lC-Lqw" id="yTl-8i-RfZ"/>
                         <outlet property="diskSwitch" destination="Xlc-U3-hbI" id="dDr-IJ-xPJ"/>
+                        <outlet property="memoryLabel" destination="ah6-Pl-3Yx" id="HvB-CS-7JA"/>
                         <outlet property="memorySwitch" destination="wNy-1G-HA9" id="Ex7-y7-6e9"/>
                     </connections>
                 </viewController>

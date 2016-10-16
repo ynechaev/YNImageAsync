@@ -8,7 +8,7 @@
 
 import UIKit
 
-let maxMemoryCacheSize = 10 * 1024 * 1024 // 10Mb
+let maxMemoryCacheSize : Int64 = 10 * 1024 * 1024 // 10Mb
 
 public class YNImageCacheProvider {
 
@@ -102,21 +102,60 @@ public class YNImageCacheProvider {
         memoryCache.removeAll()
     }
     
+    public func diskCacheSize() -> Int64 {
+        let files = cacheFolderFiles()
+        var folderSize : Int64 = 0
+        for file in files {
+            do {
+                let attributes = try FileManager.default.attributesOfItem(atPath: file)
+                let fileSize = attributes[FileAttributeKey.size] as! NSNumber
+                folderSize += fileSize.int64Value
+            } catch let error {
+                yn_logInfo("Cache folder file attribute error: \(error)")
+            }
+        }
+        return folderSize
+    }
+    
+    public func memoryCacheSize() -> Int64 {
+        var size: Int64 = 0
+        for cacheEntry in memoryCache.values {
+            size += cacheEntry.data.count
+        }
+        return size
+    }
+    
     public func clearDiskCache() {
-        do {
-            let files = try FileManager.default.contentsOfDirectory(atPath: cachePath())
-            for file in files {
+        let files = cacheFolderFiles()
+        for file in files {
+            yn_logInfo("Trying to delete \(file)")
+            do {
                 try FileManager.default.removeItem(atPath: file)
                 yn_logInfo("Deleted disk cache: \(file)")
+            } catch let error {
+                yn_logInfo("Cache folder read error: \(error)")
             }
-        } catch let error {
-            yn_logInfo("Cache folder read error: \(error)")
         }
     }
 
     public func clearCache() {
         clearMemoryCache()
         clearDiskCache()
+    }
+    
+    func cacheFolderFiles() -> [String] {
+        var returnedValue: [String] = []
+        do {
+            let files = try FileManager.default.contentsOfDirectory(atPath: cachePath())
+            for file in files {
+                let path = cachePath()
+                let fullPath = (path as NSString).appendingPathComponent(file)
+                returnedValue.append(fullPath)
+            }
+        } catch let error {
+            yn_logInfo("Cache folder read error: \(error)")
+        }
+        return returnedValue
     }
     
     func filterCacheWithArray(array: Array <YNImageCacheEntry>) {
@@ -130,14 +169,6 @@ public class YNImageCacheProvider {
                 break
             }
         }
-    }
-    
-    func memoryCacheSize() -> Int {
-        var size: Int = 0
-        for cacheEntry in memoryCache.values {
-            size += cacheEntry.data.count
-        }
-        return size
     }
     
     func cacheDirectory() -> String {

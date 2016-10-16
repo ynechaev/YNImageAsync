@@ -13,6 +13,8 @@ class SettingsController: UIViewController {
     
     @IBOutlet weak var memorySwitch: UISwitch!
     @IBOutlet weak var diskSwitch: UISwitch!
+    @IBOutlet weak var memoryLabel: UILabel!
+    @IBOutlet weak var diskLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +25,12 @@ class SettingsController: UIViewController {
         let options = YNImageCacheProvider.sharedInstance.cacheOptions
         memorySwitch.isOn = options.contains(.memory)
         diskSwitch.isOn = options.contains(.disk)
+        memoryLabel.text = "Current memory usage: \(sizeStringFrom(int: YNImageCacheProvider.sharedInstance.memoryCacheSize()))"
+        diskLabel.text = "Current cache folder usage: \(sizeStringFrom(int: YNImageCacheProvider.sharedInstance.diskCacheSize()))"
+    }
+    
+    func sizeStringFrom(int: Int64) -> String {
+        return ByteCountFormatter.string(fromByteCount: int, countStyle: .file)
     }
     
     @IBAction func didTapDoneButton(sender: AnyObject) {
