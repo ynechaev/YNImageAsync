@@ -47,9 +47,10 @@ public class YNImageCacheProvider {
         if cacheOptions.contains(.disk) {
             if let cacheHit = readCache(path: fileInCacheDirectory(filename: key)) {
                 yn_logInfo("Disk cache hit: \(key)")
+                cacheDataToMemory(key, data: cacheHit)
                 return cacheHit
             }
-            yn_logInfo("Mem cache miss: \(key)")
+            yn_logInfo("Disk cache miss: \(key)")
         }
         return nil
     }
