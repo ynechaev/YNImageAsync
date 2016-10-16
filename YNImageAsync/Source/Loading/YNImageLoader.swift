@@ -36,7 +36,7 @@ public class YNImageLoader : NSObject, URLSessionDataDelegate, URLSessionDelegat
     }
     
     public func loadImageWithUrl(_ imageUrl: String, progress: @escaping ImageProgressClosure, completion: @escaping ImageCompletionClosure) -> URLSessionTask? {
-        if let cachedImageData = YNImageCacheProvider.sharedInstance.memoryCacheForKey(imageUrl) {
+        if let cachedImageData = YNImageCacheProvider.sharedInstance.cacheForKey(imageUrl) {
             completion(UIImage(data: cachedImageData), nil)
             return nil
         } else {

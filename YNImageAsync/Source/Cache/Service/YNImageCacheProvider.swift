@@ -20,12 +20,29 @@ open class YNImageCacheProvider {
         return instance
     }()
     
+    open func cacheForKey(_ key: String) -> Data? {
+        if let memCache = memoryCacheForKey(key) {
+            return memCache
+        } else {
+            return diskCacheForKey(key)
+        }
+    }
+    
     open func memoryCacheForKey(_ key: String) -> Data? {
         if let cacheHit = memoryCache[key] {
-            yn_logInfo("Cache hit: \(key)")
+            yn_logInfo("Mem cache hit: \(key)")
             return cacheHit.data
         }
-        yn_logInfo("Cache miss: \(key)")
+        yn_logInfo("Mem cache miss: \(key)")
+        return nil
+    }
+    
+    open func diskCacheForKey(_ key: String) -> Data? {
+        if let cacheHit = readCache(path: fileInDocumentsDirectory(filename: key)) {
+            yn_logInfo("Disk cache hit: \(key)")
+            return cacheHit
+        }
+        yn_logInfo("Mem cache miss: \(key)")
         return nil
     }
     
@@ -34,14 +51,11 @@ open class YNImageCacheProvider {
         yn_logInfo("Cache store: \(key)")
         memoryCache[key] = entry
         cleanMemoryCache()
+        storeDataToDisk(key, data: data)
     }
     
-    open func imageDiskCacheForKey(_ key: String) -> UIImage? {
-        return nil
-    }
-    
-    open func storeImageToDisk(_ image: UIImage) {
-        
+    open func storeDataToDisk(_ key: String, data: Data) {
+        saveCache(cacheData: data, path: fileInDocumentsDirectory(filename: key))
     }
     
     open func cleanMemoryCache() {
@@ -109,21 +123,33 @@ open class YNImageCacheProvider {
                 yn_logError("Failed to create directory: \(writePath) - \(error)")
             }
         }
-        return (writePath as NSString).appendingPathComponent(filename)
+        
+        if let escapedFilename = filename.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
+            return (writePath as NSString).appendingPathComponent(escapedFilename)
+        } else {
+            return (writePath as NSString).appendingPathComponent(filename)
+        }
     }
     
-    func saveCache (cacheData: Data, path: String ) -> Bool{
-        guard let fileUrl = URL(string: path) else {
-            yn_logError("Failed to create file url from path: \(path)")
-            return false
+    func readCache(path: String) -> Data? {
+        let fileUrl = URL(fileURLWithPath: path)
+        do {
+            let data = try Data(contentsOf: fileUrl)
+            yn_logInfo("Disk cache read success: \(fileUrl)")
+            return data
+        } catch let saveError {
+            yn_logError("\(saveError)")
+            return nil
         }
+    }
+    
+    func saveCache(cacheData: Data, path: String ) {
+        let fileUrl = URL(fileURLWithPath: path)
         do {
             try cacheData.write(to: fileUrl , options: Data.WritingOptions(rawValue: 0))
             yn_logInfo("Disk cache write success: \(fileUrl)")
-            return true
         } catch let saveError {
             yn_logError("\(saveError)")
-            return false
         }
     }
     
