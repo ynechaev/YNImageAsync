@@ -8,9 +8,9 @@
 
 import UIKit
 
-class ViewController: UITableViewController, URLSessionTaskDelegate {
+class ListViewController: UITableViewController, URLSessionTaskDelegate {
     
-    var dataProvider: YNDataProvider?
+    var dataProvider: ListDataProvider?
     var imageCollection: Array <ListObject> = []
     
     override func viewDidLoad() {
@@ -19,7 +19,7 @@ class ViewController: UITableViewController, URLSessionTaskDelegate {
     }
     
     func setupDataProvider() {
-        dataProvider = YNDataProvider(completionClosure: { (result, error) in
+        dataProvider = ListDataProvider(completionClosure: { (result, error) in
             if let completionResult = result {
                 self.imageCollection = completionResult
                 self.tableView.reloadData()
@@ -41,7 +41,7 @@ class ViewController: UITableViewController, URLSessionTaskDelegate {
     
     override func tableView(_ tableView: UITableView, cellForRowAt
         indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: YNTableViewCell.reuseIdentifier(), for: indexPath) as! YNTableViewCell
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.reuseIdentifier(), for: indexPath) as! ListTableViewCell
         cell.setDataObject(imageCollection[(indexPath as NSIndexPath).row])
         return cell
     }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol YNCellObjectProtocol {
+public protocol ListCellObjectProtocol {
     
     var imageUrl: String { get }
     var imageTitle: String { get }

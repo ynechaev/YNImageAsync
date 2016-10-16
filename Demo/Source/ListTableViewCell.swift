@@ -8,7 +8,7 @@
 
 import UIKit
 
-class YNTableViewCell: UITableViewCell, YNCellDataProtocol {
+class ListTableViewCell: UITableViewCell, ListCellDataProtocol {
     
     @IBOutlet weak var cellImage: UIImageView!
     @IBOutlet weak var cellTitle: UILabel!
@@ -26,10 +26,10 @@ class YNTableViewCell: UITableViewCell, YNCellDataProtocol {
     }
     
     static func reuseIdentifier() -> String {
-        return String(describing: YNTableViewCell.self)
+        return String(describing: ListTableViewCell.self)
     }
     
-    func setDataObject<T: Any>(_ dataObject: T) where T: YNCellObjectProtocol {
+    func setDataObject<T: Any>(_ dataObject: T) where T: ListCellObjectProtocol {
         self.cellImage.yn_setImageWithUrl(dataObject.imageUrl)
         self.cellTitle.text = dataObject.imageTitle
     }

@@ -8,9 +8,9 @@
 
 import Foundation
 
-public protocol YNCellDataProtocol {
+public protocol ListCellDataProtocol {
     
-    func setDataObject<T: AnyObject>(_ dataObject: T) where T: YNCellObjectProtocol
+    func setDataObject<T: AnyObject>(_ dataObject: T) where T: ListCellObjectProtocol
     static func reuseIdentifier() -> String
 
 }

@@ -32,6 +32,7 @@ public class YNImageLoader : NSObject, URLSessionDataDelegate, URLSessionDelegat
     
     override convenience init() {
         let configuration = URLSessionConfiguration.default
+        configuration.requestCachePolicy = .reloadIgnoringCacheData;
         self.init(configuration: configuration)
     }
     
@@ -64,23 +65,35 @@ public class YNImageLoader : NSObject, URLSessionDataDelegate, URLSessionDelegat
     }
     
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        
         if let existingData = self.responsesQueue[dataTask.taskIdentifier] {
             var mutableData = existingData
             mutableData.append(data)
-            if let bufferSize = expectedSizeQueue[dataTask.taskIdentifier], let progressClosure = progressQueue[dataTask.taskIdentifier] {
-                let percentageDownloaded = Float(mutableData.count) / Float(bufferSize)
-                DispatchQueue.main.async {
-                    progressClosure(percentageDownloaded)
-                }
-            }
-            responsesQueue[dataTask.taskIdentifier] = mutableData
+            notifyProgress(mutableData, dataTask)
+            synced(lock: self, closure: { 
+                responsesQueue[dataTask.taskIdentifier] = mutableData
+            })
         } else {
-            responsesQueue[dataTask.taskIdentifier] = data
+            synced(lock: self, closure: {
+                responsesQueue[dataTask.taskIdentifier] = data
+            })
+            notifyProgress(data, dataTask)
+        }
+    }
+    
+    func notifyProgress(_ data: Data, _ dataTask: URLSessionDataTask) {
+        if let bufferSize = expectedSizeQueue[dataTask.taskIdentifier], let progressClosure = progressQueue[dataTask.taskIdentifier] {
+            let percentageDownloaded = Float(data.count) / Float(bufferSize)
+            DispatchQueue.main.async {
+                progressClosure(percentageDownloaded)
+            }
         }
     }
     
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
-        expectedSizeQueue[dataTask.taskIdentifier] = Int(response.expectedContentLength)
+        synced(lock: self, closure: {
+            expectedSizeQueue[dataTask.taskIdentifier] = Int(response.expectedContentLength)
+        })
         completionHandler(.allow)
     }
     

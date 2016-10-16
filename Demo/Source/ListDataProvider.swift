@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct ListObject: YNCellObjectProtocol {
+public struct ListObject: ListCellObjectProtocol {
     public var imageUrl: String
     public var imageTitle: String
     
@@ -22,7 +22,7 @@ let url = URL(string:"https://s3.amazonaws.com/work-project-image-loading/images
 
 public typealias DataCompletionClosure = ((_ result: Array<ListObject>?, _ error: NSError?) -> Void)
 
-open class YNDataProvider {
+open class ListDataProvider {
     var completionClosure: DataCompletionClosure
     
     public init(completionClosure com: @escaping DataCompletionClosure) {
