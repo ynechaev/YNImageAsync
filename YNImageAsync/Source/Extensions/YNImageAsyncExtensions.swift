@@ -10,21 +10,21 @@ import Foundation
 import UIKit
 import ObjectiveC
 
-let defaultPattern = "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAO0lEQVQYV2NkIBIwwtSdOXPmv4mJCZyPrp94hSCTQLpBpiGzyTeRZDcS8jxOX4I0IocEToUwRTCaaBMBIqwoC66FcWAAAAAASUVORK5CYII="
-
-
 private var taskAssociationKey: UInt8 = 0
 
 extension UIImageView {
     
-    public func yn_cancelPreviousLoading() {
+    public func cancelPreviousLoading() {
         if let currentTask = self.task {
             currentTask.cancel()
         }
     }
     
-    public func yn_setImageWithUrl(_ imageUrl: String, progress: LoaderProgressClosure? = nil, completion: LoaderCompletionClosure? = nil) {
-        yn_cancelPreviousLoading()
+    public func setImageWithUrl(_ imageUrl: String, placeholderImage: UIImage? = nil, progress: LoaderProgressClosure? = nil, completion: LoaderCompletionClosure? = nil) {
+        cancelPreviousLoading()
+        if let placeholder = placeholderImage {
+            self.image = placeholder
+        }
         self.task = YNImageLoader.sharedInstance.loadImageWithUrl(imageUrl, progress: { (progress) in
             
             }, completion: { (data, error) -> (Void) in
@@ -35,26 +35,6 @@ extension UIImageView {
                     completionClosure(data, error)
                 }
         })
-    }
-    
-    public func yn_setImageWithUrl(_ imageUrl: String, placeholderImage: UIImage, progress: @escaping LoaderProgressClosure, completion: @escaping LoaderCompletionClosure) -> Void {
-        self.image = placeholderImage
-        yn_setImageWithUrl(imageUrl, progress: progress, completion: completion)
-    }
-    
-    public func yn_setImageWithUrl(_ imageUrl: String, pattern: Bool, progress: @escaping LoaderProgressClosure, completion: @escaping LoaderCompletionClosure) -> Void {
-        if (pattern) {
-            if let decodedData = Data(base64Encoded: defaultPattern, options: NSData.Base64DecodingOptions()) {
-                let decodedimage = UIImage(data: decodedData)
-                self.backgroundColor = UIColor(patternImage: decodedimage!)
-            }
-        }
-        yn_setImageWithUrl(imageUrl, progress: progress) { (image, error) -> (Void) in
-            if pattern && image != nil {
-                self.backgroundColor = UIColor.clear
-            }
-            completion(image, error)
-        }
     }
     
     // MARK: Associated task object

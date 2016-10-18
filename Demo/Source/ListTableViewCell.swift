@@ -23,7 +23,7 @@ class ListTableViewCell: UITableViewCell, ListCellDataProtocol {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.cellImage.image = nil
-        self.cellImage.yn_cancelPreviousLoading()
+        self.cellImage.cancelPreviousLoading()
     }
     
     static func reuseIdentifier() -> String {
@@ -31,7 +31,7 @@ class ListTableViewCell: UITableViewCell, ListCellDataProtocol {
     }
     
     func setDataObject<T: Any>(_ dataObject: T) where T: ListCellObjectProtocol {
-        self.cellImage.yn_setImageWithUrl(dataObject.imageUrl)
+        self.cellImage.setImageWithUrl(dataObject.imageUrl)
         self.cellTitle.text = dataObject.imageTitle
     }
     
