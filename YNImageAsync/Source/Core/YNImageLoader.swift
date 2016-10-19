@@ -8,7 +8,13 @@
 
 import UIKit
 
-public typealias LoaderCompletionClosure = ((_ data: Data?, _ error: Error?) -> (Void))
+public enum YNCompletionResult {
+    case success(Data)
+    case failure(Error)
+    case handler(URLSessionTask)
+}
+
+public typealias LoaderCompletionClosure = ((YNCompletionResult) -> (Void))
 public typealias LoaderProgressClosure = ((_ progress: Float) -> Void)
 
 public class YNImageLoader : NSObject, URLSessionDataDelegate, URLSessionDelegate, URLSessionTaskDelegate {
@@ -36,15 +42,17 @@ public class YNImageLoader : NSObject, URLSessionDataDelegate, URLSessionDelegat
         self.init(configuration: configuration)
     }
     
-    public func loadImageWithUrl(_ imageUrl: String, progress: @escaping LoaderProgressClosure, completion: @escaping LoaderCompletionClosure) -> URLSessionTask? {
-        if let cachedImageData = YNImageCacheProvider.sharedInstance.cacheForKey(imageUrl) {
-            completion(cachedImageData, nil)
-            return nil
-        } else {
-            let task = self.session.dataTask(with: URL(string: imageUrl)!)
-            launchTask(task: task, progress: progress, completion: completion)
-            return task
+    public func loadImageWithUrl(_ imageUrl: String, progress: @escaping LoaderProgressClosure, completion: @escaping LoaderCompletionClosure) {
+        YNCacheProvider.sharedInstance.cacheForKey(imageUrl) { (data) in
+            if let cachedImageData = data {
+                completion(YNCompletionResult.success(cachedImageData))
+            } else {
+                let task = self.session.dataTask(with: URL(string: imageUrl)!)
+                self.launchTask(task: task, progress: progress, completion: completion)
+                completion(YNCompletionResult.handler(task))
+            }
         }
+
     }
     
     func launchTask(task: URLSessionTask, progress: @escaping LoaderProgressClosure, completion: @escaping LoaderCompletionClosure) {
@@ -99,17 +107,17 @@ public class YNImageLoader : NSObject, URLSessionDataDelegate, URLSessionDelegat
     
     public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         if let completionClosure = completionQueue[task.taskIdentifier] {
-            if error != nil {
+            if let responseError = error {
                 DispatchQueue.main.async {
-                    completionClosure(nil, error)
+                    completionClosure(.failure(responseError))
                 }
             } else {
                 if let existingData = responsesQueue[task.taskIdentifier] {
                     DispatchQueue.main.async {
-                        completionClosure(existingData, error)
+                        completionClosure(.success(existingData))
                     }
                     if let key = task.originalRequest?.url?.absoluteString {
-                        YNImageCacheProvider.sharedInstance.cacheData(key: key, data: existingData)
+                        YNCacheProvider.sharedInstance.cacheData(key: key, data: existingData)
                     }
                 }
             }

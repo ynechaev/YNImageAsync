@@ -1,5 +1,5 @@
 //
-//  YNImageCacheProvider.swift
+//  YNCacheProvider.swift
 //  ImageAsyncTest
 //
 //  Created by Yury Nechaev on 15.10.16.
@@ -10,13 +10,13 @@ import UIKit
 
 let maxMemoryCacheSize : Int64 = 10 * 1024 * 1024 // 10Mb
 
-public class YNImageCacheProvider {
+public class YNCacheProvider {
 
-    var memoryCache: [String: YNImageCacheEntry] = [:]
+    var memoryCache: [String: YNCacheEntry] = [:]
     public var cacheOptions: YNCacheOptions
     
-    public static let sharedInstance : YNImageCacheProvider = {
-        let instance = YNImageCacheProvider(cacheOptions: [.memory, .disk])
+    public static let sharedInstance : YNCacheProvider = {
+        let instance = YNCacheProvider(cacheOptions: [.memory, .disk])
         return instance
     }()
     
@@ -24,11 +24,11 @@ public class YNImageCacheProvider {
         self.cacheOptions = cacheOptions
     }
     
-    public func cacheForKey(_ key: String) -> Data? {
+    public func cacheForKey(_ key: String, completion: @escaping ((_ data: Data?) -> Void)) {
         if let memCache = memoryCacheForKey(key) {
-            return memCache
+            completion(memCache)
         } else {
-            return diskCacheForKey(key)
+            diskCacheForKey(key, completion: completion)
         }
     }
     
@@ -43,16 +43,19 @@ public class YNImageCacheProvider {
         return nil
     }
     
-    public func diskCacheForKey(_ key: String) -> Data? {
+    public func diskCacheForKey(_ key: String, completion: @escaping ((_ data: Data?) -> Void)) {
         if cacheOptions.contains(.disk) {
-            if let cacheHit = readCache(path: fileInCacheDirectory(filename: key)) {
-                yn_logInfo("Disk cache hit: \(key)")
-                cacheDataToMemory(key, data: cacheHit)
-                return cacheHit
-            }
-            yn_logInfo("Disk cache miss: \(key)")
+            readCache(path: key, completion: { (data) in
+                if let cacheHit = data {
+                    yn_logInfo("Disk cache hit: \(key)")
+                    self.cacheDataToMemory(key, data: cacheHit)
+                    completion(cacheHit)
+                } else {
+                    yn_logInfo("Disk cache miss: \(key)")
+                }
+            })
         }
-        return nil
+        completion(nil)
     }
     
     public func cacheData(key: String, data: Data) {
@@ -62,7 +65,7 @@ public class YNImageCacheProvider {
     
     public func cacheDataToMemory(_ key: String, data: Data) {
         if cacheOptions.contains(.memory) {
-            let entry = YNImageCacheEntry(data: data, cacheType: .memory, date: Date())
+            let entry = YNCacheEntry(data: data, cacheType: .memory, date: Date())
             yn_logInfo("Cache store: \(key)")
             memoryCache[key] = entry
             cleanMemoryCache()
@@ -159,7 +162,7 @@ public class YNImageCacheProvider {
         return returnedValue
     }
     
-    func filterCacheWithArray(array: Array <YNImageCacheEntry>) {
+    func filterCacheWithArray(array: Array <YNCacheEntry>) {
         let tempCache = memoryCache
         for (key, entry) in tempCache {
             guard let _ = array.index(where: { (filterEntry) -> Bool in
@@ -200,25 +203,29 @@ public class YNImageCacheProvider {
         }
     }
     
-    func readCache(path: String) -> Data? {
+    func readCache(path: String, completion: @escaping ((_ data: Data?) -> Void)) {
         let fileUrl = URL(fileURLWithPath: path)
-        do {
-            let data = try Data(contentsOf: fileUrl)
-            yn_logInfo("Disk cache read success: \(fileUrl)")
-            return data
-        } catch let readError {
-            yn_logInfo("Disk cache read error: \(readError)")
-            return nil
+        DispatchQueue.global(qos: .default).async {
+            do {
+                let data = try Data(contentsOf: fileUrl)
+                yn_logInfo("Disk cache read success: \(fileUrl)")
+                completion(data)
+            } catch let readError {
+                yn_logInfo("Disk cache read error: \(readError)")
+                completion(nil)
+            }
         }
     }
     
     func saveCache(cacheData: Data, path: String ) {
         let fileUrl = URL(fileURLWithPath: path)
-        do {
-            try cacheData.write(to: fileUrl , options: Data.WritingOptions(rawValue: 0))
-            yn_logInfo("Disk cache write success: \(fileUrl)")
-        } catch let saveError {
-            yn_logError("Disk cache write error: \(saveError)")
+        DispatchQueue.global(qos: .default).async {
+            do {
+                try cacheData.write(to: fileUrl , options: Data.WritingOptions(rawValue: 0))
+                yn_logInfo("Disk cache write success: \(fileUrl)")
+            } catch let saveError {
+                yn_logError("Disk cache write error: \(saveError)")
+            }
         }
     }
     

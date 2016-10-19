@@ -1,5 +1,5 @@
 //
-//  YNImageCacheEntry.swift
+//  YNCacheEntry.swift
 //  ImageAsyncTest
 //
 //  Created by Yury Nechaev on 15.10.16.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-public struct YNImageCacheEntry {
+public struct YNCacheEntry {
     let udid: String = UUID().uuidString
     var data: Data
-    var cacheType: ImageCacheType
+    var cacheType: YNCacheType
     var date: Date
 }
