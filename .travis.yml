@@ -6,7 +6,7 @@ branches:
  - master
  - develop
 
-xcode_project: YNImageAsyncTest.xcodeproj
+xcode_project: ImageAsyncTest.xcodeproj
 xcode_scheme: YNImageAsyncTests
 
 script:
