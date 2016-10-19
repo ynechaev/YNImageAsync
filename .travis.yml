@@ -1,7 +1,13 @@
-language: swift
+language: objective-c
+osx_image: xcode8
 
-before_install:
+branches:
+ only:
+ - master
+ - develop
 
-    - export LANG=en_US.UTF-8
-    - env
-    - locale
+xcode_project: YNImageAsyncTest.xcodeproj
+xcode_scheme: YNImageAsyncTests
+
+script:
+- xcodebuild clean build test -project YNImageAsyncTest.xcodeproj -scheme YNImageAsyncTests
