@@ -11,6 +11,5 @@ import Foundation
 public struct YNCacheEntry {
     let udid: String = UUID().uuidString
     var data: Data
-    var cacheType: YNCacheType
     var date: Date
 }

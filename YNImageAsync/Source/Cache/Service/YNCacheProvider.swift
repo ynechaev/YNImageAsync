@@ -65,7 +65,7 @@ public class YNCacheProvider {
     
     public func cacheDataToMemory(_ key: String, data: Data) {
         if cacheOptions.contains(.memory) {
-            let entry = YNCacheEntry(data: data, cacheType: .memory, date: Date())
+            let entry = YNCacheEntry(data: data, date: Date())
             yn_logInfo("Cache store: \(key)")
             memoryCache[key] = entry
             cleanMemoryCache()
