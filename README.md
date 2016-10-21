@@ -1,6 +1,6 @@
 YNImageAsync
 ==========
-[![Build Status](http://img.shields.io/travis/RebornSoul/YNImageAsync/master.svg?style=flat)](https://travis-ci.org/RebornSoul/YNImageAsync)
+[![Build Status](https://travis-ci.org/ynechaev/YNImageAsync.svg?branch=develop)](https://travis-ci.org/ynechaev/YNImageAsync)
 
 This library provides a set of tools for fast and easy caching images from the web.
 
