@@ -8,6 +8,11 @@
 
 import Foundation
 
+public struct YNCacheConfiguration {
+    public var options : YNCacheOptions
+    public var memoryCacheLimit : Int64
+}
+
 public struct YNCacheOptions : OptionSet {
     
     public let rawValue: Int

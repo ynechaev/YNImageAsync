@@ -13,15 +13,17 @@ let maxMemoryCacheSize : Int64 = 10 * 1024 * 1024 // 10Mb
 public class YNCacheProvider {
 
     var memoryCache: [String: YNCacheEntry] = [:]
-    public var cacheOptions: YNCacheOptions
+    public var configuration: YNCacheConfiguration
     
     public static let sharedInstance : YNCacheProvider = {
-        let instance = YNCacheProvider(cacheOptions: [.memory, .disk])
+        let options : YNCacheOptions = [.memory, .disk]
+        let conf = YNCacheConfiguration(options: options, memoryCacheLimit: maxMemoryCacheSize)
+        let instance = YNCacheProvider(configuration: conf)
         return instance
     }()
     
-    init(cacheOptions: YNCacheOptions) {
-        self.cacheOptions = cacheOptions
+    public init(configuration: YNCacheConfiguration) {
+        self.configuration = configuration
     }
     
     public func cacheForKey(_ key: String, completion: @escaping ((_ data: Data?) -> Void)) {
@@ -33,7 +35,7 @@ public class YNCacheProvider {
     }
     
     public func memoryCacheForKey(_ key: String) -> Data? {
-        if cacheOptions.contains(.memory) {
+        if configuration.options.contains(.memory) {
             if let cacheHit = memoryCache[key] {
                 yn_logInfo("Mem cache hit: \(key)")
                 return cacheHit.data
@@ -44,7 +46,7 @@ public class YNCacheProvider {
     }
     
     public func diskCacheForKey(_ key: String, completion: @escaping ((_ data: Data?) -> Void)) {
-        if cacheOptions.contains(.disk) {
+        if configuration.options.contains(.disk) {
             readCache(path: key, completion: { (data) in
                 if let cacheHit = data {
                     yn_logInfo("Disk cache hit: \(key)")
@@ -64,7 +66,7 @@ public class YNCacheProvider {
     }
     
     public func cacheDataToMemory(_ key: String, data: Data) {
-        if cacheOptions.contains(.memory) {
+        if configuration.options.contains(.memory) {
             let entry = YNCacheEntry(data: data, date: Date())
             yn_logInfo("Cache store: \(key)")
             memoryCache[key] = entry
@@ -73,7 +75,7 @@ public class YNCacheProvider {
     }
     
     public func cacheDataToDisk(_ key: String, data: Data) {
-        if cacheOptions.contains(.disk) {
+        if configuration.options.contains(.disk) {
             saveCache(cacheData: data, path: fileInCacheDirectory(filename: key))
         }
     }

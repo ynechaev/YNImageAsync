@@ -22,9 +22,9 @@ class SettingsController: UIViewController {
     }
     
     func setupUI() {
-        let options = YNCacheProvider.sharedInstance.cacheOptions
-        memorySwitch.isOn = options.contains(.memory)
-        diskSwitch.isOn = options.contains(.disk)
+        let configuration = YNCacheProvider.sharedInstance.configuration
+        memorySwitch.isOn = configuration.options.contains(.memory)
+        diskSwitch.isOn = configuration.options.contains(.disk)
         memoryLabel.text = "Current memory usage: \(sizeStringFrom(int: YNCacheProvider.sharedInstance.memoryCacheSize()))"
         diskLabel.text = "Current cache folder usage: \(sizeStringFrom(int: YNCacheProvider.sharedInstance.diskCacheSize()))"
     }
@@ -48,14 +48,14 @@ class SettingsController: UIViewController {
     }
     
     @IBAction func didSwitchMemoryCache(sender: UISwitch) {
-        var options = YNCacheProvider.sharedInstance.cacheOptions.rawValue
+        var options = YNCacheProvider.sharedInstance.configuration.options.rawValue
         options = options ^ YNCacheOptions.memory.rawValue
-        YNCacheProvider.sharedInstance.cacheOptions = YNCacheOptions(rawValue: options)
+        YNCacheProvider.sharedInstance.configuration.options = YNCacheOptions(rawValue: options)
     }
     
     @IBAction func didSwitchDiskCache(sender: UISwitch) {
-        var options = YNCacheProvider.sharedInstance.cacheOptions.rawValue
+        var options = YNCacheProvider.sharedInstance.configuration.options.rawValue
         options = options ^ YNCacheOptions.disk.rawValue
-        YNCacheProvider.sharedInstance.cacheOptions = YNCacheOptions(rawValue: options)
+        YNCacheProvider.sharedInstance.configuration.options = YNCacheOptions(rawValue: options)
     }
 }
