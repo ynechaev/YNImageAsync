@@ -10,4 +10,5 @@ xcode_project: ImageAsyncTest.xcodeproj
 xcode_scheme: YNImageAsyncTests
 
 script:
-- xcodebuild clean build test -project YNImageAsyncTest.xcodeproj -scheme YNImageAsyncTests
+- echo Build demo apps
+- xcodebuild clean build test -project ImageAsyncTest.xcodeproj -scheme 'Demo' -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.0'
