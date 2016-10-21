@@ -12,7 +12,7 @@ let maxMemoryCacheSize : Int64 = 10 * 1024 * 1024 // 10Mb
 
 public class YNCacheProvider {
 
-    var memoryCache: [String: YNCacheEntry] = [:]
+    internal var memoryCache: [String: YNCacheEntry] = [:]
     public var configuration: YNCacheConfiguration
     
     public static let sharedInstance : YNCacheProvider = {
@@ -84,12 +84,13 @@ public class YNCacheProvider {
         let sorted = memoryCache.values.sorted { (entry1, entry2) -> Bool in
             return entry1.date > entry2.date
         }
-        if memoryCacheSize() > maxMemoryCacheSize {
-            yn_logInfo("Memory cache \(memoryCacheSize()) > max \(maxMemoryCacheSize)")
+        let maxSize = configuration.memoryCacheLimit
+        if memoryCacheSize() > maxSize {
+            yn_logInfo("Memory cache \(memoryCacheSize()) > max \(maxSize)")
             var size : Int = 0
             for cacheEntry in sorted {
                 size += cacheEntry.data.count
-                if memoryCacheSize() - size < maxMemoryCacheSize {
+                if memoryCacheSize() - size < maxSize {
                     if let borderIndex = sorted.index(where: { (entry) -> Bool in
                         return cacheEntry.udid == entry.udid
                     }) {

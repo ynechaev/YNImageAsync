@@ -18,7 +18,7 @@ class YNCacheProviderTests: XCTestCase {
         super.setUp()
         cacheProvider = YNCacheProvider(configuration: YNCacheConfiguration(options: [.memory, .disk], memoryCacheLimit: 30 * 1024 * 1024)) // enough to store all images
         for img in imageNames {
-            if let image = UIImage(named: img) {
+            if let image = UIImage(named: img, in: Bundle(for: type(of: self)), compatibleWith: nil) {
                 let imageData = UIImageJPEGRepresentation(image, 0.9)
                 cacheProvider?.cacheData(key: img, data: imageData!)
             }
@@ -63,7 +63,16 @@ class YNCacheProviderTests: XCTestCase {
     }
     
     func testMemoryCacheForKey() {
-
+        for image in imageNames {
+            guard let provider = cacheProvider else {
+                XCTFail("Failed to get cache provider")
+                return
+            }
+            guard let _ = provider.memoryCache[image] else {
+                XCTFail("Can not retrieve \(image) image from memory cache")
+                return
+            }
+        }
     }
     
     func testDiskCacheForKey() {
