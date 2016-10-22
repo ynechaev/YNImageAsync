@@ -1,6 +1,6 @@
 YNImageAsync
 ==========
-[![Build Status](https://travis-ci.org/ynechaev/YNImageAsync.svg?branch=develop)](https://travis-ci.org/ynechaev/YNImageAsync) [![Coverage Status](https://coveralls.io/repos/github/ynechaev/YNImageAsync/badge.svg?branch=master)](https://coveralls.io/github/ynechaev/YNImageAsync?branch=master)
+[![Build Status](https://travis-ci.org/ynechaev/YNImageAsync.svg?branch=develop)](https://travis-ci.org/ynechaev/YNImageAsync) [![Coverage Status](https://coveralls.io/repos/github/ynechaev/YNImageAsync/badge.svg?branch=develop)](https://coveralls.io/github/ynechaev/YNImageAsync?branch=develop)
 
 This library provides a set of tools for fast and easy caching images from the web.
 
