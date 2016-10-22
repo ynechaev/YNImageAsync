@@ -48,17 +48,23 @@ public class YNCacheProvider {
     
     public func diskCacheForKey(_ key: String, completion: @escaping ((_ data: Data?) -> Void)) {
         if configuration.options.contains(.disk) {
-            readCache(path: key, completion: { (data) in
+            let filePath = fileInCacheDirectory(filename: key)
+            let url = URL(fileURLWithPath: filePath)
+            readCache(fileUrl: url, completion: { (data) in
                 if let cacheHit = data {
                     yn_logInfo("Disk cache hit: \(key)")
                     self.cacheDataToMemory(key, cacheHit)
                     completion(cacheHit)
+                    return
                 } else {
                     yn_logInfo("Disk cache miss: \(key)")
+                    completion(nil)
+                    return
                 }
             })
+        } else {
+            completion(nil)
         }
-        completion(nil)
     }
     
     public func cacheData(_ key: String, _ data: Data, completion: CacheCompletionClosure? = nil) {
@@ -77,7 +83,9 @@ public class YNCacheProvider {
     
     public func cacheDataToDisk(_ key: String, _ data: Data, completion: CacheCompletionClosure? = nil) {
         if configuration.options.contains(.disk) {
-            saveCache(cacheData: data, path: fileInCacheDirectory(filename: key), completion: completion)
+            let filePath = fileInCacheDirectory(filename: key)
+            let url = URL(fileURLWithPath: filePath)
+            saveCache(cacheData: data, fileUrl: url, completion: completion)
         } else {
             if let completionClosure = completion {
                 completionClosure(true)
@@ -207,8 +215,7 @@ public class YNCacheProvider {
         }
     }
     
-    func readCache(path: String, completion: @escaping ((_ data: Data?) -> Void)) {
-        let fileUrl = URL(fileURLWithPath: path)
+    func readCache(fileUrl: URL, completion: @escaping ((_ data: Data?) -> Void)) {
         DispatchQueue.global(qos: .default).async {
             do {
                 let data = try Data(contentsOf: fileUrl)
@@ -221,8 +228,7 @@ public class YNCacheProvider {
         }
     }
     
-    func saveCache(cacheData: Data, path: String, completion: CacheCompletionClosure? = nil) {
-        let fileUrl = URL(fileURLWithPath: path)
+    func saveCache(cacheData: Data, fileUrl: URL, completion: CacheCompletionClosure? = nil) {
         DispatchQueue.global(qos: .default).async {
             do {
                 try cacheData.write(to: fileUrl , options: Data.WritingOptions(rawValue: 0))

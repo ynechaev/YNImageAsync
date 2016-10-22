@@ -44,13 +44,23 @@ public class YNImageLoader : NSObject, URLSessionDataDelegate, URLSessionDelegat
     
     public func loadImageWithUrl(_ imageUrl: String, progress: @escaping LoaderProgressClosure, completion: @escaping LoaderCompletionClosure) {
         YNCacheProvider.sharedInstance.cacheForKey(imageUrl) { (data) in
-            if let cachedImageData = data {
-                completion(YNCompletionResult.success(cachedImageData))
-            } else {
-                let task = self.session.dataTask(with: URL(string: imageUrl)!)
-                self.launchTask(task: task, progress: progress, completion: completion)
-                completion(YNCompletionResult.handler(task))
+            let executionBlock : (() -> Void) = {
+                if let cachedImageData = data {
+                    completion(YNCompletionResult.success(cachedImageData))
+                } else {
+                    let task = self.session.dataTask(with: URL(string: imageUrl)!)
+                    self.launchTask(task: task, progress: progress, completion: completion)
+                    completion(YNCompletionResult.handler(task))
+                }
             }
+            if !Thread.current.isMainThread {
+                DispatchQueue.main.async {
+                    executionBlock()
+                }
+            } else {
+                executionBlock()
+            }
+
         }
 
     }

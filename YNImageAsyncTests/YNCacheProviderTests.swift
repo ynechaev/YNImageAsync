@@ -71,19 +71,23 @@ class YNCacheProviderTests: XCTestCase {
         
         provider.configuration.options = .disk
         for image in imageNames {
-            let imageExpectation = expectation(description: image)
+            let diskExpectation = expectation(description: image + "disk")
             _ = provider.diskCacheForKey(image, completion: { (data) in
-                XCTAssertNotNil(data, "Disk cache data is nil")
-                imageExpectation.fulfill()
+                XCTAssertNotNil(data, "Disk cache data is nil for key: \(image)")
+                diskExpectation.fulfill()
             })
+        }
+        
+        waitForExpectations(timeout: 10) { (error) in
+            print(error)
         }
 
         provider.configuration.options = .memory
         for image in imageNames {
-            let imageExpectation = expectation(description: image)
+            let memoryExpectation = expectation(description: image + "memory")
             _ = provider.diskCacheForKey(image, completion: { (data) in
-                XCTAssertNil(data, "Disk cache data not nil")
-                imageExpectation.fulfill()
+                XCTAssertNil(data, "Disk cache data not nil for key: \(image)")
+                memoryExpectation.fulfill()
             })
         }
         
@@ -94,6 +98,19 @@ class YNCacheProviderTests: XCTestCase {
     }
     
     func testCacheData() {
+        guard let provider = cacheProvider else {
+            XCTFail("Failed to get cache provider")
+            return
+        }
+        
+        for image in imageNames {
+            let cacheExpectation = expectation(description: image)
+            provider.cacheForKey(image, completion: { (data) in
+                XCTAssertTrue(data != nil)
+                cacheExpectation.fulfill()
+            })
+            waitForExpectations(timeout: 10, handler: nil)
+        }
     }
     
     func testCacheDataToMemory() {
@@ -346,7 +363,9 @@ class YNCacheProviderTests: XCTestCase {
         
         for image in imageNames {
             let cacheExpectation = expectation(description: image)
-            _ = provider.readCache(path: image, completion: { (data) in
+            let filePath = provider.fileInCacheDirectory(filename: image)
+            let url = URL(fileURLWithPath: filePath)
+            _ = provider.readCache(fileUrl: url, completion: { (data) in
                 XCTAssertNotNil(data, "Disk cache data is nil")
                 cacheExpectation.fulfill()
             })
@@ -369,10 +388,11 @@ class YNCacheProviderTests: XCTestCase {
         
         let file = imageNames.first!
         let filePath = provider.fileInCacheDirectory(filename: file)
-        
+        let url = URL(fileURLWithPath: filePath)
+
         if let image = UIImage(named: file, in: Bundle(for: type(of: self)), compatibleWith: nil) {
             if let imageData = UIImageJPEGRepresentation(image, 0.9) {
-                provider.saveCache(cacheData: imageData, path: filePath)
+                provider.saveCache(cacheData: imageData, fileUrl: url)
                 let files = provider.cacheFolderFiles()
                 XCTAssertTrue(files.count == 1)
             } else {
