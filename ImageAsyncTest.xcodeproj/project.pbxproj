@@ -372,7 +372,6 @@
 					0626EA661DB2316C000DC212 = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 0800;
-						TestTargetID = 062AC0021A0827E000744325;
 					};
 					062AC0021A0827E000744325 = {
 						CreatedOnToolsVersion = 6.1;
@@ -581,7 +580,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = yn.YNImageAsyncTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo.app/Demo";
 			};
 			name = Debug;
 		};
@@ -598,7 +596,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = yn.YNImageAsyncTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo.app/Demo";
 			};
 			name = Release;
 		};

@@ -8,6 +8,7 @@
 
 import UIKit
 
+public typealias CacheCompletionClosure = ((_ success: Bool) -> (Void))
 let maxMemoryCacheSize : Int64 = 10 * 1024 * 1024 // 10Mb
 
 public class YNCacheProvider {
@@ -50,7 +51,7 @@ public class YNCacheProvider {
             readCache(path: key, completion: { (data) in
                 if let cacheHit = data {
                     yn_logInfo("Disk cache hit: \(key)")
-                    self.cacheDataToMemory(key, data: cacheHit)
+                    self.cacheDataToMemory(key, cacheHit)
                     completion(cacheHit)
                 } else {
                     yn_logInfo("Disk cache miss: \(key)")
@@ -60,12 +61,12 @@ public class YNCacheProvider {
         completion(nil)
     }
     
-    public func cacheData(key: String, data: Data) {
-        cacheDataToMemory(key, data: data)
-        cacheDataToDisk(key, data: data)
+    public func cacheData(_ key: String, _ data: Data, completion: CacheCompletionClosure? = nil) {
+        cacheDataToMemory(key, data)
+        cacheDataToDisk(key, data, completion: completion)
     }
     
-    public func cacheDataToMemory(_ key: String, data: Data) {
+    public func cacheDataToMemory(_ key: String, _ data: Data) {
         if configuration.options.contains(.memory) {
             let entry = YNCacheEntry(data: data, date: Date())
             yn_logInfo("Cache store: \(key)")
@@ -74,9 +75,13 @@ public class YNCacheProvider {
         }
     }
     
-    public func cacheDataToDisk(_ key: String, data: Data) {
+    public func cacheDataToDisk(_ key: String, _ data: Data, completion: CacheCompletionClosure? = nil) {
         if configuration.options.contains(.disk) {
-            saveCache(cacheData: data, path: fileInCacheDirectory(filename: key))
+            saveCache(cacheData: data, path: fileInCacheDirectory(filename: key), completion: completion)
+        } else {
+            if let completionClosure = completion {
+                completionClosure(true)
+            }
         }
     }
     
@@ -85,22 +90,19 @@ public class YNCacheProvider {
             return entry1.date > entry2.date
         }
         let maxSize = configuration.memoryCacheLimit
-        if memoryCacheSize() > maxSize {
+        let memorySize = memoryCacheSize()
+        if memorySize > maxSize {
             yn_logInfo("Memory cache \(memoryCacheSize()) > max \(maxSize)")
-            var size : Int = 0
+            var size : Int64 = 0
+            var newCache : Array<YNCacheEntry> = []
             for cacheEntry in sorted {
                 size += cacheEntry.data.count
-                if memoryCacheSize() - size < maxSize {
-                    if let borderIndex = sorted.index(where: { (entry) -> Bool in
-                        return cacheEntry.udid == entry.udid
-                    }) {
-                        yn_logInfo("Found \(borderIndex) elements exceeding capacity")
-                        var newCache = sorted
-                        newCache.removeFirst(borderIndex)
-                        filterCacheWithArray(array: newCache)
-                    }
-                    return
+                if size > maxSize {
+                    yn_logInfo("Found \(sorted.count - newCache.count) elements exceeding capacity")
+                    filterCacheWithArray(array: newCache)
+                    break
                 }
+                newCache.append(cacheEntry)
             }
         }
     }
@@ -168,12 +170,11 @@ public class YNCacheProvider {
     func filterCacheWithArray(array: Array <YNCacheEntry>) {
         let tempCache = memoryCache
         for (key, entry) in tempCache {
-            guard let _ = array.index(where: { (filterEntry) -> Bool in
+            if !array.contains(where: { (filterEntry) -> Bool in
                 return entry.udid == filterEntry.udid
-            }) else {
+            }) {
                 memoryCache.removeValue(forKey: key)
                 yn_logInfo("Removing \(entry.udid)")
-                break
             }
         }
     }
@@ -220,14 +221,20 @@ public class YNCacheProvider {
         }
     }
     
-    func saveCache(cacheData: Data, path: String ) {
+    func saveCache(cacheData: Data, path: String, completion: CacheCompletionClosure? = nil) {
         let fileUrl = URL(fileURLWithPath: path)
         DispatchQueue.global(qos: .default).async {
             do {
                 try cacheData.write(to: fileUrl , options: Data.WritingOptions(rawValue: 0))
                 yn_logInfo("Disk cache write success: \(fileUrl)")
+                if let completionClosure = completion {
+                    completionClosure(true)
+                }
             } catch let saveError {
                 yn_logError("Disk cache write error: \(saveError)")
+                if let completionClosure = completion {
+                    completionClosure(false)
+                }
             }
         }
     }

@@ -117,7 +117,7 @@ public class YNImageLoader : NSObject, URLSessionDataDelegate, URLSessionDelegat
                         completionClosure(.success(existingData))
                     }
                     if let key = task.originalRequest?.url?.absoluteString {
-                        YNCacheProvider.sharedInstance.cacheData(key: key, data: existingData)
+                        YNCacheProvider.sharedInstance.cacheData(key, existingData)
                     }
                 }
             }
