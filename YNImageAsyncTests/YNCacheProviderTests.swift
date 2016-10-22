@@ -381,10 +381,8 @@ class YNCacheProviderTests: XCTestCase {
             XCTFail("Failed to get cache provider")
             return
         }
-        let files = provider.cacheFolderFiles().count
-        XCTAssertTrue(imageNames.count == files, "Disk cache count \(files) != images count \(imageNames.count)")
         provider.clearDiskCache()
-        XCTAssertTrue(provider.cacheFolderFiles().count == 0)
+        XCTAssertTrue(provider.cacheFolderFiles().count == 0, "Unable to clean cache folder")
         
         let file = imageNames.first!
         let filePath = provider.fileInCacheDirectory(filename: file)
@@ -396,10 +394,10 @@ class YNCacheProviderTests: XCTestCase {
                 let files = provider.cacheFolderFiles()
                 XCTAssertTrue(files.count == 1)
             } else {
-                XCTFail()
+                XCTFail("Can not create image data: \(file)")
             }
         } else {
-            XCTFail()
+            XCTFail("Can not load image from bundle: \(file)")
         }
     }
     
