@@ -1,6 +1,6 @@
 YNImageAsync
 ==========
-[![Build Status](https://travis-ci.org/ynechaev/YNImageAsync.svg?branch=develop)](https://travis-ci.org/ynechaev/YNImageAsync)
+[![Build Status](https://travis-ci.org/ynechaev/YNImageAsync.svg?branch=master)](https://travis-ci.org/ynechaev/YNImageAsync)
 
 #About
 YNImageAsync is a lightweight and convenient framework for fetching and caching images.
