@@ -1,24 +1,18 @@
 YNImageAsync
 ==========
-[![Build Status](http://img.shields.io/travis/RebornSoul/YNImageAsync/master.svg?style=flat)](https://travis-ci.org/RebornSoul/YNImageAsync)
+[![Build Status](https://travis-ci.org/ynechaev/YNImageAsync.svg?branch=master)](https://travis-ci.org/ynechaev/YNImageAsync)
 
-This library provides a set of tools for fast and easy caching images from the web.
+#About
+YNImageAsync is a lightweight and convenient framework for fetching and caching images.
 
-Features:
+# Features
+- Written on Swift 3.0
+- Asynchronous image loading
+- Supports both memory and drive caching
+- Configurable
+- Unit test coverage is good
+- UIImageView extension for fast and out-of-the-box image loading.
 
-- Native Swift support. Written on swift.
-- Asynchronous image loading.
-- UIImageView extension for fast and out-of-the-box remote image caching.
-- Super cool pattern placeholders.
-- ARC.
-- GCD - your main thread will never be blocked.
-
-Things to do:
-- Don't download the same URL at the same time.
-- Background decompression.
-- GIF support.
-- A signleton for managing all requests and sessions.
-- A set of tools to provide downloading progress.
-- A built-in visual progress indicator inside UIImageView subclass.
-
-Feel free to contribute.
+# Things to do
+- Refactor YNImageLoader for dependency injection pattern and test coverage.
+- Encapsulate request task and meta data into separate object.

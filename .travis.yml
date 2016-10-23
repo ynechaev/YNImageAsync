@@ -1,7 +1,14 @@
-language: swift
+language: objective-c
+osx_image: xcode8
 
-before_install:
+branches:
+ only:
+ - master
+ - develop
 
-    - export LANG=en_US.UTF-8
-    - env
-    - locale
+xcode_project: ImageAsyncTest.xcodeproj
+xcode_scheme: YNImageAsyncTests
+
+script:
+- echo Build demo apps
+- xcodebuild clean build test -project ImageAsyncTest.xcodeproj -scheme 'Demo' -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.0'
