@@ -1,5 +1,5 @@
 //
-//  YNImageLoader.swift
+//  ImageLoader.swift
 //  ImageAsyncTest
 //
 //  Created by Yury Nechaev on 15.10.16.
@@ -8,16 +8,22 @@
 
 import UIKit
 
-public enum YNCompletionResult {
+public enum LoaderCompletionResult {
     case success(Data)
     case failure(Error)
     case handler(URLSessionTask)
 }
 
-public typealias LoaderCompletionClosure = ((YNCompletionResult) -> (Void))
+public protocol DataRequestProtocol {
+    func loadImageWithUrl(_ imageUrl: String,
+                          progress: @escaping LoaderProgressClosure,
+                          completion: @escaping LoaderCompletionClosure);
+}
+
+public typealias LoaderCompletionClosure = ((LoaderCompletionResult) -> (Void))
 public typealias LoaderProgressClosure = ((_ progress: Float) -> Void)
 
-public class YNImageLoader : NSObject, URLSessionDataDelegate, URLSessionDelegate, URLSessionTaskDelegate {
+public class ImageLoader : NSObject, URLSessionDataDelegate, URLSessionDelegate, URLSessionTaskDelegate {
     
     var session: URLSession = URLSession(configuration: URLSessionConfiguration.default)
     var completionQueue: [Int: LoaderCompletionClosure] = [:]
@@ -25,8 +31,8 @@ public class YNImageLoader : NSObject, URLSessionDataDelegate, URLSessionDelegat
     var responsesQueue: [Int: Data] = [:]
     var expectedSizeQueue: [Int: Int] = [:]
     
-    static let sharedInstance : YNImageLoader = {
-        let instance = YNImageLoader()
+    static let sharedInstance : ImageLoader = {
+        let instance = ImageLoader()
         return instance
     }()
     
@@ -46,11 +52,11 @@ public class YNImageLoader : NSObject, URLSessionDataDelegate, URLSessionDelegat
         YNCacheProvider.sharedInstance.cacheForKey(imageUrl) { (data) in
             let executionBlock : (() -> Void) = {
                 if let cachedImageData = data {
-                    completion(YNCompletionResult.success(cachedImageData))
+                    completion(LoaderCompletionResult.success(cachedImageData))
                 } else {
                     let task = self.session.dataTask(with: URL(string: imageUrl)!)
                     self.launchTask(task: task, progress: progress, completion: completion)
-                    completion(YNCompletionResult.handler(task))
+                    completion(LoaderCompletionResult.handler(task))
                 }
             }
             if !Thread.current.isMainThread {

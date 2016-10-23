@@ -31,9 +31,9 @@ extension UIImageView {
         if let placeholder = placeholderImage {
             self.image = placeholder
         }
-        YNImageLoader.sharedInstance.loadImageWithUrl(imageUrl, progress: { (progress) in
+        ImageLoader.sharedInstance.loadImageWithUrl(imageUrl, progress: { (progress) in
             
-            }, completion: { (result: YNCompletionResult) -> (Void) in
+            }, completion: { (result: LoaderCompletionResult) -> (Void) in
                 switch(result) {
                 case .success(let data):
                     let image = UIImage(data: data)
