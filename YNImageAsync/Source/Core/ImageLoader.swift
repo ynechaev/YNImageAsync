@@ -49,7 +49,7 @@ public class ImageLoader : NSObject, URLSessionDataDelegate, URLSessionDelegate,
     }
     
     public func loadImageWithUrl(_ imageUrl: String, progress: @escaping LoaderProgressClosure, completion: @escaping LoaderCompletionClosure) {
-        YNCacheProvider.sharedInstance.cacheForKey(imageUrl) { (data) in
+        CacheProvider.sharedInstance.cacheForKey(imageUrl) { (data) in
             let executionBlock : (() -> Void) = {
                 if let cachedImageData = data {
                     completion(LoaderCompletionResult.success(cachedImageData))
@@ -133,7 +133,7 @@ public class ImageLoader : NSObject, URLSessionDataDelegate, URLSessionDelegate,
                         completionClosure(.success(existingData))
                     }
                     if let key = task.originalRequest?.url?.absoluteString {
-                        YNCacheProvider.sharedInstance.cacheData(key, existingData)
+                        CacheProvider.sharedInstance.cacheData(key, existingData)
                     }
                 }
             }

@@ -1,5 +1,5 @@
 //
-//  YNCacheProviderTests.swift
+//  CacheProviderTests.swift
 //  ImageAsyncTest
 //
 //  Created by Yury Nechaev on 2016-10-21.
@@ -9,14 +9,14 @@
 import XCTest
 @testable import YNImageAsync
 
-class YNCacheProviderTests: XCTestCase {
+class CacheProviderTests: XCTestCase {
     
-    var cacheProvider : YNCacheProvider? = nil
+    var cacheProvider : CacheProvider? = nil
     let imageNames = ["mountains.jpg", "parrot-indian.jpg", "parrot.jpg", "saint-petersburg.jpg", "snow.jpg", "tiger.jpg"]
 
     override func setUp() {
         super.setUp()
-        cacheProvider = YNCacheProvider(configuration: YNCacheConfiguration(options: [.memory, .disk], memoryCacheLimit: 30 * 1024 * 1024)) // enough to store all images
+        cacheProvider = CacheProvider(configuration: CacheConfiguration(options: [.memory, .disk], memoryCacheLimit: 30 * 1024 * 1024)) // enough to store all images
         cacheProvider?.clearCache()
         for img in imageNames {
             if let image = UIImage(named: img, in: Bundle(for: type(of: self)), compatibleWith: nil) {
@@ -311,7 +311,7 @@ class YNCacheProviderTests: XCTestCase {
         
         XCTAssertTrue(provider.memoryCache.keys.count == imageNames.count)
         
-        let filter : Array<YNCacheEntry> = [provider.memoryCache.first!.value]
+        let filter : Array<CacheEntry> = [provider.memoryCache.first!.value]
         provider.filterCacheWithArray(array: filter)
         
         XCTAssertTrue(provider.memoryCache.keys.count == 1)

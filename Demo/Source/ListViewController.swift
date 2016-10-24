@@ -48,7 +48,7 @@ class ListViewController: UITableViewController, URLSessionTaskDelegate {
     }
     
     @IBAction func didTapClearCache(sender: AnyObject) {
-        YNCacheProvider.sharedInstance.clearCache()
+        CacheProvider.sharedInstance.clearCache()
     }
     
 }

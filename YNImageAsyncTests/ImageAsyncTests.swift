@@ -1,5 +1,5 @@
 //
-//  YNImageAsyncTests.swift
+//  ImageAsyncTests.swift
 //  ImageAsyncTest
 //
 //  Created by Yury Nechaev on 22.10.16.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import YNImageAsync
 
-class YNImageAsyncTests: XCTestCase {
+class ImageAsyncTests: XCTestCase {
     
     func testSetLoggingLevel() {
         

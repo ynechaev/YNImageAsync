@@ -22,11 +22,11 @@ class SettingsController: UIViewController {
     }
     
     func setupUI() {
-        let configuration = YNCacheProvider.sharedInstance.configuration
+        let configuration = CacheProvider.sharedInstance.configuration
         memorySwitch.isOn = configuration.options.contains(.memory)
         diskSwitch.isOn = configuration.options.contains(.disk)
-        memoryLabel.text = "Current memory usage: \(sizeStringFrom(int: YNCacheProvider.sharedInstance.memoryCacheSize()))"
-        diskLabel.text = "Current cache folder usage: \(sizeStringFrom(int: YNCacheProvider.sharedInstance.diskCacheSize()))"
+        memoryLabel.text = "Current memory usage: \(sizeStringFrom(int: CacheProvider.sharedInstance.memoryCacheSize()))"
+        diskLabel.text = "Current cache folder usage: \(sizeStringFrom(int: CacheProvider.sharedInstance.diskCacheSize()))"
     }
     
     func sizeStringFrom(int: Int64) -> String {
@@ -48,14 +48,14 @@ class SettingsController: UIViewController {
     }
     
     @IBAction func didSwitchMemoryCache(sender: UISwitch) {
-        var options = YNCacheProvider.sharedInstance.configuration.options.rawValue
-        options = options ^ YNCacheOptions.memory.rawValue
-        YNCacheProvider.sharedInstance.configuration.options = YNCacheOptions(rawValue: options)
+        var options = CacheProvider.sharedInstance.configuration.options.rawValue
+        options = options ^ CacheOptions.memory.rawValue
+        CacheProvider.sharedInstance.configuration.options = CacheOptions(rawValue: options)
     }
     
     @IBAction func didSwitchDiskCache(sender: UISwitch) {
-        var options = YNCacheProvider.sharedInstance.configuration.options.rawValue
-        options = options ^ YNCacheOptions.disk.rawValue
-        YNCacheProvider.sharedInstance.configuration.options = YNCacheOptions(rawValue: options)
+        var options = CacheProvider.sharedInstance.configuration.options.rawValue
+        options = options ^ CacheOptions.disk.rawValue
+        CacheProvider.sharedInstance.configuration.options = CacheOptions(rawValue: options)
     }
 }
