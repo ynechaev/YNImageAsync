@@ -105,12 +105,12 @@
 		06EE758E1A0ABB65007BE5B0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		06EE759A1A0ACD37007BE5B0 /* ImageAsyncExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAsyncExtensions.swift; sourceTree = "<group>"; };
 		2B19D3601DBA57FD00DD0DAF /* CacheProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheProviderTests.swift; sourceTree = "<group>"; };
-		2B19D3631DBA5E6A00DD0DAF /* mountains.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = mountains.jpg; path = Resources/mountains.jpg; sourceTree = "<group>"; };
-		2B19D3641DBA5E6A00DD0DAF /* parrot-indian.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "parrot-indian.jpg"; path = "Resources/parrot-indian.jpg"; sourceTree = "<group>"; };
-		2B19D3651DBA5E6A00DD0DAF /* parrot.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = parrot.jpg; path = Resources/parrot.jpg; sourceTree = "<group>"; };
-		2B19D3661DBA5E6A00DD0DAF /* saint-petersburg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "saint-petersburg.jpg"; path = "Resources/saint-petersburg.jpg"; sourceTree = "<group>"; };
-		2B19D3671DBA5E6A00DD0DAF /* snow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = snow.jpg; path = Resources/snow.jpg; sourceTree = "<group>"; };
-		2B19D3681DBA5E6A00DD0DAF /* tiger.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = tiger.jpg; path = Resources/tiger.jpg; sourceTree = "<group>"; };
+		2B19D3631DBA5E6A00DD0DAF /* mountains.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mountains.jpg; sourceTree = "<group>"; };
+		2B19D3641DBA5E6A00DD0DAF /* parrot-indian.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "parrot-indian.jpg"; sourceTree = "<group>"; };
+		2B19D3651DBA5E6A00DD0DAF /* parrot.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = parrot.jpg; sourceTree = "<group>"; };
+		2B19D3661DBA5E6A00DD0DAF /* saint-petersburg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "saint-petersburg.jpg"; sourceTree = "<group>"; };
+		2B19D3671DBA5E6A00DD0DAF /* snow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = snow.jpg; sourceTree = "<group>"; };
+		2B19D3681DBA5E6A00DD0DAF /* tiger.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tiger.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,9 +156,9 @@
 			isa = PBXGroup;
 			children = (
 				2B19D3621DBA5C6000DD0DAF /* Resources */,
-				0626EA701DB2316C000DC212 /* Info.plist */,
-				0696B33E1DBC0DD800449F17 /* ImageAsyncTests.swift */,
 				2B19D3601DBA57FD00DD0DAF /* CacheProviderTests.swift */,
+				0696B33E1DBC0DD800449F17 /* ImageAsyncTests.swift */,
+				0626EA701DB2316C000DC212 /* Info.plist */,
 			);
 			path = YNImageAsyncTests;
 			sourceTree = "<group>";
@@ -208,8 +208,8 @@
 		0690558E1DB2DB5800C3E48F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				06B95AD11DB3E32500884125 /* CacheOptions.swift */,
 				0690558F1DB2DB6A00C3E48F /* CacheEntry.swift */,
+				06B95AD11DB3E32500884125 /* CacheOptions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -281,7 +281,7 @@
 				2B19D3671DBA5E6A00DD0DAF /* snow.jpg */,
 				2B19D3681DBA5E6A00DD0DAF /* tiger.jpg */,
 			);
-			name = Resources;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

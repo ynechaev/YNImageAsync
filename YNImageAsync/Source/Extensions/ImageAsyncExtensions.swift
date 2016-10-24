@@ -26,7 +26,7 @@ extension UIImageView {
         }
     }
     
-    public func setImageWithUrl(_ imageUrl: String, placeholderImage: UIImage? = nil, progress: LoaderProgressClosure? = nil, completion: ImageCompletionClosure? = nil) {
+    public func setImageWithUrl(_ imageUrl: URL, placeholderImage: UIImage? = nil, progress: LoaderProgressClosure? = nil, completion: ImageCompletionClosure? = nil) {
         cancelPreviousLoading()
         if let placeholder = placeholderImage {
             self.image = placeholder

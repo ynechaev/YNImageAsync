@@ -48,13 +48,13 @@ public class ImageLoader : NSObject, URLSessionDataDelegate, URLSessionDelegate,
         self.init(configuration: configuration)
     }
     
-    public func loadImageWithUrl(_ imageUrl: String, progress: @escaping LoaderProgressClosure, completion: @escaping LoaderCompletionClosure) {
-        CacheProvider.sharedInstance.cacheForKey(imageUrl) { (data) in
+    public func loadImageWithUrl(_ imageUrl: URL, progress: @escaping LoaderProgressClosure, completion: @escaping LoaderCompletionClosure) {
+        CacheProvider.sharedInstance.cacheForKey(imageUrl.absoluteString) { (data) in
             let executionBlock : (() -> Void) = {
                 if let cachedImageData = data {
                     completion(LoaderCompletionResult.success(cachedImageData))
                 } else {
-                    let task = self.session.dataTask(with: URL(string: imageUrl)!)
+                    let task = self.session.dataTask(with: imageUrl)
                     self.launchTask(task: task, progress: progress, completion: completion)
                     completion(LoaderCompletionResult.handler(task))
                 }
