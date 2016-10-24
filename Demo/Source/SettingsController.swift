@@ -38,12 +38,12 @@ class SettingsController: UIViewController {
     }
     
     @IBAction func didTapLicenceButton(sender: AnyObject) {
-        let url = URL(string: "https://raw.githubusercontent.com/RebornSoul/YNImageAsync/master/LICENSE")!
+        let url = URL(string: "https://raw.githubusercontent.com/ynechaev/YNImageAsync/master/LICENSE")!
         UIApplication.shared.openURL(url)
     }
     
     @IBAction func didTapGithubButton(sender: AnyObject) {
-        let url = URL(string: "https://github.com/RebornSoul/YNImageAsync")!
+        let url = URL(string: "https://github.com/ynechaev/YNImageAsync")!
         UIApplication.shared.openURL(url)
     }
     

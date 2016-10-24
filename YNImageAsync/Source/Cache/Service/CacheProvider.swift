@@ -216,7 +216,7 @@ public class CacheProvider {
     }
     
     func readCache(fileUrl: URL, completion: @escaping ((_ data: Data?) -> Void)) {
-        DispatchQueue.global(qos: .default).async {
+        executeBackground {
             do {
                 let data = try Data(contentsOf: fileUrl)
                 yn_logInfo("Disk cache read success: \(fileUrl)")
@@ -229,7 +229,7 @@ public class CacheProvider {
     }
     
     func saveCache(cacheData: Data, fileUrl: URL, completion: CacheCompletionClosure? = nil) {
-        DispatchQueue.global(qos: .default).async {
+        executeBackground {
             do {
                 try cacheData.write(to: fileUrl , options: Data.WritingOptions(rawValue: 0))
                 yn_logInfo("Disk cache write success: \(fileUrl)")
@@ -243,6 +243,12 @@ public class CacheProvider {
                 }
             }
         }
+    }
+    
+    func executeBackground(_ block:@escaping () -> Void) {
+        if (Thread.isMainThread) {
+            DispatchQueue.global(qos: .default).async { block() }
+        } else { block() }
     }
     
 }

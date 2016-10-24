@@ -25,6 +25,7 @@
 		069055911DB2DB6A00C3E48F /* CacheEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0690558F1DB2DB6A00C3E48F /* CacheEntry.swift */; };
 		069055951DB3600800C3E48F /* ImageAsyncExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EE759A1A0ACD37007BE5B0 /* ImageAsyncExtensions.swift */; };
 		0696B33F1DBC0DD800449F17 /* ImageAsyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0696B33E1DBC0DD800449F17 /* ImageAsyncTests.swift */; };
+		0696B35F1DBE991100449F17 /* PerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0696B35E1DBE991100449F17 /* PerformanceTest.swift */; };
 		06B95AD01DB3BF6F00884125 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B95ACF1DB3BF6F00884125 /* SettingsController.swift */; };
 		06B95AD21DB3E32500884125 /* CacheOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B95AD11DB3E32500884125 /* CacheOptions.swift */; };
 		06CA03B91DB25F8C00AC65E5 /* ListDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CA03B81DB25F8C00AC65E5 /* ListDataProvider.swift */; };
@@ -98,6 +99,7 @@
 		063365F41DB2BD9100B78098 /* CommonFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
 		0690558F1DB2DB6A00C3E48F /* CacheEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheEntry.swift; sourceTree = "<group>"; };
 		0696B33E1DBC0DD800449F17 /* ImageAsyncTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAsyncTests.swift; sourceTree = "<group>"; };
+		0696B35E1DBE991100449F17 /* PerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformanceTest.swift; sourceTree = "<group>"; };
 		06B95ACF1DB3BF6F00884125 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		06B95AD11DB3E32500884125 /* CacheOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheOptions.swift; sourceTree = "<group>"; };
 		06CA03B81DB25F8C00AC65E5 /* ListDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDataProvider.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				2B19D3601DBA57FD00DD0DAF /* CacheProviderTests.swift */,
 				0696B33E1DBC0DD800449F17 /* ImageAsyncTests.swift */,
 				0626EA701DB2316C000DC212 /* Info.plist */,
+				0696B35E1DBE991100449F17 /* PerformanceTest.swift */,
 			);
 			path = YNImageAsyncTests;
 			sourceTree = "<group>";
@@ -452,6 +455,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0696B35F1DBE991100449F17 /* PerformanceTest.swift in Sources */,
 				2B19D3611DBA57FD00DD0DAF /* CacheProviderTests.swift in Sources */,
 				0696B33F1DBC0DD800449F17 /* ImageAsyncTests.swift in Sources */,
 			);

@@ -30,6 +30,7 @@ public class ImageLoader : NSObject, URLSessionDataDelegate, URLSessionDelegate,
     var progressQueue: [Int: LoaderProgressClosure] = [:]
     var responsesQueue: [Int: Data] = [:]
     var expectedSizeQueue: [Int: Int] = [:]
+    private let queue = DispatchQueue(label: "com.YNImageAsync.loader")
     
     static let sharedInstance : ImageLoader = {
         let instance = ImageLoader()
@@ -49,26 +50,20 @@ public class ImageLoader : NSObject, URLSessionDataDelegate, URLSessionDelegate,
     }
     
     public func loadImageWithUrl(_ imageUrl: URL, progress: @escaping LoaderProgressClosure, completion: @escaping LoaderCompletionClosure) {
-        CacheProvider.sharedInstance.cacheForKey(imageUrl.absoluteString) { (data) in
-            let executionBlock : (() -> Void) = {
+        assert(Thread.isMainThread)
+        queue.async {
+            CacheProvider.sharedInstance.cacheForKey(imageUrl.absoluteString) { (data) in
                 if let cachedImageData = data {
-                    completion(LoaderCompletionResult.success(cachedImageData))
+                    DispatchQueue.main.async {
+                        completion(LoaderCompletionResult.success(cachedImageData))
+                    }
                 } else {
                     let task = self.session.dataTask(with: imageUrl)
                     self.launchTask(task: task, progress: progress, completion: completion)
                     completion(LoaderCompletionResult.handler(task))
                 }
             }
-            if !Thread.current.isMainThread {
-                DispatchQueue.main.async {
-                    executionBlock()
-                }
-            } else {
-                executionBlock()
-            }
-
         }
-
     }
     
     func launchTask(task: URLSessionTask, progress: @escaping LoaderProgressClosure, completion: @escaping LoaderCompletionClosure) {
