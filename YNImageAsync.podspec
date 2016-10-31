@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'YNImageAsync'
-  s.version      = '1.0.1'
+  s.version      = '1.1.0'
   s.summary      = 'Lightweight image loading and caching framework'
   s.homepage     = 'https://github.com/ynechaev/YNImageAsync'
   s.license      = 'MIT'

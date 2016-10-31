@@ -20,19 +20,19 @@ func yn_logInfo(_ items: Any...) {
     yn_log(items, level: .info)
 }
 
-func yn_log(_ items: Any..., level: YNLogLevel) {
+func yn_log(_ items: Any..., level: LogLevel) {
     if YNImageAsync.sharedInstance.logLevel.contains(level) {
         print(items)
     }
 }
 
-public struct YNLogLevel : OptionSet {
+public struct LogLevel : OptionSet {
 
     public let rawValue: Int
-    public static let none   = YNLogLevel(rawValue: 0)
-    public static let errors = YNLogLevel(rawValue: 1 << 0)
-    public static let debug  = YNLogLevel(rawValue: (1 << 1) | errors.rawValue)
-    public static let info   = YNLogLevel(rawValue: (1 << 2) | debug.rawValue)
+    public static let none   = LogLevel(rawValue: 0)
+    public static let errors = LogLevel(rawValue: 1 << 0)
+    public static let debug  = LogLevel(rawValue: (1 << 1) | errors.rawValue)
+    public static let info   = LogLevel(rawValue: (1 << 2) | debug.rawValue)
     
     public init(rawValue: Int) {
         self.rawValue = rawValue

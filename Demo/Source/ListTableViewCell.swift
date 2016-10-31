@@ -31,7 +31,9 @@ class ListTableViewCell: UITableViewCell, ListCellDataProtocol {
     }
     
     func setDataObject<T: Any>(_ dataObject: T) where T: ListCellObjectProtocol {
-        self.cellImage.setImageWithUrl(dataObject.imageUrl)
+        if let url = URL(string: dataObject.imageUrl) {
+            self.cellImage.setImageWithUrl(url)
+        }
         self.cellTitle.text = dataObject.imageTitle
     }
     

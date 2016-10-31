@@ -1,5 +1,5 @@
 //
-//  YNCacheProvider.swift
+//  CacheProvider.swift
 //  ImageAsyncTest
 //
 //  Created by Yury Nechaev on 15.10.16.
@@ -11,19 +11,19 @@ import UIKit
 public typealias CacheCompletionClosure = ((_ success: Bool) -> (Void))
 let maxMemoryCacheSize : Int64 = 10 * 1024 * 1024 // 10Mb
 
-public class YNCacheProvider {
+public class CacheProvider {
 
-    internal var memoryCache: [String: YNCacheEntry] = [:]
-    public var configuration: YNCacheConfiguration
+    internal var memoryCache: [String: CacheEntry] = [:]
+    public var configuration: CacheConfiguration
     
-    public static let sharedInstance : YNCacheProvider = {
-        let options : YNCacheOptions = [.memory, .disk]
-        let conf = YNCacheConfiguration(options: options, memoryCacheLimit: maxMemoryCacheSize)
-        let instance = YNCacheProvider(configuration: conf)
+    public static let sharedInstance : CacheProvider = {
+        let options : CacheOptions = [.memory, .disk]
+        let conf = CacheConfiguration(options: options, memoryCacheLimit: maxMemoryCacheSize)
+        let instance = CacheProvider(configuration: conf)
         return instance
     }()
     
-    public init(configuration: YNCacheConfiguration) {
+    public init(configuration: CacheConfiguration) {
         self.configuration = configuration
     }
     
@@ -74,7 +74,7 @@ public class YNCacheProvider {
     
     public func cacheDataToMemory(_ key: String, _ data: Data) {
         if configuration.options.contains(.memory) {
-            let entry = YNCacheEntry(data: data, date: Date())
+            let entry = CacheEntry(data: data, date: Date())
             yn_logInfo("Cache store: \(key)")
             memoryCache[key] = entry
             cleanMemoryCache()
@@ -102,7 +102,7 @@ public class YNCacheProvider {
         if memorySize > maxSize {
             yn_logInfo("Memory cache \(memoryCacheSize()) > max \(maxSize)")
             var size : Int64 = 0
-            var newCache : Array<YNCacheEntry> = []
+            var newCache : Array<CacheEntry> = []
             for cacheEntry in sorted {
                 size += cacheEntry.data.count
                 if size > maxSize {
@@ -175,7 +175,7 @@ public class YNCacheProvider {
         return returnedValue
     }
     
-    func filterCacheWithArray(array: Array <YNCacheEntry>) {
+    func filterCacheWithArray(array: Array <CacheEntry>) {
         let tempCache = memoryCache
         for (key, entry) in tempCache {
             if !array.contains(where: { (filterEntry) -> Bool in
@@ -216,7 +216,7 @@ public class YNCacheProvider {
     }
     
     func readCache(fileUrl: URL, completion: @escaping ((_ data: Data?) -> Void)) {
-        DispatchQueue.global(qos: .default).async {
+        executeBackground {
             do {
                 let data = try Data(contentsOf: fileUrl)
                 yn_logInfo("Disk cache read success: \(fileUrl)")
@@ -229,7 +229,7 @@ public class YNCacheProvider {
     }
     
     func saveCache(cacheData: Data, fileUrl: URL, completion: CacheCompletionClosure? = nil) {
-        DispatchQueue.global(qos: .default).async {
+        executeBackground {
             do {
                 try cacheData.write(to: fileUrl , options: Data.WritingOptions(rawValue: 0))
                 yn_logInfo("Disk cache write success: \(fileUrl)")
@@ -243,6 +243,12 @@ public class YNCacheProvider {
                 }
             }
         }
+    }
+    
+    func executeBackground(_ block:@escaping () -> Void) {
+        if (Thread.isMainThread) {
+            DispatchQueue.global(qos: .default).async { block() }
+        } else { block() }
     }
     
 }

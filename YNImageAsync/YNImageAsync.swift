@@ -10,18 +10,18 @@ import Foundation
 
 public class YNImageAsync {
     
-    var logLevel: YNLogLevel
+    var logLevel: LogLevel
     
     static let sharedInstance : YNImageAsync = {
-        let instance = YNImageAsync(logLevel: YNLogLevel.none)
+        let instance = YNImageAsync(logLevel: LogLevel.none)
         return instance
     }()
     
-    init(logLevel: YNLogLevel) {
+    init(logLevel: LogLevel) {
         self.logLevel = logLevel
     }
     
-    public static func setLoggingLevel(level: YNLogLevel) {
+    public static func setLoggingLevel(level: LogLevel) {
         YNImageAsync.sharedInstance.logLevel = level
     }
 }
