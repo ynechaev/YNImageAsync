@@ -1,6 +1,6 @@
 YNImageAsync
 ==========
-[![Build Status](https://travis-ci.org/ynechaev/YNImageAsync.svg?branch=master)](https://travis-ci.org/ynechaev/YNImageAsync)
+[![Build Status](https://travis-ci.org/ynechaev/YNImageAsync.svg?branch=master)](https://travis-ci.org/ynechaev/YNImageAsync) [![CocoaPods](https://img.shields.io/cocoapods/v/YNImageAsync.svg)]() [![license](https://img.shields.io/github/license/ynechaev/YNImageAsync.svg)]()
 
 #About
 YNImageAsync is a lightweight and convenient framework for fetching and caching images.
