@@ -32,9 +32,33 @@ if let url = URL(string: "https://upload.wikimedia.org/wikipedia/en/5/5f/Origina
 imageView.cancelPreviousLoading()
 ```
 ### Access cache directly
-### Configure maximum memory usage limit
-### Configure storage type
+```swift
+// Initialize cache with 30 Mb memory capacity and disk caching
+let cacheProvider = CacheProvider(configuration: CacheConfiguration(options: [.memory, .disk], memoryCacheLimit: 30 * 1024 * 1024)) 
 
-# Things to do
-- Refactor YNImageLoader for dependency injection pattern and test coverage.
-- Encapsulate request task and meta data into separate object.
+// Save cache to memory and disk
+cacheProvider.cacheData("key", data) 
+
+// Get cached data for key
+provider.cacheForKey(image, completion: { (data) in
+    if let cacheData = data {
+        print("Cache hit")
+    } else {
+        print("Cache miss")
+    }
+})
+```
+### Change memory cache capacity
+You don't need to initialize new instance of cache provider in order to change maximum memory cache capacity.
+```swift
+// New memory capacity is 10 Mb
+let newLimit: Int64 = 10 * 1024 * 1024        
+provider.configuration.memoryCacheLimit = newLimit
+// Perform memory clean operation if capacity was reduced
+provider.cleanMemoryCache()
+```
+### Configure storage type
+You can easily configure storage during initialization and during runtime as well
+```swift
+provider.configuration.options = .memory
+```
