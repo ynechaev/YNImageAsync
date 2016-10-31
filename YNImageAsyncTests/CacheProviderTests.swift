@@ -38,14 +38,14 @@ class CacheProviderTests: XCTestCase {
                 XCTFail("Failed to get cache provider")
                 return
             }
-            _ = provider.cacheForKey(image, completion: { (data) in
+            provider.cacheForKey(image, completion: { (data) in
                 XCTAssertNotNil(data, "Cache data is nil")
                 imageExpectation.fulfill()
             })
         }
         
         waitForExpectations(timeout: 10) { (error) in
-            print(error)
+            print(error ?? "Wait timeout")
         }
     }
     
@@ -79,7 +79,7 @@ class CacheProviderTests: XCTestCase {
         }
         
         waitForExpectations(timeout: 10) { (error) in
-            print(error)
+            print(error ?? "Wait timeout")
         }
 
         provider.configuration.options = .memory
@@ -92,7 +92,7 @@ class CacheProviderTests: XCTestCase {
         }
         
         waitForExpectations(timeout: 10) { (error) in
-            print(error)
+            print(error ?? "Wait timeout")
         }
         
     }
@@ -371,7 +371,7 @@ class CacheProviderTests: XCTestCase {
             })
         }
         waitForExpectations(timeout: 10) { (error) in
-            print(error)
+            print(error ?? "Wait timeout")
         }
     }
     
