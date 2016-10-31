@@ -14,10 +14,17 @@ YNImageAsync is a lightweight and convenient framework for fetching and caching 
 - Unit test coverage is good
 - UIImageView extension for fast and out-of-the-box image loading.
 
+#### Why not %framework_name%?
+Here are some results of performing 10k requests by popular frameworks:
+![image](https://cloud.githubusercontent.com/assets/1216785/19865426/76fe4eea-9f9c-11e6-90f1-3374a4f11c6a.png)
+
+(smaller time is better)
+You can check it by yourself by launching [this benchmark project tests](https://github.com/ynechaev/Image-Frameworks-Benchmark).
+
 # Install
 ### Using cocoapods
 ```
-pod 'YNImageAsync', '~> 1.0'
+pod 'YNImageAsync'
 ```
 
 # How to
@@ -40,7 +47,7 @@ let cacheProvider = CacheProvider(configuration: CacheConfiguration(options: [.m
 cacheProvider.cacheData("key", data) 
 
 // Get cached data for key
-provider.cacheForKey(image, completion: { (data) in
+provider.cacheForKey("key", completion: { (data) in
     if let cacheData = data {
         print("Cache hit")
     } else {
@@ -62,3 +69,13 @@ You can easily configure storage during initialization and during runtime as wel
 ```swift
 provider.configuration.options = .memory
 ```
+
+# Requirements
+
+* XCode 8
+* Swift 3
+* iOS 9
+
+# License
+
+YNImageAsync is available under the MIT license. See the LICENSE file for more info.
