@@ -16,7 +16,7 @@ public struct CacheConfiguration {
 public struct CacheOptions : OptionSet {
     
     public let rawValue: Int
-    public static let none   = CacheOptions(rawValue: 0)
+    public static let none   = CacheOptions([])
     public static let memory = CacheOptions(rawValue: 1 << 0)
     public static let disk   = CacheOptions(rawValue: 1 << 1)
     
