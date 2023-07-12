@@ -39,12 +39,12 @@ class SettingsController: UIViewController {
     
     @IBAction func didTapLicenceButton(sender: AnyObject) {
         let url = URL(string: "https://raw.githubusercontent.com/ynechaev/YNImageAsync/master/LICENSE")!
-        UIApplication.shared.openURL(url)
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     @IBAction func didTapGithubButton(sender: AnyObject) {
         let url = URL(string: "https://github.com/ynechaev/YNImageAsync")!
-        UIApplication.shared.openURL(url)
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     @IBAction func didSwitchMemoryCache(sender: UISwitch) {

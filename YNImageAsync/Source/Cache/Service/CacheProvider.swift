@@ -104,7 +104,7 @@ public class CacheProvider {
             var size : Int64 = 0
             var newCache : Array<CacheEntry> = []
             for cacheEntry in sorted {
-                size += cacheEntry.data.count
+                size += Int64(cacheEntry.data.count)
                 if size > maxSize {
                     yn_logInfo("Found \(sorted.count - newCache.count) elements exceeding capacity")
                     filterCacheWithArray(array: newCache)
@@ -137,7 +137,7 @@ public class CacheProvider {
     public func memoryCacheSize() -> Int64 {
         var size: Int64 = 0
         for cacheEntry in memoryCache.values {
-            size += cacheEntry.data.count
+            size += Int64(cacheEntry.data.count)
         }
         return size
     }
