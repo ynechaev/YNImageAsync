@@ -6,8 +6,8 @@ YNImageAsync
 YNImageAsync is a lightweight and convenient framework for fetching and caching images.
 
 # Features
-- Written on Swift 3.0
-- Asynchronous image loading
+- Fully written in Swift 5
+- Asynchronous image loading with async/await
 - Fast
 - Supports both memory and drive caching
 - Configurable
@@ -31,7 +31,7 @@ pod 'YNImageAsync'
 ### Set UIImageview image with url
 ```swift
 if let url = URL(string: "https://upload.wikimedia.org/wikipedia/en/5/5f/Original_Doge_meme.jpg") {
-    imageView.setImageWithUrl(url)
+    imageView.setImage(with: url)
 }
 ```
 ### Cancel UIImageview previous loading operation
@@ -67,14 +67,14 @@ provider.cleanMemoryCache()
 ### Configure storage type
 You can easily configure storage during initialization and during runtime as well
 ```swift
-provider.configuration.options = .memory
+await CacheComposer.shared.updateOptions([.memory])
 ```
 
 # Requirements
 
-* XCode 8
-* Swift 3
-* iOS 9
+* XCode 14
+* Swift 5
+* iOS 15
 
 # License
 
