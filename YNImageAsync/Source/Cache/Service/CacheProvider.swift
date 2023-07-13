@@ -32,6 +32,7 @@ public struct CacheOptions: OptionSet {
     private let memoryCache: Caching?
     private let diskCache: Caching?
     public private(set) var options: CacheOptions
+    static var logLevel: LogLevel = .info
 
     init(memoryCache: Caching?, diskCache: Caching?, options: CacheOptions = [.memory, .disk]) {
         self.memoryCache = memoryCache
@@ -103,12 +104,12 @@ actor DiskCacheProvider: Caching {
     private static let cachePath: URL = cacheDirectory.appending(path: "YNImageAsync")
     
     func fetch(_ url: URL) async throws -> Data? {
-        print("💾 Read: \(url)")
+        yn_logDebug("💾 Read: \(url)")
         return try DiskCacheProvider.read(fileUrl: DiskCacheProvider.fileKeyUrl(url))
     }
     
     func store(_ url: URL, data: Data) async throws {
-        print("💾 Store: \(url)")
+        yn_logDebug("💾 Store: \(url)")
         try DiskCacheProvider.save(data: data, fileUrl: DiskCacheProvider.fileKeyUrl(url))
     }
     
@@ -169,12 +170,12 @@ actor MemoryCacheProvider: Caching {
     private var memoryCache = [URL: CacheEntry]()
     
     func fetch(_ url: URL) async throws -> Data? {
-        print("⚡️ Read: \(url)")
+        yn_logDebug("⚡️ Read: \(url)")
         return memoryCache[url]?.data
     }
     
     func store(_ url: URL, data: Data) async throws {
-        print("⚡️ Store: \(url)")
+        yn_logDebug("⚡️ Store: \(url)")
         memoryCache[url] = CacheEntry(data: data, date: Date())
     }
     

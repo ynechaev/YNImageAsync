@@ -56,7 +56,7 @@ class ListViewController: UITableViewController, URLSessionTaskDelegate {
                 clearCacheButton.isEnabled = true
                 tableView.reloadData()
             } catch {
-                yn_logError("Cache clear error: \(error)")
+                print("Cache clear error: \(error)")
             }
         }
     }

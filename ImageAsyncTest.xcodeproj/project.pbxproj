@@ -36,7 +36,7 @@
 		2B19D36D1DBA5E6A00DD0DAF /* snow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B19D3671DBA5E6A00DD0DAF /* snow.jpg */; };
 		2B19D36E1DBA5E6A00DD0DAF /* tiger.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B19D3681DBA5E6A00DD0DAF /* tiger.jpg */; };
 		DA07F0622A5EEB1D005DF621 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA07F0612A5EEB1D005DF621 /* Assets.xcassets */; };
-		DA07F0632A6031D4005DF621 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063365F41DB2BD9100B78098 /* Logging.swift */; };
+		DA8D18A52A609D60007F2214 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063365F41DB2BD9100B78098 /* Logging.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -250,7 +250,6 @@
 		06EE75951A0ACD37007BE5B0 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				063365F41DB2BD9100B78098 /* Logging.swift */,
 				0626EA801DB25035000DC212 /* ListCellDataProtocol.swift */,
 				0626EA821DB252AE000DC212 /* ListCellObjectProtocol.swift */,
 				06CA03B81DB25F8C00AC65E5 /* ListDataProvider.swift */,
@@ -264,6 +263,7 @@
 		06EE75961A0ACD37007BE5B0 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				DA8D18A42A609CF7007F2214 /* Utilities */,
 				06E80CB91DB37D3F0068BF85 /* Cache */,
 				06E80CBD1DB37F8A0068BF85 /* Core */,
 				06E80CBC1DB37F6C0068BF85 /* Extensions */,
@@ -282,6 +282,14 @@
 				2B19D3681DBA5E6A00DD0DAF /* tiger.jpg */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		DA8D18A42A609CF7007F2214 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				063365F41DB2BD9100B78098 /* Logging.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -442,6 +450,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				06E80CC01DB37FA40068BF85 /* YNImageAsync.swift in Sources */,
+				DA8D18A52A609D60007F2214 /* Logging.swift in Sources */,
 				0626EA7F1DB2324A000DC212 /* CacheProvider.swift in Sources */,
 				069055911DB2DB6A00C3E48F /* CacheEntry.swift in Sources */,
 				069055951DB3600800C3E48F /* UIImageView+tasks.swift in Sources */,
@@ -470,7 +479,6 @@
 				062AC0091A0827E000744325 /* AppDelegate.swift in Sources */,
 				0626EA811DB25035000DC212 /* ListCellDataProtocol.swift in Sources */,
 				062AC0291A08F57500744325 /* ListTableViewCell.swift in Sources */,
-				DA07F0632A6031D4005DF621 /* Logging.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

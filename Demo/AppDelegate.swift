@@ -13,7 +13,6 @@ import YNImageAsync
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    static var logLevel: LogLevel = .errors
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         return true

@@ -21,8 +21,8 @@ func yn_logInfo(_ items: Any...) {
 }
 
 func yn_log(_ items: Any..., level: LogLevel) {
-    if AppDelegate.logLevel.contains(level) {
-        print(items)
+    if CacheComposer.logLevel.contains(level) {
+        items.forEach { print(String(describing: $0)) }
     }
 }
 
