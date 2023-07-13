@@ -7,21 +7,3 @@
 //
 
 import Foundation
-
-public class YNImageAsync {
-    
-    var logLevel: LogLevel
-    
-    static let sharedInstance : YNImageAsync = {
-        let instance = YNImageAsync(logLevel: LogLevel.none)
-        return instance
-    }()
-    
-    init(logLevel: LogLevel) {
-        self.logLevel = logLevel
-    }
-    
-    public static func setLoggingLevel(level: LogLevel) {
-        YNImageAsync.sharedInstance.logLevel = level
-    }
-}

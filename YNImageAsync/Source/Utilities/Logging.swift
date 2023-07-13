@@ -21,15 +21,15 @@ func yn_logInfo(_ items: Any...) {
 }
 
 func yn_log(_ items: Any..., level: LogLevel) {
-    if YNImageAsync.sharedInstance.logLevel.contains(level) {
-        print(items)
+    if CacheComposer.logLevel.contains(level) {
+        items.forEach { print(String(describing: $0)) }
     }
 }
 
 public struct LogLevel : OptionSet {
 
     public let rawValue: Int
-    public static let none   = LogLevel(rawValue: 0)
+    public static let none   = LogLevel([])
     public static let errors = LogLevel(rawValue: 1 << 0)
     public static let debug  = LogLevel(rawValue: (1 << 1) | errors.rawValue)
     public static let info   = LogLevel(rawValue: (1 << 2) | debug.rawValue)
@@ -37,10 +37,4 @@ public struct LogLevel : OptionSet {
     public init(rawValue: Int) {
         self.rawValue = rawValue
     }
-}
-
-func synced(lock: AnyObject, closure: () -> ()) {
-    objc_sync_enter(lock)
-    closure()
-    objc_sync_exit(lock)
 }

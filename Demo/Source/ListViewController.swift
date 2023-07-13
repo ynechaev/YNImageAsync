@@ -10,6 +10,7 @@ import UIKit
 import YNImageAsync
 
 class ListViewController: UITableViewController, URLSessionTaskDelegate {
+    @IBOutlet weak var clearCacheButton: UIBarButtonItem!
     
     var dataProvider: ListDataProvider?
     var imageCollection: Array <ListObject> = []
@@ -48,7 +49,16 @@ class ListViewController: UITableViewController, URLSessionTaskDelegate {
     }
     
     @IBAction func didTapClearCache(sender: AnyObject) {
-        CacheProvider.sharedInstance.clearCache()
+        Task {
+            do {
+                clearCacheButton.isEnabled = false
+                try await CacheComposer.shared.clear()
+                clearCacheButton.isEnabled = true
+                tableView.reloadData()
+            } catch {
+                print("Cache clear error: \(error)")
+            }
+        }
     }
     
 }

@@ -9,7 +9,6 @@
 import Foundation
 
 public struct CacheEntry {
-    let udid: String = UUID().uuidString
-    var data: Data
-    var date: Date
+    let data: Data
+    let date: Date
 }

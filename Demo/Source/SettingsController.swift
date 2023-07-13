@@ -18,19 +18,27 @@ class SettingsController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        Task {
+            await configureView()
+        }
     }
     
-    func setupUI() {
-        let configuration = CacheProvider.sharedInstance.configuration
-        memorySwitch.isOn = configuration.options.contains(.memory)
-        diskSwitch.isOn = configuration.options.contains(.disk)
-        memoryLabel.text = "Current memory usage: \(sizeStringFrom(int: CacheProvider.sharedInstance.memoryCacheSize()))"
-        diskLabel.text = "Current cache folder usage: \(sizeStringFrom(int: CacheProvider.sharedInstance.diskCacheSize()))"
+    func configureView() async {
+        let options = await CacheComposer.shared.options
+        memorySwitch.isOn = options.contains(.memory)
+        diskSwitch.isOn = options.contains(.disk)
+        
+        if let memorySize = try? await CacheComposer.shared.memorySize() {
+            memoryLabel.text = "Current memory usage: \(sizeStringFrom(memorySize))"
+        }
+        
+        if let diskSize = try? await CacheComposer.shared.diskSize() {
+            diskLabel.text = "Current cache folder usage: \(sizeStringFrom(diskSize))"
+        }
     }
     
-    func sizeStringFrom(int: Int64) -> String {
-        return ByteCountFormatter.string(fromByteCount: int, countStyle: .file)
+    func sizeStringFrom(_ size: UInt64) -> String {
+        return ByteCountFormatter.string(fromByteCount: Int64(size), countStyle: .file)
     }
     
     @IBAction func didTapDoneButton(sender: AnyObject) {
@@ -39,23 +47,30 @@ class SettingsController: UIViewController {
     
     @IBAction func didTapLicenceButton(sender: AnyObject) {
         let url = URL(string: "https://raw.githubusercontent.com/ynechaev/YNImageAsync/master/LICENSE")!
-        UIApplication.shared.openURL(url)
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     @IBAction func didTapGithubButton(sender: AnyObject) {
         let url = URL(string: "https://github.com/ynechaev/YNImageAsync")!
-        UIApplication.shared.openURL(url)
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     @IBAction func didSwitchMemoryCache(sender: UISwitch) {
-        var options = CacheProvider.sharedInstance.configuration.options.rawValue
-        options = options ^ CacheOptions.memory.rawValue
-        CacheProvider.sharedInstance.configuration.options = CacheOptions(rawValue: options)
+        Task {
+            await flipOption(.memory)
+        }
     }
     
     @IBAction func didSwitchDiskCache(sender: UISwitch) {
-        var options = CacheProvider.sharedInstance.configuration.options.rawValue
-        options = options ^ CacheOptions.disk.rawValue
-        CacheProvider.sharedInstance.configuration.options = CacheOptions(rawValue: options)
+        Task {
+            await flipOption(.disk)
+        }
+    }
+    
+    private func flipOption(_ option: CacheOptions.Element) async {
+        var options = await CacheComposer.shared.options.rawValue
+        options = options ^ option.rawValue
+        await CacheComposer.shared.updateOptions(CacheOptions(rawValue: options))
+        await configureView()
     }
 }
