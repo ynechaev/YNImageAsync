@@ -25,7 +25,7 @@ actor ImageLoader {
         do {
             return try await loader.load(url)
         } catch {
-            print("Image loader error: \(error.localizedDescription)")
+            print("Image loader error: \(error)")
             return nil
         }
     }
@@ -47,7 +47,7 @@ actor DataLoader {
         }
         
         let task = Task<Data, Error> {
-            if let cachedData = try await cache.fetch(url) {
+            if let cachedData = try? await cache.fetch(url) {
                 activeTasks[url] = nil
                 return cachedData
             }

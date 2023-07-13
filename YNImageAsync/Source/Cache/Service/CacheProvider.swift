@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CryptoKit
 
 public protocol Caching {
     func fetch(_ url: URL) async throws -> Data?
@@ -15,40 +16,84 @@ public protocol Caching {
     func clear() async throws
 }
 
+public struct CacheOptions: OptionSet {
+    public let rawValue: UInt
+    
+    public init(rawValue: UInt) {
+        self.rawValue = rawValue
+    }
+
+    static public let memory = CacheOptions(rawValue: 1 << 0)
+    static public let disk = CacheOptions(rawValue: 1 << 1)
+}
+
 @globalActor public actor CacheComposer: Caching {
-    public static var shared = CacheComposer(caches: [MemoryCacheProvider(), DiskCacheProvider()])
-    private let caches: [Caching]
-        
-    init(caches: [Caching]) {
-        self.caches = caches
+    public static var shared = CacheComposer(memoryCache: MemoryCacheProvider(), diskCache: DiskCacheProvider())
+    private let memoryCache: Caching?
+    private let diskCache: Caching?
+    public private(set) var options: CacheOptions
+
+    init(memoryCache: Caching?, diskCache: Caching?, options: CacheOptions = [.memory, .disk]) {
+        self.memoryCache = memoryCache
+        self.diskCache = diskCache
+        self.options = options
     }
         
     public func fetch(_ url: URL) async throws -> Data? {
-        var data: Data?
-        for cache in caches {
-            data = try await cache.fetch(url)
-            if data != nil { break }
+        guard !options.isEmpty else {
+            return nil
         }
-        return data
+        if options.contains(.memory), let data = try await memoryCache?.fetch(url)  {
+            return data
+        } else if options.contains(.disk), let data = try await diskCache?.fetch(url)  {
+            if options.contains(.memory) {
+                try await memoryCache?.store(url, data: data)
+            }
+            return data
+        }
+        return nil
     }
     
     public func store(_ url: URL, data: Data) async throws {
-        for cache in caches {
-            try await cache.store(url, data: data)
+        if options.contains(.memory) {
+            try await memoryCache?.store(url, data: data)
+        }
+        if options.contains(.disk) {
+            try await diskCache?.store(url, data: data)
         }
     }
     
     public func size() async throws -> UInt64 {
         var acc: UInt64 = 0
-        for cache in caches {
-            try await acc += cache.size()
+        for cache in [memoryCache, diskCache] {
+            try await acc += cache?.size() ?? 0
         }
         return acc
     }
     
     public func clear() async throws {
-        for cache in caches {
-            try await cache.clear()
+        for cache in [memoryCache, diskCache] {
+            try await cache?.clear()
+        }
+    }
+    
+    // MARK: - Composer public API
+    
+    public func memorySize() async throws -> UInt64 {
+        try await memoryCache?.size() ?? 0
+    }
+    
+    public func diskSize() async throws -> UInt64 {
+        try await diskCache?.size() ?? 0
+    }
+    
+    public func updateOptions(_ options: CacheOptions) async {
+        self.options = options
+        if !options.contains(.memory) {
+            try? await memoryCache?.clear()
+        }
+        if !options.contains(.disk) {
+            try? await diskCache?.clear()
         }
     }
 }
@@ -58,12 +103,13 @@ actor DiskCacheProvider: Caching {
     private static let cachePath: URL = cacheDirectory.appending(path: "YNImageAsync")
     
     func fetch(_ url: URL) async throws -> Data? {
-        let filePath = try DiskCacheProvider.fileInCacheDirectory(filename: url.absoluteString)
-        return try DiskCacheProvider.read(fileUrl: filePath)
+        print("💾 Read: \(url)")
+        return try DiskCacheProvider.read(fileUrl: DiskCacheProvider.fileKeyUrl(url))
     }
     
     func store(_ url: URL, data: Data) async throws {
-        return try DiskCacheProvider.save(data: data, fileUrl: url)
+        print("💾 Store: \(url)")
+        try DiskCacheProvider.save(data: data, fileUrl: DiskCacheProvider.fileKeyUrl(url))
     }
     
     func size() async throws -> UInt64 {
@@ -104,6 +150,11 @@ actor DiskCacheProvider: Caching {
         }
     }
     
+    private static func fileKeyUrl(_ url: URL) throws -> URL {
+        let fileKey = url.absoluteString.MD5()
+        return try DiskCacheProvider.fileInCacheDirectory(filename: fileKey)
+    }
+    
     private static func cacheFolderFiles() throws -> [String] {
         let cachePath = DiskCacheProvider.cachePath
         let files = try FileManager.default.contentsOfDirectory(atPath: cachePath.path)
@@ -118,10 +169,12 @@ actor MemoryCacheProvider: Caching {
     private var memoryCache = [URL: CacheEntry]()
     
     func fetch(_ url: URL) async throws -> Data? {
-        memoryCache[url]?.data
+        print("⚡️ Read: \(url)")
+        return memoryCache[url]?.data
     }
     
     func store(_ url: URL, data: Data) async throws {
+        print("⚡️ Store: \(url)")
         memoryCache[url] = CacheEntry(data: data, date: Date())
     }
     
@@ -174,4 +227,15 @@ fileprivate extension URL {
         }
         return UInt64(resourceValues.totalFileAllocatedSize ?? resourceValues.fileAllocatedSize ?? 0)
     }
+}
+
+fileprivate extension StringProtocol {
+    
+    func MD5() -> String {
+        let digest = Insecure.MD5.hash(data: Data(utf8))
+        return digest.map {
+            String(format: "%02hhx", $0)
+        }.joined()
+    }
+    
 }
