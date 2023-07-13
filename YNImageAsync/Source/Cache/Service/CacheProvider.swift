@@ -8,13 +8,76 @@
 
 import UIKit
 
-public typealias CacheCompletionClosure = ((_ success: Bool) -> (Void))
-let maxMemoryCacheSize : Int64 = 10 * 1024 * 1024 // 10Mb
+protocol Caching {
+    func fetch(_ url: URL) async throws -> Data?
+    func store(_ url: URL, data: Data) async throws
+    func size() async throws -> UInt64
+    func clear() async throws
+}
 
-public class CacheProvider {
+actor DiskCacheProvider: Caching {
+    private static let cacheDirectory: URL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+    private static let cachePath: URL = cacheDirectory.appending(path: "YNImageAsync")
+    
+    func fetch(_ url: URL) async throws -> Data? {
+        let filePath = try DiskCacheProvider.fileInCacheDirectory(filename: url.absoluteString)
+        return try DiskCacheProvider.read(fileUrl: filePath)
+    }
+    
+    func store(_ url: URL, data: Data) async throws {
+        return try DiskCacheProvider.save(data: data, fileUrl: url)
+    }
+    
+    func size() async throws -> UInt64 {
+        try FileManager.default.allocatedSizeOfDirectory(at: DiskCacheProvider.cachePath)
+    }
+    
+    func clear() async throws {
+        let files = try DiskCacheProvider.cacheFolderFiles()
+        let fileManager = FileManager.default
+        try files.forEach { file in
+            if fileManager.fileExists(atPath: file) {
+                try fileManager.removeItem(atPath: file)
+            }
+        }
+    }
+    
+    // MARK: - Disk cache utilities
+    
+    private static func read(fileUrl: URL) throws -> Data? {
+        try Data(contentsOf: fileUrl)
+    }
+    
+    private static func save(data: Data, fileUrl: URL) throws {
+        try data.write(to: fileUrl , options: Data.WritingOptions(rawValue: 0))
+    }
+    
+    private static func fileInCacheDirectory(filename: String) throws -> URL {
+        let cachePath = DiskCacheProvider.cachePath
+        
+        if (!FileManager.default.fileExists(atPath: cachePath.path)) {
+            try FileManager.default.createDirectory(atPath: cachePath.path, withIntermediateDirectories: false, attributes: nil)
+        }
+        
+        if let escapedFilename = filename.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
+            return cachePath.appendingPathComponent(escapedFilename)
+        } else {
+            return cachePath.appendingPathComponent(filename)
+        }
+    }
+    
+    private static func cacheFolderFiles() throws -> [String] {
+        let cachePath = DiskCacheProvider.cachePath
+        let files = try FileManager.default.contentsOfDirectory(atPath: cachePath.path)
+        return files.map { cachePath.appendingPathComponent($0).absoluteString }
+    }
+    
+}
+
+public actor MemoryCacheProvider: Caching {
+    let maxMemoryCacheSize : Int64 = 10 * 1024 * 1024 // 10Mb
 
     internal var memoryCache: [String: CacheEntry] = [:]
-    public var configuration: CacheConfiguration
     
     public static let sharedInstance : CacheProvider = {
         let options : CacheOptions = [.memory, .disk]
@@ -160,21 +223,6 @@ public class CacheProvider {
         clearDiskCache()
     }
     
-    func cacheFolderFiles() -> [String] {
-        var returnedValue: [String] = []
-        do {
-            let files = try FileManager.default.contentsOfDirectory(atPath: cachePath())
-            for file in files {
-                let path = cachePath()
-                let fullPath = (path as NSString).appendingPathComponent(file)
-                returnedValue.append(fullPath)
-            }
-        } catch let error {
-            yn_logInfo("Cache folder read error: \(error)")
-        }
-        return returnedValue
-    }
-    
     func filterCacheWithArray(array: Array <CacheEntry>) {
         let tempCache = memoryCache
         for (key, entry) in tempCache {
@@ -187,68 +235,48 @@ public class CacheProvider {
         }
     }
     
-    func cacheDirectory() -> String {
-        let documentsFolderPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
-        return documentsFolderPath
-    }
     
-    func cachePath() -> String {
-        return (cacheDirectory() as NSString).appendingPathComponent("YNImageAsync")
-    }
     
-    func fileInCacheDirectory(filename: String) -> String {
-        
-        let writePath = cachePath()
-        
-        if (!FileManager.default.fileExists(atPath: writePath)) {
-            do {
-                try FileManager.default.createDirectory(atPath: writePath, withIntermediateDirectories: false, attributes: nil) }
-            catch let error {
-                yn_logError("Failed to create directory: \(writePath) - \(error)")
-            }
+}
+
+extension FileManager {
+
+    public func allocatedSizeOfDirectory(at directoryURL: URL) throws -> UInt64 {
+        var enumeratorError: Error? = nil
+        func errorHandler(_: URL, error: Error) -> Bool {
+            enumeratorError = error
+            return false
         }
-        
-        if let escapedFilename = filename.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
-            return (writePath as NSString).appendingPathComponent(escapedFilename)
-        } else {
-            return (writePath as NSString).appendingPathComponent(filename)
+        let enumerator = self.enumerator(at: directoryURL,
+                                         includingPropertiesForKeys: Array(allocatedSizeResourceKeys),
+                                         options: [],
+                                         errorHandler: errorHandler)!
+        var accumulatedSize: UInt64 = 0
+        for item in enumerator {
+            if enumeratorError != nil { break }
+            let contentItemURL = item as! URL
+            accumulatedSize += try contentItemURL.regularFileAllocatedSize()
         }
+
+        if let error = enumeratorError { throw error }
+        return accumulatedSize
     }
-    
-    func readCache(fileUrl: URL, completion: @escaping ((_ data: Data?) -> Void)) {
-        executeBackground {
-            do {
-                let data = try Data(contentsOf: fileUrl)
-                yn_logInfo("Disk cache read success: \(fileUrl)")
-                completion(data)
-            } catch let readError {
-                yn_logInfo("Disk cache read error: \(readError)")
-                completion(nil)
-            }
+}
+
+
+fileprivate let allocatedSizeResourceKeys: Set<URLResourceKey> = [
+    .isRegularFileKey,
+    .fileAllocatedSizeKey,
+    .totalFileAllocatedSizeKey,
+]
+
+
+fileprivate extension URL {
+    func regularFileAllocatedSize() throws -> UInt64 {
+        let resourceValues = try self.resourceValues(forKeys: allocatedSizeResourceKeys)
+        guard resourceValues.isRegularFile ?? false else {
+            return 0
         }
+        return UInt64(resourceValues.totalFileAllocatedSize ?? resourceValues.fileAllocatedSize ?? 0)
     }
-    
-    func saveCache(cacheData: Data, fileUrl: URL, completion: CacheCompletionClosure? = nil) {
-        executeBackground {
-            do {
-                try cacheData.write(to: fileUrl , options: Data.WritingOptions(rawValue: 0))
-                yn_logInfo("Disk cache write success: \(fileUrl)")
-                if let completionClosure = completion {
-                    completionClosure(true)
-                }
-            } catch let saveError {
-                yn_logError("Disk cache write error: \(saveError)")
-                if let completionClosure = completion {
-                    completionClosure(false)
-                }
-            }
-        }
-    }
-    
-    func executeBackground(_ block:@escaping () -> Void) {
-        if (Thread.isMainThread) {
-            DispatchQueue.global(qos: .default).async { block() }
-        } else { block() }
-    }
-    
 }
