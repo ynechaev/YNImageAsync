@@ -20,9 +20,8 @@
 		062AC0131A0827E000744325 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 062AC0111A0827E000744325 /* LaunchScreen.xib */; };
 		062AC0291A08F57500744325 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062AC0281A08F57500744325 /* ListTableViewCell.swift */; };
 		063365F31DB2A99900B78098 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063365F11DB2A99900B78098 /* ImageLoader.swift */; };
-		063365F61DB2BD9100B78098 /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063365F41DB2BD9100B78098 /* CommonFunctions.swift */; };
 		069055911DB2DB6A00C3E48F /* CacheEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0690558F1DB2DB6A00C3E48F /* CacheEntry.swift */; };
-		069055951DB3600800C3E48F /* ImageAsyncExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EE759A1A0ACD37007BE5B0 /* ImageAsyncExtensions.swift */; };
+		069055951DB3600800C3E48F /* UIImageView+tasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EE759A1A0ACD37007BE5B0 /* UIImageView+tasks.swift */; };
 		0696B33F1DBC0DD800449F17 /* ImageAsyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0696B33E1DBC0DD800449F17 /* ImageAsyncTests.swift */; };
 		0696B35F1DBE991100449F17 /* PerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0696B35E1DBE991100449F17 /* PerformanceTest.swift */; };
 		06B95AD01DB3BF6F00884125 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B95ACF1DB3BF6F00884125 /* SettingsController.swift */; };
@@ -37,6 +36,7 @@
 		2B19D36D1DBA5E6A00DD0DAF /* snow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B19D3671DBA5E6A00DD0DAF /* snow.jpg */; };
 		2B19D36E1DBA5E6A00DD0DAF /* tiger.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B19D3681DBA5E6A00DD0DAF /* tiger.jpg */; };
 		DA07F0622A5EEB1D005DF621 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA07F0612A5EEB1D005DF621 /* Assets.xcassets */; };
+		DA07F0632A6031D4005DF621 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063365F41DB2BD9100B78098 /* Logging.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,7 +94,7 @@
 		062AC0121A0827E000744325 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		062AC0281A08F57500744325 /* ListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		063365F11DB2A99900B78098 /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
-		063365F41DB2BD9100B78098 /* CommonFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
+		063365F41DB2BD9100B78098 /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		0690558F1DB2DB6A00C3E48F /* CacheEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheEntry.swift; sourceTree = "<group>"; };
 		0696B33E1DBC0DD800449F17 /* ImageAsyncTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAsyncTests.swift; sourceTree = "<group>"; };
 		0696B35E1DBE991100449F17 /* PerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformanceTest.swift; sourceTree = "<group>"; };
@@ -102,7 +102,7 @@
 		06CA03B81DB25F8C00AC65E5 /* ListDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDataProvider.swift; sourceTree = "<group>"; };
 		06E80CBE1DB37FA40068BF85 /* YNImageAsync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNImageAsync.swift; sourceTree = "<group>"; };
 		06EE758E1A0ABB65007BE5B0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		06EE759A1A0ACD37007BE5B0 /* ImageAsyncExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAsyncExtensions.swift; sourceTree = "<group>"; };
+		06EE759A1A0ACD37007BE5B0 /* UIImageView+tasks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+tasks.swift"; sourceTree = "<group>"; };
 		2B19D3601DBA57FD00DD0DAF /* CacheProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheProviderTests.swift; sourceTree = "<group>"; };
 		2B19D3631DBA5E6A00DD0DAF /* mountains.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mountains.jpg; sourceTree = "<group>"; };
 		2B19D3641DBA5E6A00DD0DAF /* parrot-indian.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "parrot-indian.jpg"; sourceTree = "<group>"; };
@@ -234,7 +234,7 @@
 		06E80CBC1DB37F6C0068BF85 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				06EE759A1A0ACD37007BE5B0 /* ImageAsyncExtensions.swift */,
+				06EE759A1A0ACD37007BE5B0 /* UIImageView+tasks.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -242,7 +242,6 @@
 		06E80CBD1DB37F8A0068BF85 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				063365F41DB2BD9100B78098 /* CommonFunctions.swift */,
 				063365F11DB2A99900B78098 /* ImageLoader.swift */,
 			);
 			path = Core;
@@ -251,6 +250,7 @@
 		06EE75951A0ACD37007BE5B0 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				063365F41DB2BD9100B78098 /* Logging.swift */,
 				0626EA801DB25035000DC212 /* ListCellDataProtocol.swift */,
 				0626EA821DB252AE000DC212 /* ListCellObjectProtocol.swift */,
 				06CA03B81DB25F8C00AC65E5 /* ListDataProvider.swift */,
@@ -443,9 +443,8 @@
 			files = (
 				06E80CC01DB37FA40068BF85 /* YNImageAsync.swift in Sources */,
 				0626EA7F1DB2324A000DC212 /* CacheProvider.swift in Sources */,
-				063365F61DB2BD9100B78098 /* CommonFunctions.swift in Sources */,
 				069055911DB2DB6A00C3E48F /* CacheEntry.swift in Sources */,
-				069055951DB3600800C3E48F /* ImageAsyncExtensions.swift in Sources */,
+				069055951DB3600800C3E48F /* UIImageView+tasks.swift in Sources */,
 				063365F31DB2A99900B78098 /* ImageLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -471,6 +470,7 @@
 				062AC0091A0827E000744325 /* AppDelegate.swift in Sources */,
 				0626EA811DB25035000DC212 /* ListCellDataProtocol.swift in Sources */,
 				062AC0291A08F57500744325 /* ListTableViewCell.swift in Sources */,
+				DA07F0632A6031D4005DF621 /* Logging.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

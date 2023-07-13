@@ -18,19 +18,25 @@ class SettingsController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        Task {
+            await setupUI()
+        }
     }
     
-    func setupUI() {
-        let configuration = CacheProvider.sharedInstance.configuration
-        memorySwitch.isOn = configuration.options.contains(.memory)
-        diskSwitch.isOn = configuration.options.contains(.disk)
-        memoryLabel.text = "Current memory usage: \(sizeStringFrom(int: CacheProvider.sharedInstance.memoryCacheSize()))"
-        diskLabel.text = "Current cache folder usage: \(sizeStringFrom(int: CacheProvider.sharedInstance.diskCacheSize()))"
+    func setupUI() async {
+//        let configuration = CacheProvider.sharedInstance.configuration
+//        memorySwitch.isOn = configuration.options.contains(.memory)
+//        diskSwitch.isOn = configuration.options.contains(.disk)
+        guard let size = try? await CacheComposer.shared.size() else {
+            return
+        }
+        
+        memoryLabel.text = "Current memory usage: \(sizeStringFrom(size))"
+        diskLabel.text = "Current cache folder usage: \(sizeStringFrom(size))"
     }
     
-    func sizeStringFrom(int: Int64) -> String {
-        return ByteCountFormatter.string(fromByteCount: int, countStyle: .file)
+    func sizeStringFrom(_ size: UInt64) -> String {
+        return ByteCountFormatter.string(fromByteCount: Int64(size), countStyle: .file)
     }
     
     @IBAction func didTapDoneButton(sender: AnyObject) {
@@ -48,14 +54,14 @@ class SettingsController: UIViewController {
     }
     
     @IBAction func didSwitchMemoryCache(sender: UISwitch) {
-        var options = CacheProvider.sharedInstance.configuration.options.rawValue
-        options = options ^ CacheOptions.memory.rawValue
-        CacheProvider.sharedInstance.configuration.options = CacheOptions(rawValue: options)
+//        var options = CacheProvider.sharedInstance.configuration.options.rawValue
+//        options = options ^ CacheOptions.memory.rawValue
+//        CacheProvider.sharedInstance.configuration.options = CacheOptions(rawValue: options)
     }
     
     @IBAction func didSwitchDiskCache(sender: UISwitch) {
-        var options = CacheProvider.sharedInstance.configuration.options.rawValue
-        options = options ^ CacheOptions.disk.rawValue
-        CacheProvider.sharedInstance.configuration.options = CacheOptions(rawValue: options)
+//        var options = CacheProvider.sharedInstance.configuration.options.rawValue
+//        options = options ^ CacheOptions.disk.rawValue
+//        CacheProvider.sharedInstance.configuration.options = CacheOptions(rawValue: options)
     }
 }

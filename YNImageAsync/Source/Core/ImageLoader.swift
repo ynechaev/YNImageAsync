@@ -11,7 +11,7 @@ import UIKit
 actor ImageLoader {
     private let loader: DataLoader
     
-    static let shared: ImageLoader = ImageLoader(loader: DataLoader(cache: MemoryCache()))
+    static let shared: ImageLoader = ImageLoader(loader: DataLoader(cache: CacheComposer.shared))
     
     init(loader: DataLoader) {
         self.loader = loader
@@ -32,11 +32,11 @@ actor ImageLoader {
 }
 
 actor DataLoader {
-    private let cache: MemoryCache
+    private let cache: Caching
     private let session: URLSession
     private var activeTasks = [URL: Task<Data, Error>]()
     
-    init(cache: MemoryCache, session: URLSession = .shared) {
+    init(cache: Caching, session: URLSession = .shared) {
         self.cache = cache
         self.session = session
     }
@@ -47,12 +47,12 @@ actor DataLoader {
         }
         
         let task = Task<Data, Error> {
-            if let cachedData = await cache.data(with: url.absoluteString) {
+            if let cachedData = try await cache.fetch(url) {
                 activeTasks[url] = nil
                 return cachedData
             }
             let (data, _) = try await session.data(from: url)
-            await cache.store(data, for: url.absoluteString)
+            try await cache.store(url, data: data)
             activeTasks[url] = nil
             return data
         }
@@ -60,16 +60,3 @@ actor DataLoader {
         return try await task.value
     }
 }
-
-actor MemoryCache {
-    private var cache = [String: Data]()
-    
-    func store(_ data: Data, for key: String) {
-        cache[key] = data
-    }
-    
-    func data(with key: String) -> Data? {
-        cache[key]
-    }
-}
-

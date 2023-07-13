@@ -21,7 +21,7 @@ func yn_logInfo(_ items: Any...) {
 }
 
 func yn_log(_ items: Any..., level: LogLevel) {
-    if YNImageAsync.sharedInstance.logLevel.contains(level) {
+    if AppDelegate.logLevel.contains(level) {
         print(items)
     }
 }
@@ -37,10 +37,4 @@ public struct LogLevel : OptionSet {
     public init(rawValue: Int) {
         self.rawValue = rawValue
     }
-}
-
-func synced(lock: AnyObject, closure: () -> ()) {
-    objc_sync_enter(lock)
-    closure()
-    objc_sync_exit(lock)
 }

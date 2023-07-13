@@ -8,11 +8,49 @@
 
 import UIKit
 
-protocol Caching {
+public protocol Caching {
     func fetch(_ url: URL) async throws -> Data?
     func store(_ url: URL, data: Data) async throws
     func size() async throws -> UInt64
     func clear() async throws
+}
+
+@globalActor public actor CacheComposer: Caching {
+    public static var shared = CacheComposer(caches: [MemoryCacheProvider(), DiskCacheProvider()])
+    private let caches: [Caching]
+        
+    init(caches: [Caching]) {
+        self.caches = caches
+    }
+        
+    public func fetch(_ url: URL) async throws -> Data? {
+        var data: Data?
+        for cache in caches {
+            data = try await cache.fetch(url)
+            if data != nil { break }
+        }
+        return data
+    }
+    
+    public func store(_ url: URL, data: Data) async throws {
+        for cache in caches {
+            try await cache.store(url, data: data)
+        }
+    }
+    
+    public func size() async throws -> UInt64 {
+        var acc: UInt64 = 0
+        for cache in caches {
+            try await acc += cache.size()
+        }
+        return acc
+    }
+    
+    public func clear() async throws {
+        for cache in caches {
+            try await cache.clear()
+        }
+    }
 }
 
 actor DiskCacheProvider: Caching {
@@ -74,169 +112,26 @@ actor DiskCacheProvider: Caching {
     
 }
 
-public actor MemoryCacheProvider: Caching {
-    let maxMemoryCacheSize : Int64 = 10 * 1024 * 1024 // 10Mb
+actor MemoryCacheProvider: Caching {
+    let maxMemoryCacheSize : UInt64 = 10 * 1024 * 1024 // 10Mb
 
-    internal var memoryCache: [String: CacheEntry] = [:]
+    private var memoryCache = [URL: CacheEntry]()
     
-    public static let sharedInstance : CacheProvider = {
-        let options : CacheOptions = [.memory, .disk]
-        let conf = CacheConfiguration(options: options, memoryCacheLimit: maxMemoryCacheSize)
-        let instance = CacheProvider(configuration: conf)
-        return instance
-    }()
-    
-    public init(configuration: CacheConfiguration) {
-        self.configuration = configuration
+    func fetch(_ url: URL) async throws -> Data? {
+        memoryCache[url]?.data
     }
     
-    public func cacheForKey(_ key: String, completion: @escaping ((_ data: Data?) -> Void)) {
-        if let memCache = memoryCacheForKey(key) {
-            completion(memCache)
-        } else {
-            diskCacheForKey(key, completion: completion)
-        }
+    func store(_ url: URL, data: Data) async throws {
+        memoryCache[url] = CacheEntry(data: data, date: Date())
     }
     
-    public func memoryCacheForKey(_ key: String) -> Data? {
-        if configuration.options.contains(.memory) {
-            if let cacheHit = memoryCache[key] {
-                yn_logInfo("Mem cache hit: \(key)")
-                return cacheHit.data
-            }
-            yn_logInfo("Mem cache miss: \(key)")
-        }
-        return nil
+    func size() async throws -> UInt64 {
+        UInt64(memoryCache.values.reduce(0, { $0 + $1.data.count }))
     }
     
-    public func diskCacheForKey(_ key: String, completion: @escaping ((_ data: Data?) -> Void)) {
-        if configuration.options.contains(.disk) {
-            let filePath = fileInCacheDirectory(filename: key)
-            let url = URL(fileURLWithPath: filePath)
-            readCache(fileUrl: url, completion: { (data) in
-                if let cacheHit = data {
-                    yn_logInfo("Disk cache hit: \(key)")
-                    self.cacheDataToMemory(key, cacheHit)
-                    completion(cacheHit)
-                    return
-                } else {
-                    yn_logInfo("Disk cache miss: \(key)")
-                    completion(nil)
-                    return
-                }
-            })
-        } else {
-            completion(nil)
-        }
-    }
-    
-    public func cacheData(_ key: String, _ data: Data, completion: CacheCompletionClosure? = nil) {
-        cacheDataToMemory(key, data)
-        cacheDataToDisk(key, data, completion: completion)
-    }
-    
-    public func cacheDataToMemory(_ key: String, _ data: Data) {
-        if configuration.options.contains(.memory) {
-            let entry = CacheEntry(data: data, date: Date())
-            yn_logInfo("Cache store: \(key)")
-            memoryCache[key] = entry
-            cleanMemoryCache()
-        }
-    }
-    
-    public func cacheDataToDisk(_ key: String, _ data: Data, completion: CacheCompletionClosure? = nil) {
-        if configuration.options.contains(.disk) {
-            let filePath = fileInCacheDirectory(filename: key)
-            let url = URL(fileURLWithPath: filePath)
-            saveCache(cacheData: data, fileUrl: url, completion: completion)
-        } else {
-            if let completionClosure = completion {
-                completionClosure(true)
-            }
-        }
-    }
-    
-    public func cleanMemoryCache() {
-        let sorted = memoryCache.values.sorted { (entry1, entry2) -> Bool in
-            return entry1.date > entry2.date
-        }
-        let maxSize = configuration.memoryCacheLimit
-        let memorySize = memoryCacheSize()
-        if memorySize > maxSize {
-            yn_logInfo("Memory cache \(memoryCacheSize()) > max \(maxSize)")
-            var size : Int64 = 0
-            var newCache : Array<CacheEntry> = []
-            for cacheEntry in sorted {
-                size += Int64(cacheEntry.data.count)
-                if size > maxSize {
-                    yn_logInfo("Found \(sorted.count - newCache.count) elements exceeding capacity")
-                    filterCacheWithArray(array: newCache)
-                    break
-                }
-                newCache.append(cacheEntry)
-            }
-        }
-    }
-    
-    public func clearMemoryCache() {
+    func clear() async throws {
         memoryCache.removeAll()
     }
-    
-    public func diskCacheSize() -> Int64 {
-        let files = cacheFolderFiles()
-        var folderSize : Int64 = 0
-        for file in files {
-            do {
-                let attributes = try FileManager.default.attributesOfItem(atPath: file)
-                let fileSize = attributes[FileAttributeKey.size] as! NSNumber
-                folderSize += fileSize.int64Value
-            } catch let error {
-                yn_logInfo("Cache folder file attribute error: \(error)")
-            }
-        }
-        return folderSize
-    }
-    
-    public func memoryCacheSize() -> Int64 {
-        var size: Int64 = 0
-        for cacheEntry in memoryCache.values {
-            size += Int64(cacheEntry.data.count)
-        }
-        return size
-    }
-    
-    public func clearDiskCache() {
-        let files = cacheFolderFiles()
-        for file in files {
-            yn_logInfo("Trying to delete \(file)")
-            do {
-                try FileManager.default.removeItem(atPath: file)
-                yn_logInfo("Deleted disk cache: \(file)")
-            } catch let error {
-                yn_logInfo("Cache folder read error: \(error)")
-            }
-        }
-    }
-
-    public func clearCache() {
-        clearMemoryCache()
-        clearDiskCache()
-    }
-    
-    func filterCacheWithArray(array: Array <CacheEntry>) {
-        let tempCache = memoryCache
-        for (key, entry) in tempCache {
-            if !array.contains(where: { (filterEntry) -> Bool in
-                return entry.udid == filterEntry.udid
-            }) {
-                memoryCache.removeValue(forKey: key)
-                yn_logInfo("Removing \(entry.udid)")
-            }
-        }
-    }
-    
-    
-    
 }
 
 extension FileManager {
