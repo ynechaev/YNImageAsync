@@ -105,9 +105,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use memory cache" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wbg-dM-w4W">
-                                <rect key="frame" x="16" y="82" width="304" height="20.333333333333329"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use memory cache" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wbg-dM-w4W">
+                                <rect key="frame" x="16" y="82" width="304" height="23.333333333333329"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -123,21 +123,9 @@
                                     <action selector="didSwitchDiskCacheWithSender:" destination="Z7w-8e-PiD" eventType="valueChanged" id="97H-jT-lkg"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use disk cache" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O5l-dv-a0o">
-                                <rect key="frame" x="16" y="120.33333333333333" width="304" height="20.333333333333329"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current memory usage:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ah6-Pl-3Yx">
-                                <rect key="frame" x="16" y="180" width="361" height="20.333333333333343"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current cache folder usage:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MKG-lC-Lqw">
-                                <rect key="frame" x="16" y="208.33333333333334" width="361" height="20.333333333333343"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use disk cache" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O5l-dv-a0o">
+                                <rect key="frame" x="16" y="123.33333333333333" width="304" height="23.333333333333329"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -181,27 +169,56 @@
                                     <action selector="didTapGithubButtonWithSender:" destination="Z7w-8e-PiD" eventType="touchUpInside" id="e9z-CK-04c"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JHE-SF-d7i">
+                                <rect key="frame" x="139.33333333333334" y="265.66666666666669" width="114.33333333333334" height="34.333333333333314"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Clear cache" cornerStyle="medium">
+                                    <backgroundConfiguration key="background">
+                                        <color key="backgroundColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </backgroundConfiguration>
+                                    <color key="baseForegroundColor" systemColor="systemBackgroundColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="didTapClearWithSender:" destination="Z7w-8e-PiD" eventType="touchUpInside" id="uop-70-eEY"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Whd-J3-cl3">
+                                <rect key="frame" x="16" y="169" width="147.66666666666666" height="56.666666666666657"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Memory:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ah6-Pl-3Yx">
+                                        <rect key="frame" x="0.0" y="0.0" width="147.66666666666666" height="23.333333333333332"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cache directory:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MKG-lC-Lqw">
+                                        <rect key="frame" x="0.0" y="33.333333333333343" width="147.66666666666666" height="23.333333333333329"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Gh0-wY-XNf" firstAttribute="top" secondItem="pgg-xw-UGJ" secondAttribute="bottom" constant="8" id="0nD-aq-b73"/>
                             <constraint firstAttribute="trailing" secondItem="pgg-xw-UGJ" secondAttribute="trailing" constant="16" id="1FO-uH-SEh"/>
+                            <constraint firstItem="JHE-SF-d7i" firstAttribute="top" secondItem="Whd-J3-cl3" secondAttribute="bottom" constant="40" id="6B5-18-ydT"/>
                             <constraint firstItem="N5Q-QI-XGR" firstAttribute="top" secondItem="ESr-lg-bIo" secondAttribute="top" id="6Ld-2s-7FC"/>
                             <constraint firstItem="wNy-1G-HA9" firstAttribute="leading" secondItem="wbg-dM-w4W" secondAttribute="trailing" constant="8" id="B1f-c6-3ZD"/>
-                            <constraint firstItem="ah6-Pl-3Yx" firstAttribute="top" secondItem="Xlc-U3-hbI" secondAttribute="bottom" constant="33" id="EEP-d4-W6X"/>
                             <constraint firstItem="O5l-dv-a0o" firstAttribute="leading" secondItem="ESr-lg-bIo" secondAttribute="leading" constant="16" id="HW4-YO-NNa"/>
                             <constraint firstAttribute="trailing" secondItem="wNy-1G-HA9" secondAttribute="trailing" constant="16" id="Hje-bw-TCO"/>
-                            <constraint firstItem="MKG-lC-Lqw" firstAttribute="top" secondItem="ah6-Pl-3Yx" secondAttribute="bottom" constant="8" id="In1-np-J76"/>
-                            <constraint firstItem="ah6-Pl-3Yx" firstAttribute="leading" secondItem="ESr-lg-bIo" secondAttribute="leading" constant="16" id="Jav-Oy-zr8"/>
+                            <constraint firstItem="Whd-J3-cl3" firstAttribute="top" secondItem="O5l-dv-a0o" secondAttribute="bottom" constant="22.329999999999998" id="MOh-eh-xf1"/>
                             <constraint firstItem="PRW-db-OAa" firstAttribute="top" secondItem="Gh0-wY-XNf" secondAttribute="bottom" constant="10" id="Me2-35-EHn"/>
                             <constraint firstItem="Xlc-U3-hbI" firstAttribute="top" secondItem="wNy-1G-HA9" secondAttribute="bottom" constant="8" id="MlX-Ht-MVk"/>
                             <constraint firstItem="O5l-dv-a0o" firstAttribute="top" secondItem="wbg-dM-w4W" secondAttribute="bottom" constant="18" id="VH2-IN-Vqs"/>
-                            <constraint firstItem="MKG-lC-Lqw" firstAttribute="leading" secondItem="ESr-lg-bIo" secondAttribute="leading" constant="16" id="VI2-Zb-rHM"/>
-                            <constraint firstAttribute="trailing" secondItem="ah6-Pl-3Yx" secondAttribute="trailing" constant="16" id="XP6-K6-A1L"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Whd-J3-cl3" secondAttribute="trailing" id="VTj-MJ-s1N"/>
                             <constraint firstAttribute="trailing" secondItem="Gh0-wY-XNf" secondAttribute="trailing" constant="16" id="bPn-J2-URI"/>
                             <constraint firstItem="wbg-dM-w4W" firstAttribute="top" secondItem="Zw1-je-OHi" secondAttribute="bottom" constant="82" id="dju-5C-6Dc"/>
-                            <constraint firstAttribute="trailing" secondItem="MKG-lC-Lqw" secondAttribute="trailing" constant="16" id="eaD-uK-6tA"/>
+                            <constraint firstItem="JHE-SF-d7i" firstAttribute="centerX" secondItem="ESr-lg-bIo" secondAttribute="centerX" id="fjf-KA-V1U"/>
                             <constraint firstItem="Gh0-wY-XNf" firstAttribute="leading" secondItem="ESr-lg-bIo" secondAttribute="leading" constant="16" id="gj7-74-luh"/>
+                            <constraint firstItem="Whd-J3-cl3" firstAttribute="leading" secondItem="ESr-lg-bIo" secondAttribute="leadingMargin" id="gqI-ea-3IJ"/>
                             <constraint firstItem="wNy-1G-HA9" firstAttribute="top" secondItem="Zw1-je-OHi" secondAttribute="bottom" constant="77" id="iOd-CV-FtF"/>
                             <constraint firstItem="wbg-dM-w4W" firstAttribute="leading" secondItem="ESr-lg-bIo" secondAttribute="leading" constant="16" id="ki6-Bc-zWq"/>
                             <constraint firstItem="Xlc-U3-hbI" firstAttribute="leading" secondItem="O5l-dv-a0o" secondAttribute="trailing" constant="8" id="mJF-jj-r5r"/>
@@ -221,12 +238,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ucP-Aw-jba" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1109.5999999999999" y="-402.54872563718146"/>
+            <point key="canvasLocation" x="1109.1603053435115" y="-402.81690140845075"/>
         </scene>
     </scenes>
     <resources>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>

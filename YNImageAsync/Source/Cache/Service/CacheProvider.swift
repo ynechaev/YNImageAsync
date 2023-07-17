@@ -31,6 +31,7 @@ public struct CacheOptions: OptionSet {
     public static var shared = CacheComposer(memoryCache: MemoryCacheProvider(), diskCache: DiskCacheProvider())
     private let memoryCache: Caching?
     private let diskCache: Caching?
+    private var diskStoreTasks = [URL: Task<Void, Error>]()
     public private(set) var options: CacheOptions
     static var logLevel: LogLevel = .info
 
@@ -60,7 +61,13 @@ public struct CacheOptions: OptionSet {
             try await memoryCache?.store(url, data: data)
         }
         if options.contains(.disk) {
-            try await diskCache?.store(url, data: data)
+            if diskStoreTasks[url] == nil {
+                let storeTask = Task.detached { [weak self] in
+                    guard let self else { return }
+                    try await self.diskCache?.store(url, data: data)
+                }
+                diskStoreTasks[url] = storeTask
+            }
         }
     }
     
@@ -100,8 +107,10 @@ public struct CacheOptions: OptionSet {
 }
 
 actor DiskCacheProvider: Caching {
+    private static let cacheName = "YNImageAsync"
+    
     private static let cacheDirectory: URL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
-    private static let cachePath: URL = cacheDirectory.appending(path: "YNImageAsync")
+    static let cachePath: URL = cacheDirectory.appending(path: cacheName)
     
     func fetch(_ url: URL) async throws -> Data? {
         yn_logDebug("💾 Read: \(url)")
@@ -118,13 +127,7 @@ actor DiskCacheProvider: Caching {
     }
     
     func clear() async throws {
-        let files = try DiskCacheProvider.cacheFolderFiles()
-        let fileManager = FileManager.default
-        try files.forEach { file in
-            if fileManager.fileExists(atPath: file) {
-                try fileManager.removeItem(atPath: file)
-            }
-        }
+        try FileManager.default.clearDirectory(with: DiskCacheProvider.cachePath)
     }
     
     // MARK: - Disk cache utilities
@@ -155,13 +158,6 @@ actor DiskCacheProvider: Caching {
         let fileKey = url.absoluteString.MD5()
         return try DiskCacheProvider.fileInCacheDirectory(filename: fileKey)
     }
-    
-    private static func cacheFolderFiles() throws -> [String] {
-        let cachePath = DiskCacheProvider.cachePath
-        let files = try FileManager.default.contentsOfDirectory(atPath: cachePath.path)
-        return files.map { cachePath.appendingPathComponent($0).absoluteString }
-    }
-    
 }
 
 actor MemoryCacheProvider: Caching {
@@ -230,13 +226,21 @@ fileprivate extension URL {
     }
 }
 
-fileprivate extension StringProtocol {
-    
+extension StringProtocol {
     func MD5() -> String {
         let digest = Insecure.MD5.hash(data: Data(utf8))
         return digest.map {
             String(format: "%02hhx", $0)
         }.joined()
     }
-    
+}
+
+extension FileManager {
+    func clearDirectory(with url: URL) throws {
+        let tmpDirectory = try contentsOfDirectory(at: url, includingPropertiesForKeys: nil)
+        try tmpDirectory.forEach { file in
+            let fileUrl = url.appending(path: file.lastPathComponent)
+            try removeItem(at: fileUrl)
+        }
+    }
 }
