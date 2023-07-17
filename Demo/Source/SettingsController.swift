@@ -67,6 +67,19 @@ class SettingsController: UIViewController {
         }
     }
     
+    @IBAction func didTapClear(sender: UIButton) {
+        Task {
+            sender.isEnabled = false
+            do {
+                try await CacheComposer.shared.clear()
+            } catch {
+                print("Error clearing cache: \(error)")
+            }
+            sender.isEnabled = true
+            await configureView()
+        }
+    }
+    
     private func flipOption(_ option: CacheOptions.Element) async {
         var options = await CacheComposer.shared.options.rawValue
         options = options ^ option.rawValue

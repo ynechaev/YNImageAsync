@@ -10,15 +10,14 @@ import XCTest
 @testable import YNImageAsync
 
 class CacheComposerTests: XCTestCase {
-    
-    let imageNames = ["mountains.jpg", "parrot-indian.jpg", "parrot.jpg", "saint-petersburg.jpg", "snow.jpg", "tiger.jpg"]
+    static let cacheName = "CacheComposerTests"
     
     override func setUp() async throws {
-        try FileManager.default.clearTempDirectory()
+        try FileManager.default.clearDirectory(with: DiskCacheProvider.cachePath)
     }
     
     override func tearDown() async throws {
-        try FileManager.default.clearTempDirectory()
+        try FileManager.default.clearDirectory(with: DiskCacheProvider.cachePath)
     }
     
     func test_store() async throws {
@@ -187,16 +186,6 @@ class CacheComposerTests: XCTestCase {
         XCTAssertEqual(diskMock.cache.count, 0)
     }
     
-}
-
-extension FileManager {
-    func clearTempDirectory() throws {
-        let tmpDirectory = try contentsOfDirectory(atPath: temporaryDirectory.path)
-        try tmpDirectory.forEach { file in
-            let fileUrl = temporaryDirectory.appendingPathComponent(file)
-            try removeItem(atPath: fileUrl.path)
-        }
-    }
 }
 
 final class CacheMock: Caching {
