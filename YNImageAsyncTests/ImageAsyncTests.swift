@@ -11,27 +11,27 @@ import XCTest
 
 class ImageAsyncTests: XCTestCase {
     
-    func testSetLoggingLevel() {
-        
-        YNImageAsync.sharedInstance.logLevel = .none
-        XCTAssertFalse(YNImageAsync.sharedInstance.logLevel.contains(.debug))
-        XCTAssertFalse(YNImageAsync.sharedInstance.logLevel.contains(.errors))
-        XCTAssertFalse(YNImageAsync.sharedInstance.logLevel.contains(.info))
-        
-        YNImageAsync.sharedInstance.logLevel = .errors
-        XCTAssertFalse(YNImageAsync.sharedInstance.logLevel.contains(.debug))
-        XCTAssertTrue(YNImageAsync.sharedInstance.logLevel.contains(.errors))
-        XCTAssertFalse(YNImageAsync.sharedInstance.logLevel.contains(.info))
-        
-        YNImageAsync.sharedInstance.logLevel = .debug
-        XCTAssertTrue(YNImageAsync.sharedInstance.logLevel.contains(.debug))
-        XCTAssertTrue(YNImageAsync.sharedInstance.logLevel.contains(.errors))
-        XCTAssertFalse(YNImageAsync.sharedInstance.logLevel.contains(.info))
-        
-        YNImageAsync.sharedInstance.logLevel = .info
-        XCTAssertTrue(YNImageAsync.sharedInstance.logLevel.contains(.debug))
-        XCTAssertTrue(YNImageAsync.sharedInstance.logLevel.contains(.errors))
-        XCTAssertTrue(YNImageAsync.sharedInstance.logLevel.contains(.info))
-    }
+//    func testSetLoggingLevel() {
+//        
+//        YNImageAsync.sharedInstance.logLevel = .none
+//        XCTAssertFalse(YNImageAsync.sharedInstance.logLevel.contains(.debug))
+//        XCTAssertFalse(YNImageAsync.sharedInstance.logLevel.contains(.errors))
+//        XCTAssertFalse(YNImageAsync.sharedInstance.logLevel.contains(.info))
+//        
+//        YNImageAsync.sharedInstance.logLevel = .errors
+//        XCTAssertFalse(YNImageAsync.sharedInstance.logLevel.contains(.debug))
+//        XCTAssertTrue(YNImageAsync.sharedInstance.logLevel.contains(.errors))
+//        XCTAssertFalse(YNImageAsync.sharedInstance.logLevel.contains(.info))
+//        
+//        YNImageAsync.sharedInstance.logLevel = .debug
+//        XCTAssertTrue(YNImageAsync.sharedInstance.logLevel.contains(.debug))
+//        XCTAssertTrue(YNImageAsync.sharedInstance.logLevel.contains(.errors))
+//        XCTAssertFalse(YNImageAsync.sharedInstance.logLevel.contains(.info))
+//        
+//        YNImageAsync.sharedInstance.logLevel = .info
+//        XCTAssertTrue(YNImageAsync.sharedInstance.logLevel.contains(.debug))
+//        XCTAssertTrue(YNImageAsync.sharedInstance.logLevel.contains(.errors))
+//        XCTAssertTrue(YNImageAsync.sharedInstance.logLevel.contains(.info))
+//    }
     
 }

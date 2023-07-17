@@ -31,6 +31,7 @@ public struct CacheOptions: OptionSet {
     public static var shared = CacheComposer(memoryCache: MemoryCacheProvider(), diskCache: DiskCacheProvider())
     private let memoryCache: Caching?
     private let diskCache: Caching?
+    private var diskStoreTasks = [URL: Task<Void, Error>]()
     public private(set) var options: CacheOptions
     static var logLevel: LogLevel = .info
 
@@ -60,7 +61,13 @@ public struct CacheOptions: OptionSet {
             try await memoryCache?.store(url, data: data)
         }
         if options.contains(.disk) {
-            try await diskCache?.store(url, data: data)
+            if diskStoreTasks[url] == nil {
+                let storeTask = Task.detached { [weak self] in
+                    guard let self else { return }
+                    try await self.diskCache?.store(url, data: data)
+                }
+                diskStoreTasks[url] = storeTask
+            }
         }
     }
     

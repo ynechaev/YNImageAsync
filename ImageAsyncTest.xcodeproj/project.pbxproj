@@ -28,7 +28,7 @@
 		06CA03B91DB25F8C00AC65E5 /* ListDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CA03B81DB25F8C00AC65E5 /* ListDataProvider.swift */; };
 		06E80CC01DB37FA40068BF85 /* YNImageAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E80CBE1DB37FA40068BF85 /* YNImageAsync.swift */; };
 		06EE758F1A0ABB65007BE5B0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06EE758E1A0ABB65007BE5B0 /* CoreGraphics.framework */; };
-		2B19D3611DBA57FD00DD0DAF /* CacheProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19D3601DBA57FD00DD0DAF /* CacheProviderTests.swift */; };
+		2B19D3611DBA57FD00DD0DAF /* CacheComposerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19D3601DBA57FD00DD0DAF /* CacheComposerTests.swift */; };
 		2B19D3691DBA5E6A00DD0DAF /* mountains.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B19D3631DBA5E6A00DD0DAF /* mountains.jpg */; };
 		2B19D36A1DBA5E6A00DD0DAF /* parrot-indian.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B19D3641DBA5E6A00DD0DAF /* parrot-indian.jpg */; };
 		2B19D36B1DBA5E6A00DD0DAF /* parrot.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B19D3651DBA5E6A00DD0DAF /* parrot.jpg */; };
@@ -103,7 +103,7 @@
 		06E80CBE1DB37FA40068BF85 /* YNImageAsync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNImageAsync.swift; sourceTree = "<group>"; };
 		06EE758E1A0ABB65007BE5B0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		06EE759A1A0ACD37007BE5B0 /* UIImageView+tasks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+tasks.swift"; sourceTree = "<group>"; };
-		2B19D3601DBA57FD00DD0DAF /* CacheProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheProviderTests.swift; sourceTree = "<group>"; };
+		2B19D3601DBA57FD00DD0DAF /* CacheComposerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheComposerTests.swift; sourceTree = "<group>"; };
 		2B19D3631DBA5E6A00DD0DAF /* mountains.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mountains.jpg; sourceTree = "<group>"; };
 		2B19D3641DBA5E6A00DD0DAF /* parrot-indian.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "parrot-indian.jpg"; sourceTree = "<group>"; };
 		2B19D3651DBA5E6A00DD0DAF /* parrot.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = parrot.jpg; sourceTree = "<group>"; };
@@ -156,7 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				2B19D3621DBA5C6000DD0DAF /* Resources */,
-				2B19D3601DBA57FD00DD0DAF /* CacheProviderTests.swift */,
+				2B19D3601DBA57FD00DD0DAF /* CacheComposerTests.swift */,
 				0696B33E1DBC0DD800449F17 /* ImageAsyncTests.swift */,
 				0626EA701DB2316C000DC212 /* Info.plist */,
 				0696B35E1DBE991100449F17 /* PerformanceTest.swift */,
@@ -463,7 +463,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0696B35F1DBE991100449F17 /* PerformanceTest.swift in Sources */,
-				2B19D3611DBA57FD00DD0DAF /* CacheProviderTests.swift in Sources */,
+				2B19D3611DBA57FD00DD0DAF /* CacheComposerTests.swift in Sources */,
 				0696B33F1DBC0DD800449F17 /* ImageAsyncTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -609,7 +609,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = yn.YNImageAsyncTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -629,7 +629,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = yn.YNImageAsyncTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

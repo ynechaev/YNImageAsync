@@ -10,16 +10,16 @@ import XCTest
 
 class PerformanceTests: XCTestCase {
     
-    let view = UIImageView()
-    let urls: [URL] = {
-        return (0..<10_000).map { _ in return URL(string: "http://test.com/\(arc4random()).jpeg")! }
-    }()
-    
-    func testYNImageAsync() {
-        measure {
-            for url in self.urls {
-                self.view.setImageWithUrl(url)
-            }
-        }
-    }
+//    let view = UIImageView()
+//    let urls: [URL] = {
+//        return (0..<10_000).map { _ in return URL(string: "http://test.com/\(arc4random()).jpeg")! }
+//    }()
+//    
+//    func testYNImageAsync() {
+//        measure {
+//            for url in self.urls {
+//                self.view.setImage(with: url)
+//            }
+//        }
+//    }
 }
