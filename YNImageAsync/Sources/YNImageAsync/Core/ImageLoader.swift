@@ -6,9 +6,7 @@
 //  Copyright © 2016 Yury Nechaev. All rights reserved.
 //
 
-#if canImport(UIKit)
-import UIKit
-#endif
+import Foundation
 
 actor ImageLoader {
     private let loader: DataLoader
