@@ -7,12 +7,11 @@
 //
 
 import XCTest
-import UIKit
 @testable import YNImageAsync
 
 class CacheComposerTests: XCTestCase {
     static let cacheName = "CacheComposerTests"
-    static let testImage = UIImage.build(with: CGSize(width: 1, height: 1), filledWithColor: .clear)!
+    static let imageData = "image".data(using: .utf8)!
     
     override func setUp() async throws {
         try FileManager.default.clearDirectory(with: DiskCacheProvider.cachePath)
@@ -27,8 +26,7 @@ class CacheComposerTests: XCTestCase {
         let memoryMock = CacheMock()
         let sut = CacheComposer(memoryCache: memoryMock, diskCache: nil)
         
-        let image = CacheComposerTests.testImage
-        let imageData = image.jpegData(compressionQuality: 0.8)!
+        let imageData = CacheComposerTests.imageData
         let url = URL(string: "http://example.com/mountains.jpg")!
         
         // when
@@ -46,8 +44,7 @@ class CacheComposerTests: XCTestCase {
         let diskMock = CacheMock(storeThrottling: 1)
         let sut = CacheComposer(memoryCache: memoryMock, diskCache: diskMock)
         
-        let image = CacheComposerTests.testImage
-        let imageData = image.jpegData(compressionQuality: 0.8)!
+        let imageData = CacheComposerTests.imageData
         let url = URL(string: "http://example.com/mountains.jpg")!
         
         // when
@@ -69,8 +66,7 @@ class CacheComposerTests: XCTestCase {
         let memoryMock = CacheMock()
         let sut = CacheComposer(memoryCache: memoryMock, diskCache: nil)
         
-        let image = CacheComposerTests.testImage
-        let imageData = image.jpegData(compressionQuality: 0.8)!
+        let imageData = CacheComposerTests.imageData
         let url = URL(string: "http://example.com/mountains.jpg")!
         
         memoryMock.cache[url] = imageData
@@ -89,8 +85,7 @@ class CacheComposerTests: XCTestCase {
         let diskMock = CacheMock()
         let sut = CacheComposer(memoryCache: memoryMock, diskCache: diskMock)
         
-        let image = CacheComposerTests.testImage
-        let imageData = image.jpegData(compressionQuality: 0.8)!
+        let imageData = CacheComposerTests.imageData
         let url = URL(string: "http://example.com/mountains.jpg")!
         
         diskMock.cache[url] = imageData
@@ -110,8 +105,7 @@ class CacheComposerTests: XCTestCase {
         let diskMock = CacheMock()
         let sut = CacheComposer(memoryCache: memoryMock, diskCache: diskMock)
         
-        let image = CacheComposerTests.testImage
-        let imageData = image.jpegData(compressionQuality: 0.8)!
+        let imageData = CacheComposerTests.imageData
         let url = URL(string: "http://example.com/mountains.jpg")!
         
         memoryMock.cache[url] = imageData
@@ -130,8 +124,7 @@ class CacheComposerTests: XCTestCase {
         let memoryMock = CacheMock()
         let sut = CacheComposer(memoryCache: memoryMock, diskCache: nil)
         
-        let image = CacheComposerTests.testImage
-        let imageData = image.jpegData(compressionQuality: 0.8)!
+        let imageData = CacheComposerTests.imageData
         let url = URL(string: "http://example.com/mountains.jpg")!
         
         memoryMock.cache[url] = imageData
@@ -140,7 +133,7 @@ class CacheComposerTests: XCTestCase {
         let size = try await sut.size()
         
         // then
-        XCTAssertEqual(size, 825)
+        XCTAssertEqual(size, 5)
         XCTAssertEqual(memoryMock.sizeCalls, 1)
     }
     
@@ -150,8 +143,7 @@ class CacheComposerTests: XCTestCase {
         let diskMock = CacheMock()
         let sut = CacheComposer(memoryCache: memoryMock, diskCache: diskMock)
         
-        let image = CacheComposerTests.testImage
-        let imageData = image.jpegData(compressionQuality: 0.8)!
+        let imageData = CacheComposerTests.imageData
         let url = URL(string: "http://example.com/mountains.jpg")!
         
         memoryMock.cache[url] = imageData
@@ -161,7 +153,7 @@ class CacheComposerTests: XCTestCase {
         let size = try await sut.size()
         
         // then
-        XCTAssertEqual(size, 1650)
+        XCTAssertEqual(size, 10)
         XCTAssertEqual(memoryMock.sizeCalls, 1)
     }
     
@@ -171,8 +163,7 @@ class CacheComposerTests: XCTestCase {
         let diskMock = CacheMock()
         let sut = CacheComposer(memoryCache: memoryMock, diskCache: diskMock)
         
-        let image = CacheComposerTests.testImage
-        let imageData = image.jpegData(compressionQuality: 0.8)!
+        let imageData = CacheComposerTests.imageData
         let url = URL(string: "http://example.com/mountains.jpg")!
         
         memoryMock.cache[url] = imageData
