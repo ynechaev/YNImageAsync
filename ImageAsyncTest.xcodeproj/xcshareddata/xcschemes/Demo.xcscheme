@@ -41,20 +41,10 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0626EA661DB2316C000DC212"
-               BuildableName = "YNImageAsyncTests.xctest"
+               BlueprintIdentifier = "YNImageAsyncTests"
+               BuildableName = "YNImageAsyncTests"
                BlueprintName = "YNImageAsyncTests"
-               ReferencedContainer = "container:ImageAsyncTest.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "062AC0171A0827E000744325"
-               BuildableName = "ImageAsyncTestTests.xctest"
-               BlueprintName = "ImageAsyncTestTests"
-               ReferencedContainer = "container:ImageAsyncTest.xcodeproj">
+               ReferencedContainer = "container:YNImageAsync">
             </BuildableReference>
          </TestableReference>
       </Testables>
