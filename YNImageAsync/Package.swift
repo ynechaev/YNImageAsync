@@ -21,13 +21,7 @@ let package = Package(
             name: "YNImageAsync"),
         .testTarget(
             name: "YNImageAsyncTests",
-            dependencies: ["YNImageAsync"],
-            resources: [
-                // Copy Tests/ExampleTests/Resources directories as-is.
-                // Use to retain directory structure.
-                // Will be at top level in bundle.
-                .copy("Resources"),
-            ]
+            dependencies: ["YNImageAsync"]
         ),
     ]
 )
