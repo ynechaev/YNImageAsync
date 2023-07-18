@@ -243,7 +243,9 @@ extension StringProtocol {
 
 extension FileManager {
     func clearDirectory(with url: URL) throws {
-        let tmpDirectory = try contentsOfDirectory(at: url, includingPropertiesForKeys: nil)
+        guard let tmpDirectory = try? contentsOfDirectory(at: url, includingPropertiesForKeys: nil) else {
+            return
+        }
         try tmpDirectory.forEach { file in
             let fileUrl = url.appendingPathComponent(file.lastPathComponent)
             try removeItem(at: fileUrl)
