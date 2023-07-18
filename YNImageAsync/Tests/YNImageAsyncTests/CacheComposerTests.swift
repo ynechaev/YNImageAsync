@@ -38,6 +38,7 @@ class CacheComposerTests: XCTestCase {
         XCTAssertEqual(memoryMock.storeCalls, 1)
     }
     
+    @MainActor
     func test_store_diskThrottling_notBlockingActor() async throws {
         // given
         let memoryMock = CacheMock()
