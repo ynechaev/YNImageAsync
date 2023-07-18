@@ -40,29 +40,22 @@ imageView.cancelPreviousLoading()
 ```
 ### Access cache directly
 ```swift
-// Initialize cache with 30 Mb memory capacity and disk caching
-let cacheProvider = CacheProvider(configuration: CacheConfiguration(options: [.memory, .disk], memoryCacheLimit: 30 * 1024 * 1024)) 
+import XCTest
 
-// Save cache to memory and disk
-cacheProvider.cacheData("key", data) 
+func testCache() async throws {
+    let memory = MyMemoryCache() // Your implementation of Caching protocol
+    let disk = MyDiskCache() // Your implementation of Caching protocol
+    let yourData // Replace with your data
+    let cacheComposer = CacheComposer(memoryCache: memory, diskCache: disk) 
+    
+    // Save cache to memory and disk
+    try await cacheComposer.store(url, data) 
+    
+    // Get cached data for key
+    let data = try await cacheComposer.fetch(url)
 
-// Get cached data for key
-provider.cacheForKey("key", completion: { (data) in
-    if let cacheData = data {
-        print("Cache hit")
-    } else {
-        print("Cache miss")
-    }
-})
-```
-### Change memory cache capacity
-You don't need to initialize new instance of cache provider in order to change maximum memory cache capacity.
-```swift
-// New memory capacity is 10 Mb
-let newLimit: Int64 = 10 * 1024 * 1024        
-provider.configuration.memoryCacheLimit = newLimit
-// Perform memory clean operation if capacity was reduced
-provider.cleanMemoryCache()
+    XCTAssertEqual(data, yourData)
+}
 ```
 ### Configure storage type
 You can easily configure storage during initialization and during runtime as well
@@ -70,11 +63,13 @@ You can easily configure storage during initialization and during runtime as wel
 await CacheComposer.shared.updateOptions([.memory])
 ```
 
+# Upcoming features
+* Configure cache size for every cache type
+
 # Requirements
 
-* XCode 14
 * Swift 5
-* iOS 15
+* iOS 13
 
 # License
 
