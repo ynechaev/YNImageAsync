@@ -13,6 +13,10 @@ jobs:
   build:
 
     runs-on: macos-latest
+    
+    defaults:
+      run:
+        working-directory: ./YNImageAsync
 
     steps:
     - uses: actions/checkout@v3
