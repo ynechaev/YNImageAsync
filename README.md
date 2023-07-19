@@ -65,6 +65,8 @@ await CacheComposer.shared.updateOptions([.memory])
 
 # Upcoming features
 * Configure cache size for every cache type
+* Automatic cache cleanup
+* Hash sum checks to update cache
 
 # Requirements
 
