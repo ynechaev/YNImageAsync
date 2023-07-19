@@ -22,10 +22,8 @@ Here are some results of performing 10k requests by popular frameworks:
 You can check it by yourself by launching [this benchmark project tests](https://github.com/ynechaev/Image-Frameworks-Benchmark).
 
 # Install
-### Using cocoapods
-```
-pod 'YNImageAsync'
-```
+### Using SPM
+Follow [this guide](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app) in order to add YNImageAsync as a dependency to your project.
 
 # How to
 ### Set UIImageview image with url
