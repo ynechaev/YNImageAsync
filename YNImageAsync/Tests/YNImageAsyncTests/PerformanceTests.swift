@@ -14,7 +14,7 @@ final class PerformanceTests: XCTestCase {
         try FileManager.default.clearDirectory(with: DiskCacheProvider.cachePath)
     }
     
-    func testPerformanceExample() async throws {
+    func test_storePerformance() async throws {
         // given
         let sut = CacheComposer.shared
         CacheComposer.logLevel = .none
