@@ -58,6 +58,7 @@ class DiskCacheProviderTests: XCTestCase {
     
     private func createAndFillCacheWithFiles(fileSize: UInt64, numFiles: Int) -> [URL] {
         var urls: [URL] = []
+        try! FileManager.default.createDirectory(atPath: DiskCacheProvider.cachePath.absoluteString, withIntermediateDirectories: true, attributes: nil)
         for i in 0..<numFiles {
             let data = Data(repeating: UInt8(i % 256), count: Int(fileSize))
             let fileName = "TestFile\(i)"
