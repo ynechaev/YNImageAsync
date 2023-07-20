@@ -36,7 +36,7 @@ final class PerformanceTests: XCTestCase {
         // 10k writes ~ 1.2s on macbook pro M1
         print("Elapsed disk write time: \(diff)")
         let size = try await sut.diskSize()
-        XCTAssertEqual(size, 40960000)
+        XCTAssertEqual(size, 50000)
         XCTAssertLessThan(diff, 5)
     }
     

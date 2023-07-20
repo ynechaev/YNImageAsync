@@ -16,7 +16,7 @@ public protocol Caching {
 }
 
 protocol CacheLimiting {
-    func updateCacheLimit(_ limit: UInt64) async
+    func updateCacheLimit(_ limit: UInt64) async throws
 }
 
 public struct CacheOptions: OptionSet {
