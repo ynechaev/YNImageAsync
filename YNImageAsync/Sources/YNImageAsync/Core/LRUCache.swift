@@ -37,7 +37,7 @@ actor LRUCache<Key: Hashable>: CacheLimiting {
 
         // Check if we have enough space in the cache to store the data.
         while totalSize + dataSize > maxTotalSize, let keyToRemove = recentKeys.last {
-            remove(with: keyToRemove)
+            evict(with: keyToRemove)
         }
 
         // Store the data in the cache.
@@ -62,11 +62,11 @@ actor LRUCache<Key: Hashable>: CacheLimiting {
     
     private func enforceCacheLimit() async {
         while totalSize > maxTotalSize, let keyToRemove = recentKeys.last {
-            remove(with: keyToRemove)
+            evict(with: keyToRemove)
         }
     }
     
-    private func remove(with key: Key) {
+    private func evict(with key: Key) {
         totalSize -= UInt64(cache[key]?.count ?? 0)
         cache[key] = nil
         recentKeys.removeLast()
