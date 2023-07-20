@@ -9,42 +9,47 @@
 import UIKit
 import YNImageAsync
 
-class ListViewController: UITableViewController, URLSessionTaskDelegate {
+class ListViewController: UITableViewController {
     @IBOutlet weak var clearCacheButton: UIBarButtonItem!
     
-    var dataProvider: ListDataProvider?
-    var imageCollection: Array <ListObject> = []
+    let dataProvider = ListDataProvider()
+    var viewModel: ListViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupDataProvider()
+        fetchData()
     }
     
-    func setupDataProvider() {
-        dataProvider = ListDataProvider(completionClosure: { (result, error) in
-            if let completionResult = result {
-                self.imageCollection = completionResult
-                self.tableView.reloadData()
-            } else {
-                self.handleError(error)
+    func fetchData() {
+        Task {
+            do {
+                if let model = try await dataProvider.loadList() {
+                    viewModel = .init(response: model)
+                    tableView.reloadData()
+                }
+            } catch {
+                handleError(error)
             }
-        })
-    }
-    
-    func handleError(_ error: NSError?) {
-        if let responseError = error {
-            print("Error occured: \(responseError)")
         }
     }
     
+    func handleError(_ error: Error) {
+        print("Error occured: \(error)")
+        let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        present(alertController, animated: true)
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return imageCollection.count
+        return viewModel?.images?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt
         indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.reuseIdentifier(), for: indexPath) as! ListTableViewCell
-        cell.setDataObject(imageCollection[(indexPath as NSIndexPath).row])
+        guard let model = viewModel?.images?[indexPath.row] else {
+            return cell
+        }
+        cell.configureView(model)
         return cell
     }
     

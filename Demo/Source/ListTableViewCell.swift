@@ -9,16 +9,10 @@
 import UIKit
 import YNImageAsync
 
-class ListTableViewCell: UITableViewCell, ListCellDataProtocol {
+class ListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var cellImage: UIImageView!
     @IBOutlet weak var cellTitle: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.cellImage.layer.rasterizationScale = UIScreen.main.scale
-        self.cellImage.layer.shouldRasterize = true
-    }
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -28,10 +22,11 @@ class ListTableViewCell: UITableViewCell, ListCellDataProtocol {
     static func reuseIdentifier() -> String {
         return String(describing: ListTableViewCell.self)
     }
-    
-    func setDataObject<T: Any>(_ dataObject: T) where T: ListCellObjectProtocol {
-        self.cellImage.setImage(with: dataObject.imageUrl)
-        self.cellTitle.text = dataObject.imageTitle
+}
+
+extension ListTableViewCell: ViewConfigurable {
+    func configureView(_ model: ItemViewModel) {
+        self.cellImage.setImage(with: model.imageUrl)
+        self.cellTitle.text = model.imageTitle
     }
-    
 }

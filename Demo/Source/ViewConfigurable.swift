@@ -1,5 +1,5 @@
 //
-//  YNCellObjectProtocol.swift
+//  YNCellDataProtocol.swift
 //  ImageAsyncTest
 //
 //  Created by Yury Nechaev on 15.10.16.
@@ -8,9 +8,8 @@
 
 import Foundation
 
-public protocol ListCellObjectProtocol {
+protocol ViewConfigurable {
+    associatedtype Model
     
-    var imageUrl: String { get }
-    var imageTitle: String { get }
-    
+    func configureView(_ model: Model)
 }
