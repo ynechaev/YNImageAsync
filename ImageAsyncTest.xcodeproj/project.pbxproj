@@ -21,6 +21,7 @@
 		DA71E7922A671DCC00A366A2 /* YNImageAsync in Frameworks */ = {isa = PBXBuildFile; productRef = DA71E7912A671DCC00A366A2 /* YNImageAsync */; };
 		DAB170302A697C7000899D0E /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1702F2A697C7000899D0E /* ListViewModel.swift */; };
 		DAB170322A697C9C00899D0E /* ListResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB170312A697C9C00899D0E /* ListResponseModel.swift */; };
+		DAB170352A699CC300899D0E /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = DAB170342A699CC300899D0E /* OrderedCollections */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -61,6 +62,7 @@
 			files = (
 				DA71E7922A671DCC00A366A2 /* YNImageAsync in Frameworks */,
 				06EE758F1A0ABB65007BE5B0 /* CoreGraphics.framework in Frameworks */,
+				DAB170352A699CC300899D0E /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +157,7 @@
 			name = Demo;
 			packageProductDependencies = (
 				DA71E7912A671DCC00A366A2 /* YNImageAsync */,
+				DAB170342A699CC300899D0E /* OrderedCollections */,
 			);
 			productName = ImageAsyncTest;
 			productReference = 062AC0031A0827E000744325 /* Demo.app */;
@@ -188,6 +191,9 @@
 				Base,
 			);
 			mainGroup = 062ABFFA1A0827E000744325;
+			packageReferences = (
+				DAB170332A699CC300899D0E /* XCRemoteSwiftPackageReference "swift-collections" */,
+			);
 			productRefGroup = 062AC0041A0827E000744325 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -422,10 +428,26 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		DAB170332A699CC300899D0E /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		DA71E7912A671DCC00A366A2 /* YNImageAsync */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = YNImageAsync;
+		};
+		DAB170342A699CC300899D0E /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DAB170332A699CC300899D0E /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

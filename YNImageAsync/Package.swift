@@ -7,15 +7,25 @@ let package = Package(
     name: "YNImageAsync",
     platforms: [
         .iOS(.v13)
-               ],
+    ],
     products: [
         .library(
             name: "YNImageAsync",
             targets: ["YNImageAsync"]),
     ],
+    dependencies: [
+        .package(
+            url: "https://github.com/apple/swift-collections.git",
+            .upToNextMajor(from: "1.0.0")
+        )
+    ],
     targets: [
         .target(
-            name: "YNImageAsync"),
+            name: "YNImageAsync",
+            dependencies: [
+                .product(name: "Collections", package: "swift-collections")
+            ]
+        ),
         .testTarget(
             name: "YNImageAsyncTests",
             dependencies: ["YNImageAsync"]
