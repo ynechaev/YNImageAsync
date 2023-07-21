@@ -23,12 +23,7 @@ class DiskCacheProviderTests: XCTestCase {
     
     override func tearDown() async throws {
         try await super.tearDown()
-        do {
-            // Clear the cache after each test
-            try await cacheProvider.clear()
-        } catch {
-            XCTFail("Failed to clear the cache: \(error)")
-        }
+        try await cacheProvider.clear()
     }
     
     func testCacheLimitEnforcement() async throws {
@@ -58,7 +53,7 @@ class DiskCacheProviderTests: XCTestCase {
     
     private func createAndFillCacheWithFiles(fileSize: UInt64, numFiles: Int) -> [URL] {
         var urls: [URL] = []
-        try! FileManager.default.createDirectory(atPath: DiskCacheProvider.cachePath.absoluteString, withIntermediateDirectories: true, attributes: nil)
+        try! FileManager.default.createDirectory(at: DiskCacheProvider.cachePath, withIntermediateDirectories: true, attributes: nil)
         for i in 0..<numFiles {
             let data = Data(repeating: UInt8(i % 256), count: Int(fileSize))
             let fileName = "TestFile\(i)"
