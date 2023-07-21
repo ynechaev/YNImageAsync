@@ -1,6 +1,10 @@
 YNImageAsync
 ==========
-[![Build Status](https://travis-ci.org/ynechaev/YNImageAsync.svg?branch=master)](https://travis-ci.org/ynechaev/YNImageAsync) [![CocoaPods](https://img.shields.io/cocoapods/v/YNImageAsync.svg)]() [![license](https://img.shields.io/github/license/ynechaev/YNImageAsync.svg)]()
+![Build Status](https://github.com/ynechaev/YNImageAsync/actions/workflows/ios.yml/badge.svg)
+![Swift package status](https://github.com/ynechaev/YNImageAsync/actions/workflows/swift.yml/badge.svg)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=ynechaev_YNImageAsync&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=ynechaev_YNImageAsync)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=ynechaev_YNImageAsync&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=ynechaev_YNImageAsync)
+![license](https://img.shields.io/github/license/ynechaev/YNImageAsync.svg)
 
 #About
 YNImageAsync is a lightweight and convenient framework for fetching and caching images.
