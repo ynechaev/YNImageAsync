@@ -60,7 +60,7 @@ actor MemoryCacheProvider: Caching {
     
     private func didReceive(memoryPressureEvent: DispatchSource.MemoryPressureEvent) {
         switch memoryPressureEvent {
-        case .warning, .critical:
+        case .critical:
             Task {
                 let size = try? await size()
                 yn_logError("🔥 Memory pressure detected: \(memoryPressureEvent)\nCache size: \(String(describing: size))")
