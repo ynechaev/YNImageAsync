@@ -15,8 +15,8 @@ actor DiskCacheProvider: Caching {
     private(set) var maxCacheSize : UInt64
     private var accessTimestamps = [URL: Date]()
 
-    private static let cacheDirectory: URL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
-    private static let applicationSupportDirectory: URL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+    private static let cacheDirectory: URL = try! FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+    private static let applicationSupportDirectory: URL = try! FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
 
     static let cachePath: URL = cacheDirectory.appendingPathComponent(cacheName)
     
