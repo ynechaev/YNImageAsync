@@ -90,6 +90,8 @@ public struct CacheOptions: OptionSet {
         for cache in [memoryCache, diskCache] {
             try await cache?.clear()
         }
+        diskStoreTasks.values.forEach { $0.cancel() }
+        diskStoreTasks.removeAll()
     }
     
     // MARK: - Composer public API

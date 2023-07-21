@@ -58,7 +58,7 @@ final class PerformanceTests: XCTestCase {
         }
         await fulfillment(of: [exp], timeout: 5)
         let diff = Double(clock() - begin) / Double(CLOCKS_PER_SEC)
-        // 10k writes ~ 0.18s on macbook pro M1
+        // 10k writes ~ 0.2s on macbook pro M1
         print("Elapsed memory write time: \(diff)")
         let size = try await sut.memorySize()
         XCTAssertEqual(size, 50000)
