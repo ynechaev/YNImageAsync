@@ -10,10 +10,10 @@ YNImageAsync
 YNImageAsync is a lightweight and convenient framework for fetching and caching images.
 
 # Features
-- Fully written in Swift 5
+- Fast
+- Swift 5 and no ObjC
 - Asynchronous image loading with async/await
 - LRUCache for both memory and disk cache
-- Fast
 - Supports both memory and drive caching
 - Configurable with size limit for every kind of cache
 - Good unit and performance test coverage
