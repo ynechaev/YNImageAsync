@@ -14,17 +14,9 @@ YNImageAsync is a lightweight and convenient framework for fetching and caching 
 - Swift 5 and no ObjC
 - Asynchronous image loading with async/await
 - LRUCache for both memory and disk cache
-- Supports both memory and drive caching
 - Configurable with size limit for every kind of cache
 - Good unit and performance test coverage
 - UIImageView extension for fast and out-of-the-box image loading.
-
-#### Why not %framework_name%?
-Here are some results of performing 10k requests by popular frameworks:
-![image](https://cloud.githubusercontent.com/assets/1216785/19865426/76fe4eea-9f9c-11e6-90f1-3374a4f11c6a.png)
-
-(smaller time is better)
-You can check it by yourself by launching [this benchmark project tests](https://github.com/ynechaev/Image-Frameworks-Benchmark).
 
 # Install
 ### Using SPM
@@ -64,6 +56,12 @@ func testCache() async throws {
 You can easily configure storage during initialization and during runtime as well
 ```swift
 await CacheComposer.shared.updateOptions([.memory])
+```
+
+### Set cache size limit
+```swift
+let cache = DiskCacheProvider()
+try await cache.updateCacheLimit(UInt64(100 * 1024 * 1024))
 ```
 
 # Upcoming features
