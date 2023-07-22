@@ -43,6 +43,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Print contents of working directory
+        run: ls -la
+        
       - name: Analyze with SonarCloud
 
         # You can pin the exact commit or the version.
