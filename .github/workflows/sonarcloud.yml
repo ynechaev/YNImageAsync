@@ -56,3 +56,4 @@ jobs:
             -Dsonar.projectKey=ynechaev_YNImageAsync
             -Dsonar.organization=ynechaev
             -Dsonar.verbose=true
+            -Dsonar.scm.exclusions.disabled=true
