@@ -57,4 +57,4 @@ jobs:
             -Dsonar.organization=ynechaev
             -Dsonar.verbose=true
             -Dsonar.scm.exclusions.disabled=true
-            -Dsonar.projectBaseDir=.YNImageAsync
+            -Dsonar.projectBaseDir=YNImageAsync
