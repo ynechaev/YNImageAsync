@@ -56,5 +56,3 @@ jobs:
           args: >
             -Dsonar.projectKey=ynechaev_YNImageAsync
             -Dsonar.organization=ynechaev
-            -Dsonar.projectBaseDir=./YNImageAsync
-            -Dsonar.tests=./YNImageAsync/Tests
