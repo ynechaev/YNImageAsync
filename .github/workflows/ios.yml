@@ -33,11 +33,6 @@ jobs:
           if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then filetype_parameter="workspace" && file_to_build="`ls -A | grep -i \\.xcworkspace\$`"; else filetype_parameter="project" && file_to_build="`ls -A | grep -i \\.xcodeproj\$`"; fi
           file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
           xcodebuild build-for-testing -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device"
-          # Save build artifacts
-          mkdir build_output
-          cp -R build/Logs/Test/*.xcresult build_output/
-          tar -czvf build_output.tar.gz build_output
-          echo "::set-output name=build_artifact::build_output.tar.gz"
       - name: Test
         env:
           scheme: ${{ 'default' }}
@@ -48,16 +43,10 @@ jobs:
           if [ $scheme = default ]; then scheme=$(cat default); fi
           if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then filetype_parameter="workspace" && file_to_build="`ls -A | grep -i \\.xcworkspace\$`"; else filetype_parameter="project" && file_to_build="`ls -A | grep -i \\.xcodeproj\$`"; fi
           file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
-          xcodebuild test-without-building -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -enableCodeCoverage YES
+          xcodebuild test-without-building -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -enableCodeCoverage YES -derivedDataPath DerivedData -resultBundlePath artifacts/ResultBundle.xcresult
           # Collect code coverage data from .xcresult
-          xcrun xccov view --report --json YOUR_TEST_RESULTS_DIRECTORY/Actions.xcresult > coverage.json
-          
-          # Convert to Cobertura XML format
-          xcrun llvm-cov export -format="cobertura" coverage.json > cobertura.xml
-          
-          # Save Cobertura XML report as an artifact
-          mkdir coverage_report
-          mv cobertura.xml coverage_report/
-          tar -czvf coverage_report.tar.gz coverage_report
-          echo "::set-output name=coverage_report_artifact::coverage_report.tar.gz"
+          xcresultparser --output-format cobertura artifacts/ResultBundle.xcresult > artifacts/coverage.xml
+          # Save report as an artifact
+          tar -czvf artifacts.tar.gz artifacts
+          echo "::set-output name=artifacts::artifacts.tar.gz"
 
