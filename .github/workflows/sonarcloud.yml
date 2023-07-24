@@ -2,7 +2,7 @@ name: SonarCloud analysis
 
 on:
   workflow_run:
-    workflows: ["ios"]
+    workflows: ["XCode build & test"]
     types:
       - completed
   push:
