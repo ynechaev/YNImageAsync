@@ -24,6 +24,7 @@ jobs:
           echo Using default scheme: $default
       - name: Install xcresultparser
         run: |
+          brew tap a7ex/homebrew-formulae
           brew install xcresultparser
       - name: Build
         env:
