@@ -22,6 +22,9 @@ jobs:
           default="YNImageAsync"
           echo $default | cat >default
           echo Using default scheme: $default
+      - name: Install xcresultparser
+        run: |
+          brew install xcresultparser
       - name: Build
         env:
           scheme: ${{ 'default' }}
