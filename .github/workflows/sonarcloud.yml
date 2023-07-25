@@ -33,4 +33,4 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.cobertura.reportPaths=artifacts/cobertura.xml
+            -Dsonar.cobertura.reportPaths=artifacts/coverage.xml
