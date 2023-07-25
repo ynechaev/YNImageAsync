@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    name: Build and Test YNImageAsyncTests scheme
+    name: Build and Test YNImageAsync scheme
     runs-on: macos-13
 
     steps:
@@ -19,9 +19,13 @@ jobs:
         uses: actions/checkout@v3
       - name: Set Default Scheme
         run: |
-          default="YNImageAsyncTests"
+          default="YNImageAsync"
           echo $default | cat >default
           echo Using default scheme: $default
+      - name: Install xcresultparser
+        run: |
+          brew tap a7ex/homebrew-formulae
+          brew install xcresultparser
       - name: Build
         env:
           scheme: ${{ 'default' }}
@@ -32,7 +36,7 @@ jobs:
           if [ $scheme = default ]; then scheme=$(cat default); fi
           if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then filetype_parameter="workspace" && file_to_build="`ls -A | grep -i \\.xcworkspace\$`"; else filetype_parameter="project" && file_to_build="`ls -A | grep -i \\.xcodeproj\$`"; fi
           file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
-          xcodebuild build-for-testing -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device"
+          xcodebuild build-for-testing -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -derivedDataPath DerivedData
       - name: Test
         env:
           scheme: ${{ 'default' }}
@@ -43,5 +47,15 @@ jobs:
           if [ $scheme = default ]; then scheme=$(cat default); fi
           if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then filetype_parameter="workspace" && file_to_build="`ls -A | grep -i \\.xcworkspace\$`"; else filetype_parameter="project" && file_to_build="`ls -A | grep -i \\.xcodeproj\$`"; fi
           file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
-          xcodebuild test-without-building -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device"
+          xcodebuild test-without-building -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -enableCodeCoverage YES -derivedDataPath DerivedData -resultBundlePath artifacts/ResultBundle.xcresult
+          # Collect code coverage data from .xcresult
+          xcresultparser --output-format cobertura artifacts/ResultBundle.xcresult > artifacts/coverage.xml
+          # Save report as an artifact
+          tar -czvf artifacts.tar.gz artifacts
+          echo "::set-output name=artifacts::artifacts.tar.gz"
+      - name: Archive Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifacts
+          path: artifacts.tar.gz
 
