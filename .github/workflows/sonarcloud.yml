@@ -5,11 +5,6 @@ on:
     workflows: ["XCode build & test"]
     types:
       - completed
-  push:
-    branches: [ "master" ]
-  pull_request:
-    types: [opened, synchronize, reopened]
-  workflow_dispatch:
 
 permissions:
   pull-requests: read # allows SonarCloud to decorate PRs with analysis results
