@@ -2,7 +2,7 @@ name: SonarCloud analysis
 
 on:
   workflow_run:
-    workflows: ["Build and Test YNImageAsync scheme"]
+    workflows: ["XCode build & test"]
     types:
       - completed
   push:
