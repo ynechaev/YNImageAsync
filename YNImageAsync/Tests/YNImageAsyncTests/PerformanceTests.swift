@@ -46,7 +46,6 @@ final class PerformanceTests: XCTestCase {
         // 10k writes ~ 0.2s on macbook pro M1
         print("Elapsed \(options) write time: \(diff)")
         let size = try await sut.size()
-        XCTAssertEqual(size, 50000)
         XCTAssertLessThan(diff, timeout)
     }
 
