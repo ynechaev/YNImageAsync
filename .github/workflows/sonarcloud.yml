@@ -1,10 +1,10 @@
 name: SonarCloud analysis
 
 on:
-  workflow_run:
-    workflows: ["XCode build & test"]
-    types:
-      - completed
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 
 permissions:
   pull-requests: read # allows SonarCloud to decorate PRs with analysis results
@@ -16,10 +16,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.workflow_run.head_branch }}
           fetch-depth: 0
-      - run: git branch
-      - run: env
+      - name: Wait for tests to succeed
+        uses: lewagon/wait-on-check-action@v1.3.1
+        with:
+          ref: ${{ github.ref }}
+          check-name: 'Build and Test YNImageAsync scheme'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
       - name: Download Build Artifacts
         uses: actions/download-artifact@v2
         with:
