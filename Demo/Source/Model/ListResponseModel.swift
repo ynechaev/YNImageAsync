@@ -9,7 +9,7 @@
 import Foundation
 
 struct ListResponse: Codable {
-    let images: [ListObject]?
+    let images: [ListObject]
 }
 
 struct ListObject: Codable {

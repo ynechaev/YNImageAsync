@@ -7,12 +7,29 @@
 //
 
 import Foundation
+import Combine
 
-struct ListViewModel {
-    let images: [ItemViewModel]?
+final class ListViewModel: ObservableObject {
+    @Published private(set) var images = [ItemViewModel]()
+    @Published private(set) var error: APIError?
     
-    init(response: ListResponse) {
-        self.images = response.images?.compactMap { ItemViewModel(imageUrl: $0.url, imageTitle: $0.title) }
+    private let api: ListDataProvider
+    
+    init(api: ListDataProvider = ListDataProvider()) {
+        self.api = api
+    }
+    
+    func fetch() {
+        api.loadList()
+            .map(\.images)
+            .map { $0.map { ItemViewModel(imageUrl: $0.url, imageTitle: $0.title) } }
+            .catch { [weak self] error -> AnyPublisher<[ItemViewModel], Never> in
+                print("API Error occured: \(error)")
+                self?.error = error
+                return Just([])
+                    .eraseToAnyPublisher()
+            }
+            .assign(to: &$images)
     }
 }
 
