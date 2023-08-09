@@ -13,3 +13,8 @@ jobs:
   call-sonarcloud:
     needs: call-ios
     uses: ./.github/workflows/sonarcloud.yaml
+  print:
+    needs: [call-ios]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "${{ needs.call-ios }}"
