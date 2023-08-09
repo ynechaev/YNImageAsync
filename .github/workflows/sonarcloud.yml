@@ -1,7 +1,9 @@
-name: SonarCloud analysis
+name: sonarcloud
 
 on:
-  workflow_call:
+  workflow_run:
+    workflows: ["ios"]
+    types: [completed] #requested
 
 permissions:
   pull-requests: read # allows SonarCloud to decorate PRs with analysis results
