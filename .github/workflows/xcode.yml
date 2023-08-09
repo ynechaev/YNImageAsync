@@ -1,0 +1,15 @@
+name: Demo1
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+  call-ios:
+    uses: ./.github/workflows/ios.yaml
+  call-sonarcloud:
+    needs: call-ios
+    uses: ./.github/workflows/sonarcloud.yaml
