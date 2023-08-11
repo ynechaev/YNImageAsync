@@ -84,7 +84,7 @@ actor DiskCacheProvider: Caching {
     }
     
     private static func fileKeyUrl(_ url: URL) throws -> URL {
-        let fileKey = url.absoluteString.MD5()
+        let fileKey = url.absoluteString.md5()
         return try DiskCacheProvider.fileInCacheDirectory(filename: fileKey)
     }
 }
@@ -212,7 +212,7 @@ fileprivate extension URL {
 }
 
 fileprivate extension StringProtocol {
-    func MD5() -> String {
+    func md5() -> String {
         let digest = Insecure.MD5.hash(data: Data(utf8))
         return digest.map {
             String(format: "%02hhx", $0)
