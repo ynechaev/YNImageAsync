@@ -8,29 +8,29 @@
 
 import UIKit
 import YNImageAsync
+import Combine
 
 class ListViewController: UITableViewController {
+    private var subscriptions = Set<AnyCancellable>()
+    
     @IBOutlet weak var clearCacheButton: UIBarButtonItem!
     
     let dataProvider = ListDataProvider()
-    var viewModel: ListViewModel?
+    let viewModel = ListViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchData()
-    }
-    
-    func fetchData() {
-        Task {
-            do {
-                if let model = try await dataProvider.loadList() {
-                    viewModel = .init(response: model)
-                    tableView.reloadData()
+        viewModel.$images
+            .makeConnectable()
+            .autoconnect()
+            .sink { _ in
+                DispatchQueue.main.async { [weak self] in
+                    guard let self else { return }
+                    self.tableView.reloadData()
                 }
-            } catch {
-                handleError(error)
             }
-        }
+            .store(in: &subscriptions)
+        viewModel.fetch()
     }
     
     func handleError(_ error: Error) {
@@ -40,15 +40,13 @@ class ListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.images?.count ?? 0
+        return viewModel.images.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt
         indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.reuseIdentifier(), for: indexPath) as! ListTableViewCell
-        guard let model = viewModel?.images?[indexPath.row] else {
-            return cell
-        }
+        let model = viewModel.images[indexPath.row]
         cell.configureView(model)
         return cell
     }

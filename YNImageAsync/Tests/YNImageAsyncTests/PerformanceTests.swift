@@ -11,7 +11,7 @@ import XCTest
 final class PerformanceTests: XCTestCase {
     
     override func setUp() async throws {
-        try FileManager.default.clearDirectory(with: DiskCacheProvider.cachePath)
+        try FileManager.default.clearDirectory(with: DiskCacheProvider.cachePath())
         try await CacheComposer.shared.clear()
     }
     
@@ -45,7 +45,6 @@ final class PerformanceTests: XCTestCase {
         let diff = Double(clock() - begin) / Double(CLOCKS_PER_SEC)
         // 10k writes ~ 0.2s on macbook pro M1
         print("Elapsed \(options) write time: \(diff)")
-        let size = try await sut.size()
         XCTAssertLessThan(diff, timeout)
     }
 
