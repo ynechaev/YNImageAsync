@@ -11,7 +11,7 @@ import XCTest
 final class PerformanceTests: XCTestCase {
     
     override func setUp() async throws {
-        try FileManager.default.clearDirectory(with: DiskCacheProvider.cachePath)
+        try FileManager.default.clearDirectory(with: DiskCacheProvider.cachePath())
         try await CacheComposer.shared.clear()
     }
     
