@@ -11,14 +11,25 @@ import CryptoKit
 actor DiskCacheProvider: Caching {
     private static let cacheName = "YNImageAsync"
     private static let plistName = "AccessTimestamps.plist"
-    private static let accessTimestampsURL: URL = applicationSupportDirectory.appendingPathComponent(plistName)
+    
     private(set) var maxCacheSize : UInt64
     private var accessTimestamps = [URL: Date]()
+    
+    private static func cacheDirectory() throws -> URL {
+        try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+    }
+    
+    private static func applicationSupportDirectory() throws -> URL {
+        try FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+    }
+    
+    private static func accessTimestampsURL() throws -> URL {
+        try applicationSupportDirectory().appendingPathComponent(plistName)
+    }
 
-    private static let cacheDirectory: URL = try! FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-    private static let applicationSupportDirectory: URL = try! FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-
-    static let cachePath: URL = cacheDirectory.appendingPathComponent(cacheName)
+    static func cachePath() throws -> URL {
+        try cacheDirectory().appendingPathComponent(cacheName)
+    }
     
     init(maxCacheSize: UInt64 = .max) {
         self.maxCacheSize = maxCacheSize
@@ -40,11 +51,11 @@ actor DiskCacheProvider: Caching {
     }
     
     func size() async throws -> UInt64 {
-        try FileManager.default.allocatedSizeOfDirectory(at: DiskCacheProvider.cachePath)
+        try FileManager.default.allocatedSizeOfDirectory(at: DiskCacheProvider.cachePath())
     }
     
     func clear() async throws {
-        try FileManager.default.clearDirectory(with: DiskCacheProvider.cachePath)
+        try FileManager.default.clearDirectory(with: DiskCacheProvider.cachePath())
         try deleteTimestampFile()
     }
     
@@ -59,7 +70,7 @@ actor DiskCacheProvider: Caching {
     }
     
     private static func fileInCacheDirectory(filename: String) throws -> URL {
-        let cachePath = DiskCacheProvider.cachePath
+        let cachePath = try DiskCacheProvider.cachePath()
         
         if (!FileManager.default.fileExists(atPath: cachePath.path)) {
             try FileManager.default.createDirectory(atPath: cachePath.path, withIntermediateDirectories: false, attributes: nil)
@@ -73,7 +84,7 @@ actor DiskCacheProvider: Caching {
     }
     
     private static func fileKeyUrl(_ url: URL) throws -> URL {
-        let fileKey = url.absoluteString.MD5()
+        let fileKey = url.absoluteString.md5()
         return try DiskCacheProvider.fileInCacheDirectory(filename: fileKey)
     }
 }
@@ -117,7 +128,7 @@ extension DiskCacheProvider: CacheLimiting {
     private func readAccessTimestampsFromFile() throws {
         do {
             // Read the access timestamps from the file
-            let data = try Data(contentsOf: Self.accessTimestampsURL)
+            let data = try Data(contentsOf: Self.accessTimestampsURL())
             let decoder = PropertyListDecoder()
             let fileAccessTimestamps = try decoder.decode([URL: Date].self, from: data)
             
@@ -140,12 +151,12 @@ extension DiskCacheProvider: CacheLimiting {
     private func saveAccessTimestampsToFile() throws {
         let encoder = PropertyListEncoder()
         let data = try encoder.encode(accessTimestamps)
-        try data.write(to: Self.accessTimestampsURL)
+        try data.write(to: Self.accessTimestampsURL())
     }
     
     private func deleteTimestampFile() throws {
         do {
-            try FileManager.default.removeItem(at: Self.accessTimestampsURL)
+            try FileManager.default.removeItem(at: Self.accessTimestampsURL())
         } catch let error as NSError {
             try handleError(error, silence: [.missingFile])
         }
@@ -201,7 +212,7 @@ fileprivate extension URL {
 }
 
 fileprivate extension StringProtocol {
-    func MD5() -> String {
+    func md5() -> String {
         let digest = Insecure.MD5.hash(data: Data(utf8))
         return digest.map {
             String(format: "%02hhx", $0)

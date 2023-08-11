@@ -30,7 +30,7 @@ class DiskCacheProviderTests: XCTestCase {
         // Fill the cache with files until it exceeds the cache size
         let fileSize: UInt64 = 512 * 1024 // 512 KB
         let numFilesToFillCache = 5
-        let urls = createAndFillCacheWithFiles(fileSize: fileSize, numFiles: numFilesToFillCache)
+        let urls = try createAndFillCacheWithFiles(fileSize: fileSize, numFiles: numFilesToFillCache)
         
         // Access the files to update access timestamps
         for url in urls {
@@ -51,13 +51,13 @@ class DiskCacheProviderTests: XCTestCase {
         XCTAssertLessThanOrEqual(size2, maxSize2)
     }
     
-    private func createAndFillCacheWithFiles(fileSize: UInt64, numFiles: Int) -> [URL] {
+    private func createAndFillCacheWithFiles(fileSize: UInt64, numFiles: Int) throws -> [URL] {
         var urls: [URL] = []
-        try! FileManager.default.createDirectory(at: DiskCacheProvider.cachePath, withIntermediateDirectories: true, attributes: nil)
+        try FileManager.default.createDirectory(at: DiskCacheProvider.cachePath(), withIntermediateDirectories: true, attributes: nil)
         for i in 0..<numFiles {
             let data = Data(repeating: UInt8(i % 256), count: Int(fileSize))
             let fileName = "TestFile\(i)"
-            let fileURL = DiskCacheProvider.cachePath.appendingPathComponent(fileName)
+            let fileURL = try DiskCacheProvider.cachePath().appendingPathComponent(fileName)
             do {
                 try data.write(to: fileURL)
                 urls.append(fileURL)

@@ -14,11 +14,11 @@ class CacheComposerTests: XCTestCase {
     static let imageData = "image".data(using: .utf8)!
     
     override func setUp() async throws {
-        try FileManager.default.clearDirectory(with: DiskCacheProvider.cachePath)
+        try FileManager.default.clearDirectory(with: DiskCacheProvider.cachePath())
     }
     
     override func tearDown() async throws {
-        try FileManager.default.clearDirectory(with: DiskCacheProvider.cachePath)
+        try FileManager.default.clearDirectory(with: DiskCacheProvider.cachePath())
     }
     
     func test_store() async throws {
