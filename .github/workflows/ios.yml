@@ -1,4 +1,4 @@
-name: XCode build & test
+name: ci-ios
 
 env:
   DEVELOPER_DIR: /Applications/Xcode_14.3.1.app/Contents/Developer
@@ -11,7 +11,6 @@ on:
 
 jobs:
   build:
-    name: Build and Test YNImageAsync scheme
     runs-on: macos-13
 
     steps:
