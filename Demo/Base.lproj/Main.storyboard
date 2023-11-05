@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5b1-bf-hmc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5b1-bf-hmc">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="ec5-y0-jJB" kind="relationship" relationship="rootViewController" id="HJd-eL-DJY"/>
+                        <segue destination="iIl-Ug-gk1" kind="relationship" relationship="rootViewController" id="e9w-PS-4Gj"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L9M-Rw-5Ht" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -25,74 +26,76 @@
             <point key="canvasLocation" x="-497" y="-401"/>
         </scene>
         <!--List View Controller-->
-        <scene sceneID="LsC-pX-RLA">
+        <scene sceneID="sds-In-boA">
             <objects>
-                <tableViewController id="ec5-y0-jJB" customClass="ListViewController" customModule="Demo" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" id="Bbj-YS-bb5">
+                <collectionViewController id="iIl-Ug-gk1" customClass="ListViewController" customModule="Demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="rqa-xQ-fmj">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListTableViewCell" rowHeight="90" id="6Qs-2L-5KE" customClass="ListTableViewCell" customModule="Demo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="50" width="393" height="90"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6Qs-2L-5KE" id="geL-b3-Nmk">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="90"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cZh-xf-OO7">
+                            <size key="itemSize" width="393" height="122"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ListCollectionViewCell" id="Kef-XZ-aDj" customClass="ListCollectionViewCell" customModule="Demo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="122"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="KSU-yg-k3J">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="122"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Fye-LS-RvE">
-                                            <rect key="frame" x="8" y="15" width="60" height="60"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-image" translatesAutoresizingMaskIntoConstraints="NO" id="hY1-cb-rle">
+                                            <rect key="frame" x="8" y="31" width="60" height="60"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="60" id="33Z-Ob-fbA"/>
-                                                <constraint firstAttribute="height" constant="60" id="GBs-Dh-I6C"/>
+                                                <constraint firstAttribute="height" constant="60" id="1F4-ME-6hF"/>
+                                                <constraint firstAttribute="width" constant="60" id="hfF-TM-5Nu"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bOx-9g-yL6">
-                                            <rect key="frame" x="82" y="13" width="303" height="64"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                            <color key="textColor" systemColor="darkTextColor"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UUa-Sp-mMl">
+                                            <rect key="frame" x="76" y="50.666666666666664" width="33" height="20.999999999999993"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="bOx-9g-yL6" firstAttribute="leading" secondItem="Fye-LS-RvE" secondAttribute="trailing" constant="14" id="2zK-I0-9Tx"/>
-                                        <constraint firstItem="Fye-LS-RvE" firstAttribute="leading" secondItem="geL-b3-Nmk" secondAttribute="leading" constant="8" id="3zr-Ou-VWm"/>
-                                        <constraint firstAttribute="bottom" secondItem="bOx-9g-yL6" secondAttribute="bottom" constant="13" id="Ln9-49-dqe"/>
-                                        <constraint firstAttribute="trailing" secondItem="bOx-9g-yL6" secondAttribute="trailing" constant="8" id="UAz-Dk-IjM"/>
-                                        <constraint firstItem="Fye-LS-RvE" firstAttribute="centerY" secondItem="geL-b3-Nmk" secondAttribute="centerY" id="VJc-Fd-u7L"/>
-                                        <constraint firstItem="bOx-9g-yL6" firstAttribute="top" secondItem="geL-b3-Nmk" secondAttribute="top" constant="13" id="pxQ-08-H9V"/>
+                                        <constraint firstItem="hY1-cb-rle" firstAttribute="leading" secondItem="KSU-yg-k3J" secondAttribute="leadingMargin" id="Ezv-uU-cFM"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="UUa-Sp-mMl" secondAttribute="trailing" constant="20" id="HoV-m5-2IU"/>
+                                        <constraint firstItem="hY1-cb-rle" firstAttribute="centerY" secondItem="KSU-yg-k3J" secondAttribute="centerY" id="g8g-6Q-0EW"/>
+                                        <constraint firstItem="UUa-Sp-mMl" firstAttribute="leading" secondItem="hY1-cb-rle" secondAttribute="trailing" constant="8" id="jBx-R8-qC6"/>
+                                        <constraint firstItem="hY1-cb-rle" firstAttribute="centerY" secondItem="UUa-Sp-mMl" secondAttribute="centerY" id="xrU-VN-06m"/>
                                     </constraints>
-                                </tableViewCellContentView>
+                                </collectionViewCellContentView>
+                                <size key="customSize" width="393" height="122"/>
                                 <connections>
-                                    <outlet property="cellImage" destination="Fye-LS-RvE" id="qkY-zt-juX"/>
-                                    <outlet property="cellTitle" destination="bOx-9g-yL6" id="IRu-xi-a7k"/>
+                                    <outlet property="imageView" destination="hY1-cb-rle" id="ETR-PC-Cei"/>
+                                    <outlet property="titleLabel" destination="UUa-Sp-mMl" id="kNT-fX-XeD"/>
                                 </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="ec5-y0-jJB" id="Qb7-2A-lxr"/>
-                            <outlet property="delegate" destination="ec5-y0-jJB" id="oa9-Kw-VWb"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="I4j-Cz-PZh">
-                        <barButtonItem key="leftBarButtonItem" title="Clear all cache" id="4PV-yD-C4L">
+                            </collectionViewCell>
+                        </cells>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="USd-vv-USV">
+                        <barButtonItem key="leftBarButtonItem" title="Clear cache" id="jh9-lz-l4c">
                             <connections>
-                                <action selector="didTapClearCacheWithSender:" destination="ec5-y0-jJB" id="4hB-RD-ser"/>
+                                <action selector="didTapClearCacheWithSender:" destination="iIl-Ug-gk1" id="1cl-Pm-hQx"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Settings" id="eyK-wQ-zC6">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="3lP-IT-XF5">
                             <connections>
-                                <segue destination="Z7w-8e-PiD" kind="presentation" id="5R4-3x-lNa"/>
+                                <segue destination="Z7w-8e-PiD" kind="presentation" id="WWY-fh-0rv"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="clearCacheButton" destination="4PV-yD-C4L" id="7xz-wM-TiF"/>
+                        <outlet property="clearCacheButton" destination="jh9-lz-l4c" id="zcn-Pp-FFB"/>
                     </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QV0-1Z-0eY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fRR-6B-g0r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="269.60000000000002" y="-400.74962518740631"/>
+            <point key="canvasLocation" x="310.68702290076334" y="-403.52112676056339"/>
         </scene>
         <!--Settings Controller-->
         <scene sceneID="2wB-JJ-OsS">
@@ -243,9 +246,7 @@
         </scene>
     </scenes>
     <resources>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="placeholder-image" width="59.333332061767578" height="40"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

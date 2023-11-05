@@ -9,6 +9,8 @@
 import UIKit
 
 extension UIImageView {
+    private static var queue = DispatchQueue(label: "image-view-tasks", attributes: .concurrent)
+
     typealias ImageTask = Task<Void, Error>
     
     private static var _imageTasks = [String: ImageTask]()
@@ -16,11 +18,15 @@ extension UIImageView {
     var imageTask: ImageTask? {
         get {
             let tmpAddress = String(format: "%p", unsafeBitCast(self, to: Int.self))
-            return UIImageView._imageTasks[tmpAddress]
+            return UIImageView.queue.sync {
+                UIImageView._imageTasks[tmpAddress]
+            }
         }
         set(newValue) {
             let tmpAddress = String(format: "%p", unsafeBitCast(self, to: Int.self))
-            UIImageView._imageTasks[tmpAddress] = newValue
+            UIImageView.queue.async(flags: .barrier) {
+                UIImageView._imageTasks[tmpAddress] = newValue
+            }
         }
     }
     

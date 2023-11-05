@@ -23,6 +23,7 @@ final class ListViewModel: ObservableObject {
         api.loadList()
             .map(\.images)
             .map { $0.map { ItemViewModel(imageUrl: $0.url, imageTitle: $0.title) } }
+            .receive(on: DispatchQueue.main)
             .catch { [weak self] error -> AnyPublisher<[ItemViewModel], Never> in
                 print("API Error occured: \(error)")
                 self?.error = error
@@ -33,7 +34,10 @@ final class ListViewModel: ObservableObject {
     }
 }
 
-struct ItemViewModel {
+struct ItemViewModel: Identifiable, Hashable {
+    var id: String {
+        imageUrl
+    }
     let imageUrl: String
     let imageTitle: String
 }
