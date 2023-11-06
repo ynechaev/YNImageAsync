@@ -16,7 +16,7 @@ YNImageAsync is a lightweight and convenient framework for fetching and caching 
 - LRUCache for both memory and disk cache
 - Configurable with size limit for every kind of cache
 - Good unit and performance test coverage
-- UIImageView extension for fast and out-of-the-box image loading.
+- UIImageView extension for fast and out-of-the-box image loading, including built in downsampling optimization.
 
 # Install
 ### Using SPM
