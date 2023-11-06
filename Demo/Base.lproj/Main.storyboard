@@ -48,7 +48,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-image" translatesAutoresizingMaskIntoConstraints="NO" id="hY1-cb-rle">
-                                            <rect key="frame" x="8" y="31" width="60" height="60"/>
+                                            <rect key="frame" x="8" y="10" width="60" height="102"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="60" id="1F4-ME-6hF"/>
                                                 <constraint firstAttribute="width" constant="60" id="hfF-TM-5Nu"/>
@@ -64,7 +64,8 @@
                                     <constraints>
                                         <constraint firstItem="hY1-cb-rle" firstAttribute="leading" secondItem="KSU-yg-k3J" secondAttribute="leadingMargin" id="Ezv-uU-cFM"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="UUa-Sp-mMl" secondAttribute="trailing" constant="20" id="HoV-m5-2IU"/>
-                                        <constraint firstItem="hY1-cb-rle" firstAttribute="centerY" secondItem="KSU-yg-k3J" secondAttribute="centerY" id="g8g-6Q-0EW"/>
+                                        <constraint firstAttribute="bottom" secondItem="hY1-cb-rle" secondAttribute="bottom" constant="10" id="NX1-jm-7l3"/>
+                                        <constraint firstItem="hY1-cb-rle" firstAttribute="top" secondItem="KSU-yg-k3J" secondAttribute="top" constant="10" id="NoV-N0-AGb"/>
                                         <constraint firstItem="UUa-Sp-mMl" firstAttribute="leading" secondItem="hY1-cb-rle" secondAttribute="trailing" constant="8" id="jBx-R8-qC6"/>
                                         <constraint firstItem="hY1-cb-rle" firstAttribute="centerY" secondItem="UUa-Sp-mMl" secondAttribute="centerY" id="xrU-VN-06m"/>
                                     </constraints>

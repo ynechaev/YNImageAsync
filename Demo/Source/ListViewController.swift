@@ -26,6 +26,7 @@ class ListViewController: UICollectionViewController {
         super.viewDidLoad()
         self.collectionView.setCollectionViewLayout(makeLayout(), animated: false)
         self.collectionView.dataSource = dataSource
+        self.collectionView.prefetchDataSource = self
         viewModel.$images
             .sink { _ in
             } receiveValue: { [weak self] value in
@@ -66,6 +67,14 @@ class ListViewController: UICollectionViewController {
             }
         }
     }
+}
+
+extension ListViewController: UICollectionViewDataSourcePrefetching {
+    
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        // ask viewModel to prefetch images
+    }
+
 }
 
 private extension ListViewController {
