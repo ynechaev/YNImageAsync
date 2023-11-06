@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,7 +12,7 @@
 		062AC00B1A0827E000744325 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062AC00A1A0827E000744325 /* ListViewController.swift */; };
 		062AC00E1A0827E000744325 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 062AC00C1A0827E000744325 /* Main.storyboard */; };
 		062AC0131A0827E000744325 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 062AC0111A0827E000744325 /* LaunchScreen.xib */; };
-		062AC0291A08F57500744325 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062AC0281A08F57500744325 /* ListTableViewCell.swift */; };
+		062AC0291A08F57500744325 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062AC0281A08F57500744325 /* ListCollectionViewCell.swift */; };
 		06B95AD01DB3BF6F00884125 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B95ACF1DB3BF6F00884125 /* SettingsController.swift */; };
 		06CA03B91DB25F8C00AC65E5 /* ListDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CA03B81DB25F8C00AC65E5 /* ListDataProvider.swift */; };
 		06EE758F1A0ABB65007BE5B0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06EE758E1A0ABB65007BE5B0 /* CoreGraphics.framework */; };
@@ -45,7 +45,7 @@
 		062AC00A1A0827E000744325 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		062AC00D1A0827E000744325 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		062AC0121A0827E000744325 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		062AC0281A08F57500744325 /* ListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
+		062AC0281A08F57500744325 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
 		06B95ACF1DB3BF6F00884125 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		06CA03B81DB25F8C00AC65E5 /* ListDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDataProvider.swift; sourceTree = "<group>"; };
 		06EE758E1A0ABB65007BE5B0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -115,7 +115,7 @@
 				DAB1702E2A697C5D00899D0E /* Model */,
 				0626EA801DB25035000DC212 /* ViewConfigurable.swift */,
 				06CA03B81DB25F8C00AC65E5 /* ListDataProvider.swift */,
-				062AC0281A08F57500744325 /* ListTableViewCell.swift */,
+				062AC0281A08F57500744325 /* ListCollectionViewCell.swift */,
 				062AC00A1A0827E000744325 /* ListViewController.swift */,
 				06B95ACF1DB3BF6F00884125 /* SettingsController.swift */,
 			);
@@ -229,7 +229,7 @@
 				062AC0091A0827E000744325 /* AppDelegate.swift in Sources */,
 				0626EA811DB25035000DC212 /* ViewConfigurable.swift in Sources */,
 				DAB170322A697C9C00899D0E /* ListResponseModel.swift in Sources */,
-				062AC0291A08F57500744325 /* ListTableViewCell.swift in Sources */,
+				062AC0291A08F57500744325 /* ListCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

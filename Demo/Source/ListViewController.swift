@@ -10,27 +10,43 @@ import UIKit
 import YNImageAsync
 import Combine
 
-class ListViewController: UITableViewController {
+class ListViewController: UICollectionViewController {
+    typealias DataSource = UICollectionViewDiffableDataSource<Section, ItemViewModel>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, ItemViewModel>
+
     private var subscriptions = Set<AnyCancellable>()
     
     @IBOutlet weak var clearCacheButton: UIBarButtonItem!
     
     let dataProvider = ListDataProvider()
     let viewModel = ListViewModel()
+    private lazy var dataSource = makeDataSource()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.collectionView.setCollectionViewLayout(makeLayout(), animated: false)
+        self.collectionView.dataSource = dataSource
+        self.collectionView.prefetchDataSource = self
         viewModel.$images
-            .makeConnectable()
-            .autoconnect()
             .sink { _ in
-                DispatchQueue.main.async { [weak self] in
-                    guard let self else { return }
-                    self.tableView.reloadData()
-                }
+            } receiveValue: { [weak self] value in
+                self?.applySnapshot(data: value)
             }
             .store(in: &subscriptions)
         viewModel.fetch()
+    }
+    
+    func makeLayout() -> UICollectionViewCompositionalLayout {
+        let config = UICollectionLayoutListConfiguration(appearance: .plain)
+        let layout = UICollectionViewCompositionalLayout.list(using: config)
+        return layout
+    }
+    
+    func applySnapshot(data: [ItemViewModel], animatingDifferences: Bool = true) {
+        var snapshot = Snapshot()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(data)
+        dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
     
     func handleError(_ error: Error) {
@@ -39,30 +55,43 @@ class ListViewController: UITableViewController {
         present(alertController, animated: true)
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.images.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt
-        indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.reuseIdentifier(), for: indexPath) as! ListTableViewCell
-        let model = viewModel.images[indexPath.row]
-        cell.configureView(model)
-        return cell
-    }
-    
     @IBAction func didTapClearCache(sender: AnyObject) {
         Task {
             do {
                 clearCacheButton.isEnabled = false
                 try await CacheComposer.shared.clear()
                 clearCacheButton.isEnabled = true
-                tableView.reloadData()
+                collectionView.reloadData()
             } catch {
                 print("Cache clear error: \(error)")
             }
         }
     }
-    
 }
 
+extension ListViewController: UICollectionViewDataSourcePrefetching {
+    
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        // ask viewModel to prefetch images
+    }
+
+}
+
+private extension ListViewController {
+    func makeDataSource() -> UICollectionViewDiffableDataSource<Section, ItemViewModel> {
+        UICollectionViewDiffableDataSource(
+            collectionView: collectionView,
+            cellProvider: { collectionView, indexPath, viewModel in
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCollectionViewCell.reuseIdentifier, for: indexPath) as! ListCollectionViewCell
+                cell.configureView(viewModel)
+                return cell
+            }
+        )
+    }
+}
+
+extension ListViewController {
+    enum Section {
+      case main
+    }
+}
