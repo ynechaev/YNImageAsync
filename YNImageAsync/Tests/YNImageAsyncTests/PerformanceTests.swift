@@ -26,7 +26,7 @@ final class PerformanceTests: XCTestCase {
     }
     
     private func runPerformanceTest(with options: CacheOptions, timeout: TimeInterval) async throws {
-        // given
+        // givenn
         let sut = CacheComposer.shared
         await sut.updateOptions(options)
         CacheComposer.logLevel = .errors
