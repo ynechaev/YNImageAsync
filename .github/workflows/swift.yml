@@ -16,7 +16,7 @@ jobs:
     
     defaults:
       run:
-        working-directory: ./YNImageAsync
+        working-directory: .
 
     steps:
     - uses: actions/checkout@v3
