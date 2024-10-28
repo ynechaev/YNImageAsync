@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,13 +15,10 @@
 		062AC0291A08F57500744325 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062AC0281A08F57500744325 /* ListCollectionViewCell.swift */; };
 		06B95AD01DB3BF6F00884125 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B95ACF1DB3BF6F00884125 /* SettingsController.swift */; };
 		06CA03B91DB25F8C00AC65E5 /* ListDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CA03B81DB25F8C00AC65E5 /* ListDataProvider.swift */; };
-		06EE758F1A0ABB65007BE5B0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06EE758E1A0ABB65007BE5B0 /* CoreGraphics.framework */; };
 		DA07F0622A5EEB1D005DF621 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA07F0612A5EEB1D005DF621 /* Assets.xcassets */; };
-		DA5A95F42A65A4DF0094B032 /* YNImageAsync in Resources */ = {isa = PBXBuildFile; fileRef = DA5A95F32A65A45B0094B032 /* YNImageAsync */; };
-		DA71E7922A671DCC00A366A2 /* YNImageAsync in Frameworks */ = {isa = PBXBuildFile; productRef = DA71E7912A671DCC00A366A2 /* YNImageAsync */; };
+		DA757D362CD0521F00CD24D7 /* YNImageAsync in Frameworks */ = {isa = PBXBuildFile; productRef = DA757D352CD0521F00CD24D7 /* YNImageAsync */; };
 		DAB170302A697C7000899D0E /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1702F2A697C7000899D0E /* ListViewModel.swift */; };
 		DAB170322A697C9C00899D0E /* ListResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB170312A697C9C00899D0E /* ListResponseModel.swift */; };
-		DAB170352A699CC300899D0E /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = DAB170342A699CC300899D0E /* OrderedCollections */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,7 +36,7 @@
 
 /* Begin PBXFileReference section */
 		0626EA801DB25035000DC212 /* ViewConfigurable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewConfigurable.swift; sourceTree = "<group>"; };
-		062AC0031A0827E000744325 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		062AC0031A0827E000744325 /* YNImageAsyncDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YNImageAsyncDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		062AC0071A0827E000744325 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		062AC0081A0827E000744325 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		062AC00A1A0827E000744325 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -48,9 +45,7 @@
 		062AC0281A08F57500744325 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
 		06B95ACF1DB3BF6F00884125 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		06CA03B81DB25F8C00AC65E5 /* ListDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDataProvider.swift; sourceTree = "<group>"; };
-		06EE758E1A0ABB65007BE5B0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		DA07F0612A5EEB1D005DF621 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		DA5A95F32A65A45B0094B032 /* YNImageAsync */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = YNImageAsync; sourceTree = "<group>"; };
 		DAB1702F2A697C7000899D0E /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		DAB170312A697C9C00899D0E /* ListResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResponseModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -60,9 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA71E7922A671DCC00A366A2 /* YNImageAsync in Frameworks */,
-				06EE758F1A0ABB65007BE5B0 /* CoreGraphics.framework in Frameworks */,
-				DAB170352A699CC300899D0E /* OrderedCollections in Frameworks */,
+				DA757D362CD0521F00CD24D7 /* YNImageAsync in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,10 +65,8 @@
 		062ABFFA1A0827E000744325 = {
 			isa = PBXGroup;
 			children = (
-				DA5A95F32A65A45B0094B032 /* YNImageAsync */,
-				062AC0051A0827E000744325 /* Demo */,
+				062AC0051A0827E000744325 /* YNImageAsyncDemo */,
 				062AC0041A0827E000744325 /* Products */,
-				06EE758E1A0ABB65007BE5B0 /* CoreGraphics.framework */,
 				DA71E7902A671DCC00A366A2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -83,12 +74,12 @@
 		062AC0041A0827E000744325 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				062AC0031A0827E000744325 /* Demo.app */,
+				062AC0031A0827E000744325 /* YNImageAsyncDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		062AC0051A0827E000744325 /* Demo */ = {
+		062AC0051A0827E000744325 /* YNImageAsyncDemo */ = {
 			isa = PBXGroup;
 			children = (
 				06EE75951A0ACD37007BE5B0 /* Source */,
@@ -98,7 +89,7 @@
 				062AC0111A0827E000744325 /* LaunchScreen.xib */,
 				062AC00C1A0827E000744325 /* Main.storyboard */,
 			);
-			path = Demo;
+			name = YNImageAsyncDemo;
 			sourceTree = "<group>";
 		};
 		062AC0061A0827E000744325 /* Supporting Files */ = {
@@ -141,9 +132,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		062AC0021A0827E000744325 /* Demo */ = {
+		062AC0021A0827E000744325 /* YNImageAsyncDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 062AC0221A0827E000744325 /* Build configuration list for PBXNativeTarget "Demo" */;
+			buildConfigurationList = 062AC0221A0827E000744325 /* Build configuration list for PBXNativeTarget "YNImageAsyncDemo" */;
 			buildPhases = (
 				062ABFFF1A0827E000744325 /* Sources */,
 				062AC0001A0827E000744325 /* Frameworks */,
@@ -154,13 +145,12 @@
 			);
 			dependencies = (
 			);
-			name = Demo;
+			name = YNImageAsyncDemo;
 			packageProductDependencies = (
-				DA71E7912A671DCC00A366A2 /* YNImageAsync */,
-				DAB170342A699CC300899D0E /* OrderedCollections */,
+				DA757D352CD0521F00CD24D7 /* YNImageAsync */,
 			);
 			productName = ImageAsyncTest;
-			productReference = 062AC0031A0827E000744325 /* Demo.app */;
+			productReference = 062AC0031A0827E000744325 /* YNImageAsyncDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -172,7 +162,7 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftMigration = 0730;
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1610;
 				ORGANIZATIONNAME = "Yury Nechaev";
 				TargetAttributes = {
 					062AC0021A0827E000744325 = {
@@ -182,7 +172,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 062ABFFE1A0827E000744325 /* Build configuration list for PBXProject "ImageAsyncTest" */;
+			buildConfigurationList = 062ABFFE1A0827E000744325 /* Build configuration list for PBXProject "YNImageAsyncDemo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -192,13 +182,13 @@
 			);
 			mainGroup = 062ABFFA1A0827E000744325;
 			packageReferences = (
-				DAB170332A699CC300899D0E /* XCRemoteSwiftPackageReference "swift-collections" */,
+				DA757D252CD04FC700CD24D7 /* XCLocalSwiftPackageReference "../../YNImageAsync" */,
 			);
 			productRefGroup = 062AC0041A0827E000744325 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				062AC0021A0827E000744325 /* Demo */,
+				062AC0021A0827E000744325 /* YNImageAsyncDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -208,7 +198,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA5A95F42A65A4DF0094B032 /* YNImageAsync in Resources */,
 				062AC00E1A0827E000744325 /* Main.storyboard in Resources */,
 				DA07F0622A5EEB1D005DF621 /* Assets.xcassets in Resources */,
 				062AC0131A0827E000744325 /* LaunchScreen.xib in Resources */,
@@ -297,6 +286,7 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -344,6 +334,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -362,16 +353,15 @@
 		062AC0231A0827E000744325 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = "Demo/Supporting Files/Info.plist";
+				DEVELOPMENT_TEAM = 6EZW9Z24C3;
+				INFOPLIST_FILE = "Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "YN.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -381,16 +371,15 @@
 		062AC0241A0827E000744325 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = "Demo/Supporting Files/Info.plist";
+				DEVELOPMENT_TEAM = 6EZW9Z24C3;
+				INFOPLIST_FILE = "Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "YN.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -400,7 +389,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		062ABFFE1A0827E000744325 /* Build configuration list for PBXProject "ImageAsyncTest" */ = {
+		062ABFFE1A0827E000744325 /* Build configuration list for PBXProject "YNImageAsyncDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				062AC0201A0827E000744325 /* Debug */,
@@ -409,7 +398,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		062AC0221A0827E000744325 /* Build configuration list for PBXNativeTarget "Demo" */ = {
+		062AC0221A0827E000744325 /* Build configuration list for PBXNativeTarget "YNImageAsyncDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				062AC0231A0827E000744325 /* Debug */,
@@ -420,26 +409,18 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		DAB170332A699CC300899D0E /* XCRemoteSwiftPackageReference "swift-collections" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-collections.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
+/* Begin XCLocalSwiftPackageReference section */
+		DA757D252CD04FC700CD24D7 /* XCLocalSwiftPackageReference "../../YNImageAsync" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../YNImageAsync;
 		};
-/* End XCRemoteSwiftPackageReference section */
+/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		DA71E7912A671DCC00A366A2 /* YNImageAsync */ = {
+		DA757D352CD0521F00CD24D7 /* YNImageAsync */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = DA757D252CD04FC700CD24D7 /* XCLocalSwiftPackageReference "../../YNImageAsync" */;
 			productName = YNImageAsync;
-		};
-		DAB170342A699CC300899D0E /* OrderedCollections */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DAB170332A699CC300899D0E /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = OrderedCollections;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
