@@ -1,8 +1,5 @@
 name: ci-ios
 
-env:
-  DEVELOPER_DIR: /Applications/Xcode_16.1.app/Contents/Developer
-
 on:
   push:
     branches: [ "master" ]
@@ -11,14 +8,16 @@ on:
 
 jobs:
   build:
-    runs-on: macos-15
+    name: Build and Test default scheme using any available iPhone simulator
+    runs-on: macos-latest
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Set Default Scheme
         run: |
-          default="YNImageAsync"
+          scheme_list=$(xcodebuild -list -json | tr -d "\n")
+          default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['targets'][0]")
           echo $default | cat >default
           echo Using default scheme: $default
       - name: Install xcresultparser
