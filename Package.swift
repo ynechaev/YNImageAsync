@@ -28,7 +28,11 @@ let package = Package(
         ),
         .testTarget(
             name: "YNImageAsyncTests",
-            dependencies: ["YNImageAsync"]
+            dependencies: [
+                "YNImageAsync",
+                .product(name: "Collections", package: "swift-collections")
+            ],
+            path: "Tests"
         ),
     ]
 )
