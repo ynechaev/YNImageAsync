@@ -13,25 +13,15 @@ let package = Package(
             name: "YNImageAsync",
             targets: ["YNImageAsync"]),
     ],
-    dependencies: [
-        .package(
-            url: "https://github.com/apple/swift-collections.git",
-            .upToNextMajor(from: "1.0.0")
-        )
-    ],
+    dependencies: [],
     targets: [
         .target(
             name: "YNImageAsync",
-            dependencies: [
-                .product(name: "Collections", package: "swift-collections")
-            ]
+            dependencies: []
         ),
         .testTarget(
             name: "YNImageAsyncTests",
-            dependencies: [
-                "YNImageAsync",
-                .product(name: "Collections", package: "swift-collections")
-            ],
+            dependencies: ["YNImageAsync"],
             path: "Tests"
         ),
     ]

@@ -6,12 +6,12 @@
 //
 
 import Foundation
-import Collections
 
 actor LRUCache<Key: Hashable>: CacheLimiting {
     private var maxTotalSize: UInt64
     private var cache = [Key: Data]()
-    private var recentKeys = OrderedSet<Key>()
+    private var recentKeys = DoublyLinkedList<Key>()
+    private var keyNodes = [Key: DoublyLinkedList<Key>.Node]()
     private var totalSize: UInt64 = 0
 
     init(maxTotalSize: UInt64) {
@@ -36,7 +36,7 @@ actor LRUCache<Key: Hashable>: CacheLimiting {
         }
 
         // Check if we have enough space in the cache to store the data.
-        while totalSize + dataSize > maxTotalSize, let keyToRemove = recentKeys.last {
+        while totalSize + dataSize > maxTotalSize, let keyToRemove = recentKeys.tail?.value {
             evict(with: keyToRemove)
         }
 
@@ -45,34 +45,44 @@ actor LRUCache<Key: Hashable>: CacheLimiting {
         totalSize += dataSize
         updateKeyUsage(key)
     }
-    
+
     func size() -> UInt64 {
         UInt64(cache.values.reduce(0) { $0 + $1.count })
     }
-    
+
     func clear() async {
         cache.removeAll()
         recentKeys.removeAll()
+        keyNodes.removeAll()
+        totalSize = 0
     }
-    
+
     func updateCacheLimit(_ limit: UInt64) async {
         maxTotalSize = limit
         await enforceCacheLimit()
     }
-    
+
     private func enforceCacheLimit() async {
-        while totalSize > maxTotalSize, let keyToRemove = recentKeys.last {
+        while totalSize > maxTotalSize, let keyToRemove = recentKeys.tail?.value {
             evict(with: keyToRemove)
         }
     }
-    
+
     private func evict(with key: Key) {
         totalSize -= UInt64(cache[key]?.count ?? 0)
         cache[key] = nil
-        recentKeys.removeLast()
+        if let node = keyNodes[key] {
+            recentKeys.remove(node)
+            keyNodes[key] = nil
+        }
     }
 
     private func updateKeyUsage(_ key: Key) {
-        recentKeys.insert(key, at: 0)
+        if let node = keyNodes[key] {
+            recentKeys.moveToFront(node)
+        } else {
+            let newNode = recentKeys.insertAtFront(key)
+            keyNodes[key] = newNode
+        }
     }
 }
