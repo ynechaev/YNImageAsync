@@ -16,13 +16,13 @@ final class PerformanceTests: XCTestCase {
     }
     
     func test_diskStore_performance() async throws {
-        XCTSkip
+        try XCTSkipIf(true, "Disabled in CI")
         // 10k writes ~ 1.2s on macbook pro M1
         try await runPerformanceTest(with: [.disk], timeout: 5)
     }
     
     func test_memoryStore_performance() async throws {
-        XCTSkip
+        try XCTSkipIf(true, "Disabled in CI")
         // 10k writes ~ 0.2s on macbook pro M1
         try await runPerformanceTest(with: [.memory], timeout: 2)
     }
