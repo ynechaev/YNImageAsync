@@ -1,8 +1,5 @@
 name: ci-ios
 
-env:
-  DEVELOPER_DIR: /Applications/Xcode_14.3.1.app/Contents/Developer
-
 on:
   push:
     branches: [ "master" ]
@@ -11,11 +8,12 @@ on:
 
 jobs:
   build:
-    runs-on: macos-13
+    name: Build and Test default scheme using any available iPhone simulator
+    runs-on: macos-latest
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Set Default Scheme
         run: |
           default="YNImageAsync"
@@ -33,9 +31,7 @@ jobs:
           # xcrun xctrace returns via stderr, not the expected stdout (see https://developer.apple.com/forums/thread/663959)
           device=`xcrun xctrace list devices 2>&1 | grep -oE 'iPhone.*?[^\(]+' | head -1 | awk '{$1=$1;print}' | sed -e "s/ Simulator$//"`
           if [ $scheme = default ]; then scheme=$(cat default); fi
-          if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then filetype_parameter="workspace" && file_to_build="`ls -A | grep -i \\.xcworkspace\$`"; else filetype_parameter="project" && file_to_build="`ls -A | grep -i \\.xcodeproj\$`"; fi
-          file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
-          xcodebuild build-for-testing -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -derivedDataPath DerivedData
+          xcodebuild build-for-testing -scheme "$scheme" -destination "platform=$platform,name=$device" -derivedDataPath DerivedData
       - name: Test
         env:
           scheme: ${{ 'default' }}
@@ -44,16 +40,14 @@ jobs:
           # xcrun xctrace returns via stderr, not the expected stdout (see https://developer.apple.com/forums/thread/663959)
           device=`xcrun xctrace list devices 2>&1 | grep -oE 'iPhone.*?[^\(]+' | head -1 | awk '{$1=$1;print}' | sed -e "s/ Simulator$//"`
           if [ $scheme = default ]; then scheme=$(cat default); fi
-          if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then filetype_parameter="workspace" && file_to_build="`ls -A | grep -i \\.xcworkspace\$`"; else filetype_parameter="project" && file_to_build="`ls -A | grep -i \\.xcodeproj\$`"; fi
-          file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
-          xcodebuild test-without-building -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -enableCodeCoverage YES -derivedDataPath DerivedData -resultBundlePath artifacts/ResultBundle.xcresult
+          xcodebuild test-without-building -scheme "$scheme" -destination "platform=$platform,name=$device" -enableCodeCoverage YES -derivedDataPath DerivedData -resultBundlePath artifacts/ResultBundle.xcresult
           # Collect code coverage data from .xcresult
           xcresultparser --output-format cobertura artifacts/ResultBundle.xcresult > artifacts/coverage.xml
           # Save report as an artifact
           tar -czvf artifacts.tar.gz artifacts
           echo "::set-output name=artifacts::artifacts.tar.gz"
       - name: Archive Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: artifacts
           path: artifacts.tar.gz

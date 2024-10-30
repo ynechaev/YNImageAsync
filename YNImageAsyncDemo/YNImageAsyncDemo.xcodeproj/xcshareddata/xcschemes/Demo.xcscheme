@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1500"
+   LastUpgradeVersion = "1610"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "062AC0021A0827E000744325"
-               BuildableName = "Demo.app"
-               BlueprintName = "Demo"
-               ReferencedContainer = "container:ImageAsyncTest.xcodeproj">
+               BuildableName = "YNImageAsyncDemo.app"
+               BlueprintName = "YNImageAsyncDemo"
+               ReferencedContainer = "container:YNImageAsyncDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,9 +32,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "062AC0021A0827E000744325"
-            BuildableName = "Demo.app"
-            BlueprintName = "Demo"
-            ReferencedContainer = "container:ImageAsyncTest.xcodeproj">
+            BuildableName = "YNImageAsyncDemo.app"
+            BlueprintName = "YNImageAsyncDemo"
+            ReferencedContainer = "container:YNImageAsyncDemo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <CodeCoverageTargets>
@@ -64,9 +64,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "062AC0021A0827E000744325"
-            BuildableName = "Demo.app"
-            BlueprintName = "Demo"
-            ReferencedContainer = "container:ImageAsyncTest.xcodeproj">
+            BuildableName = "YNImageAsyncDemo.app"
+            BlueprintName = "YNImageAsyncDemo"
+            ReferencedContainer = "container:YNImageAsyncDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -81,9 +81,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "062AC0021A0827E000744325"
-            BuildableName = "Demo.app"
-            BlueprintName = "Demo"
-            ReferencedContainer = "container:ImageAsyncTest.xcodeproj">
+            BuildableName = "YNImageAsyncDemo.app"
+            BlueprintName = "YNImageAsyncDemo"
+            ReferencedContainer = "container:YNImageAsyncDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
